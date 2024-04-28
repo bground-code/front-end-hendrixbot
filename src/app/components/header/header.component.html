@@ -1,0 +1,35 @@
+<nav
+  class="navbar navbar-top navbar-expand-lg border-top-0 border-bottom text-secondary"
+>
+  <div class="container-fluid">
+    <nav class="me-auto d-flex">
+      <fa-icon
+        [title]="collapsed ? 'Exibir menu lateral' : 'Ocultar menu lateral'"
+        [icon]="faBars"
+        class="me-3 ms-1 text-dark cursor-pointer"
+        (click)="toggleMenu()"
+      ></fa-icon>
+      <span class="text-black cursor-pointer" [routerLink]="'/home'">
+        <div>
+          {{ labelEvent.titleApplication }}
+        </div>
+      </span>
+    </nav>
+    <div class="dropdown">
+      <span
+        class="btn bg-transparent border-0"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+        data-bs-auto-close="outside"
+      >
+        <fa-icon [icon]="faUser"></fa-icon>
+      </span>
+      <ul class="dropdown-menu dropdown-menu-end shadow">
+
+          <fa-icon [icon]="faArrowRightToBracket"> </fa-icon>
+          <span class="text-center cursor-pointer ms-2"> Sair </span>
+
+      </ul>
+    </div>
+  </div>
+</nav>

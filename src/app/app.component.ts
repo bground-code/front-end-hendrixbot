@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { Usuario } from './models/usuario';
 import { UsuarioService } from './client/usuario.service';
+import { faGear, faHome, faUser } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-root',
@@ -8,9 +10,17 @@ import { UsuarioService } from './client/usuario.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'projeto-login-simples';
-  constructor(private usuarioService: UsuarioService) {}
+  title = 'Hendrix-Bot';
   usuario = new Usuario();
+  showSidebar: boolean = true;
+
+  constructor(private usuarioService: UsuarioService, private router: Router) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.showSidebar = !event.url.includes('/login');
+      }
+    });
+  }
 
   ngOnInit(): void {}
 
@@ -25,5 +35,13 @@ export class AppComponent {
       },
     });
     console.log(this.usuario);
+  }
+
+  protected readonly faUser = faUser;
+  protected readonly faGear = faGear;
+  protected readonly faHome = faHome;
+
+  toggleMenu() {
+
   }
 }

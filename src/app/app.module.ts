@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
 import {
   ButtonDirective,
   CardBodyComponent,
@@ -27,10 +29,11 @@ import { IconDirective } from '@coreui/icons-angular';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { provideToastr, ToastrModule } from 'ngx-toastr';
-import {
-  BrowserAnimationsModule,
-  provideAnimations,
-} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
+
+import { faGear, faHome, faUser } from '@fortawesome/free-solid-svg-icons';
+import {SidebarModule} from "./components/sidebar/sidebar.module";
+import {SidebarStateService} from "./components/sidebar/sidebar-state.service";
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, HomeComponent],
@@ -58,8 +61,17 @@ import {
     NavItemComponent,
     NavLinkDirective,
     DropdownComponent,
+    FontAwesomeModule,
+    SidebarModule,
+    CommonModule,
+    MatDialogModule
+
   ],
-  providers: [provideAnimations(), provideToastr()],
+  providers: [provideAnimations(), provideToastr(), SidebarStateService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIcons(faGear, faHome, faUser);
+  }
+}

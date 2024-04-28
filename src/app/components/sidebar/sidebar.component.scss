@@ -1,0 +1,38 @@
+// Estilos para o sidebar e o botão
+.sidebar-transition {
+  transition: margin-left 0.5s;
+}
+
+.sidebar-hidden {
+  margin-left: -250px; // Ajuste para a largura do seu sidebar
+}
+
+.toggle-sidebar-button {
+  position: fixed;
+  top: 10px; // Ajuste de acordo com o alinhamento vertical desejado
+  left: 0;
+  z-index: 999;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; // Botão circular
+  background-color: #333; // Escolha uma cor que combine com seu esquema
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2); // Sombra suave para o botão
+  transition: all 0.5s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken(#333, 10%); // Escurece o botão no hover
+  }
+}
+
+.sidebar-hidden + .toggle-sidebar-button > fa-icon {
+  transform: rotate(180deg);
+}
+
+.sidebar-hidden + .toggle-sidebar-button {
+  left: -10px;
+}

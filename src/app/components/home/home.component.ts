@@ -21,4 +21,7 @@ export class HomeComponent implements OnInit {
       this.toastr.error('Acesso negado!');
     }
   }
+  toggleMenu() {
+    document.querySelector('body')?.classList.toggle('collapsedMenu');
+  }
 }
