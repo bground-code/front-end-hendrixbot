@@ -1,0 +1,45 @@
+<div class="container">
+  <h3>Cadastrar aluno:</h3>
+  <div class="form-group">
+    <label for="nome">Nome completo</label>
+    <input id="nome" class="form-control" type="text" [(ngModel)]="nome">
+  </div>
+  <div class="form-group">
+    <label for="email">E-mail</label>
+    <input id="email" class="form-control" type="email" [(ngModel)]="email">
+  </div>
+  <div class="form-group">
+    <label for="cpf">CPF</label>
+    <input id="cpf" class="form-control" type="text" [(ngModel)]="cpf">
+  </div>
+  <div class="form-group">
+    <label for="dataNascimento">Data de nascimento</label>
+    <input id="dataNascimento" class="form-control" type="text" [(ngModel)]="dataNascimento">
+  </div>
+  <div class="form-group">
+    <label for="senha">Senha</label>
+    <input id="senha" class="form-control" type="password" [(ngModel)]="senha">
+  </div>
+  <div class="form-group">
+    <label for="confirmarSenha">Confirme a senha</label>
+    <input id="confirmarSenha" class="form-control" type="password" [(ngModel)]="confirmarSenha">
+  </div>
+  <div class="form-group">
+    <label for="contato">Contato</label>
+    <input id="contato" class="form-control" type="text" [(ngModel)]="contato">
+  </div>
+  <div class="form-group">
+    <label for="responsavel">Responsável</label>
+    <input id="responsavel" class="form-control" type="text" [(ngModel)]="responsavel">
+  </div>
+  <div class="form-group">
+    <label for="papelUsuario">Papel do Usuário</label>
+    <input id="papelUsuario" class="form-control" type="text" [(ngModel)]="papelUsuario">
+  </div>
+  <div class="form-group">
+    <!-- Botão de salvar -->
+    <button class="btn btn-primary" (click)="handleSalvar()">Salvar</button>
+    <!-- Botão de cancelar -->
+    <button class="btn btn-secondary" (click)="close()">Cancelar</button>
+  </div>
+</div>

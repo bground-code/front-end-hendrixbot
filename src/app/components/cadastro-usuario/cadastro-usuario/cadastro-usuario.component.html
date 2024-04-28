@@ -1,0 +1,38 @@
+<div class="container">
+  <h3>Lista de Alunos</h3>
+  <div class="form-group ml-auto">
+    <button class="btn btn-primary" (click)="openModal()">Cadastrar Usuário</button>
+  </div>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Nome</th>
+      <th>E-mail</th>
+      <th>CPF</th>
+      <th>Data de Nascimento</th>
+      <th>Contato</th>
+      <th>Responsável</th>
+      <th>Papel do Usuário</th>
+      <th>Ações</th> <!-- Nova coluna para ação de exclusão -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let aluno of alunos">
+      <td>{{ aluno.nome }}</td>
+      <td>{{ aluno.email }}</td>
+      <td>{{ aluno.cpf }}</td>
+      <td>{{ aluno.dataNascimento }}</td>
+      <td>{{ aluno.contatoWhatsapp }}</td>
+      <td>{{ aluno.responsavel1 }}, {{ aluno.responsavel2 }}</td>
+      <td>{{ aluno.papelUsuario }}</td>
+      <td>
+        <button class="btn btn-danger" (click)="excluirAluno(aluno.idUsuario)">Excluir</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+
+  <mat-paginator [length]="totalElements" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]" (page)="onPageChange($event)" showFirstLastButtons></mat-paginator>
+</div>

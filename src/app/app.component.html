@@ -1,1 +1,11 @@
-<router-outlet></router-outlet>
+<div class="d-flex flex-row h-100">
+  <app-sidebar *ngIf="showSidebar"></app-sidebar>
+  <div id="content" class="w-100">
+    <div class="w-100 content-page">
+      <div class="py-3">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="sidebar-overlay" (click)="toggleMenu()"></div>
