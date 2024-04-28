@@ -1,14 +1,9 @@
 {
-  "name": "coreui-free-angular-admin-template",
-  "version": "5.0.2",
-  "copyright": "Copyright 2024 creativeLabs Łukasz Holeczek",
-  "license": "MIT",
-  "author": "The CoreUI Team (https://github.com/orgs/coreui/people) and contributors",
+  "name": "hendrixbot",
+  "version": "1",
   "homepage": "https://coreui.io/angular",
   "config": {
-    "theme": "default",
-    "coreui_library_short_version": "5.0",
-    "coreui_library_docs_url": "https://coreui.io/angular/docs/"
+    "theme": "default"
   },
   "scripts": {
     "ng": "ng",
@@ -26,6 +21,7 @@
     "@angular/core": "^17.3.4",
     "@angular/forms": "^17.3.4",
     "@angular/language-service": "^17.3.4",
+    "@angular/material": "^17.3.6",
     "@angular/platform-browser": "^17.3.4",
     "@angular/platform-browser-dynamic": "^17.3.4",
     "@angular/router": "^17.3.4",
@@ -36,7 +32,10 @@
     "@coreui/icons": "^3.0.1",
     "@coreui/icons-angular": "~5.0.2",
     "@coreui/utils": "^2.0.2",
+    "@fortawesome/angular-fontawesome": "^0.14.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "chart.js": "^4.4.2",
+    "install": "^0.13.0",
     "lodash-es": "^4.17.21",
     "ngx-scrollbar": "^13.0.3",
     "ngx-toastr": "^18.0.0",
@@ -63,6 +62,6 @@
   },
   "engines": {
     "node": "^18.13.0 || ^20.9.0",
-    "npm": ">= 9"
+    "npm": ">= 8"
   }
 }
