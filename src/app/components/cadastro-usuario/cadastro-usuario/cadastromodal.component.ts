@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { AlunoService } from '../../../client/cadastro.aluno.service'; // Importe o AlunoService
+import { AlunoService } from '../../../client/cadastro.aluno.service';
 import { Router } from '@angular/router';
 import {FormsModule} from "@angular/forms"; // Importe o Router
 
@@ -13,11 +13,10 @@ import {FormsModule} from "@angular/forms"; // Importe o Router
   ],
   styleUrls: ['./cadastro-modal.component.scss']
 })
-export class CadastroModalComponent {
+export class CadastromodalComponent {
 
-  // Injete o AlunoService e o Router no construtor
   constructor(
-    public dialogRef: MatDialogRef<CadastroModalComponent>,
+    public dialogRef: MatDialogRef<CadastromodalComponent>,
     private alunoService: AlunoService,
     private router: Router
   ) { }
@@ -52,11 +51,10 @@ export class CadastroModalComponent {
     this.alunoService.cadastrarAluno(alunoData).subscribe(
       response => {
         console.log('Aluno cadastrado com sucesso:', response);
-        this.router.navigate(['/cadastrar-usuario']); // Navegação após salvar
+        this.router.navigate(['/cadastrar-usuario']); 
       },
       error => {
         console.error('Erro ao cadastrar aluno:', error);
-        // Implemente a lógica de tratamento de erro aqui
       }
     );
   }
