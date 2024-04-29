@@ -1,0 +1,59 @@
+<div class="container mt-3">
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Filtrar Histórias" [(ngModel)]="filterValue">
+    <button class="btn btn-outline-secondary" type="button" (click)="clearFilter()">Limpar Filtro</button>
+  </div>
+
+  <div *ngIf="stories.length === 0" class="alert alert-info">
+    Nenhuma história encontrada.
+  </div>
+
+  <div *ngFor="let story of stories; let i = index" class="card mb-3">
+    <div class="card-body">
+      <div class="d-flex justify-content-between">
+        <input [(ngModel)]="story.name" class="form-control" (change)="updateStory(story.id)">
+        <button class="btn btn-danger ms-2" (click)="deleteStory(story.id)">Deletar História</button>
+      </div>
+
+      <ul class="list-group list-group-flush mt-3">
+        <li *ngFor="let step of story.steps; let j = index" class="list-group-item">
+          <div class="row g-3 align-items-center">
+            <div class="col-auto">
+              <select [(ngModel)]="step.intentName" class="form-select" (change)="updateStory(story.id)">
+                <option value="">Selecionar Intenção</option>
+                <option *ngFor="let intent of intents" [value]="intent.name">{{ intent.name }}</option>
+              </select>
+            </div>
+
+            <div class="col-auto">
+              <select [(ngModel)]="step.actionText" class="form-select" (change)="updateStory(story.id)">
+                <option value="">Selecionar Ação</option>
+                <option *ngFor="let action of actions" [value]="action.name">{{ action.name }}</option>
+              </select>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <div class="mt-3">
+        <button class="btn btn-primary" (click)="updateStory(story.id)">Atualizar História</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-body">
+    <h5 class="card-title">Adicionar Nova História</h5>
+    <div class="input-group">
+      <input class="form-control" placeholder="Nome da nova história" [(ngModel)]="newStoryName">
+      <select class="form-select" [(ngModel)]="newStepIntent">
+        <option value="">Selecionar Intenção</option>
+        <option *ngFor="let intent of intents" [value]="intent.name">{{ intent.name }}</option>
+      </select>
+      <select class="form-select" [(ngModel)]="newStepAction">
+        <option value="">Selecionar Ação</option>
+        <option *ngFor="let action of actions" [value]="action.name">{{ action.name }}</option>
+      </select>
+      <button class="btn btn-success" type="button" (click)="createStory()">Criar História</button>
+    </div>
+  </div>
+</div>

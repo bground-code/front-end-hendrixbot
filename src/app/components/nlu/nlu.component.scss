@@ -1,0 +1,22 @@
+.card-title {
+  color: #0056b3; // Um azul mais escuro para melhor contraste
+}
+
+.btn-primary {
+  background-color: #007bff; // Bootstrap primary color
+  &:hover {
+    background-color: #0056b3; // Um pouco mais escuro no hover
+  }
+}
+
+.btn-danger {
+  margin-top: 1rem; // Espaço acima do botão de deletar
+  &:hover {
+    background-color: #c82333; // Um vermelho mais escuro no hover
+  }
+}
+
+// Ícones do Bootstrap
+.bi {
+  margin-right: .5rem;
+}

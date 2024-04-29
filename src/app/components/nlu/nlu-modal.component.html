@@ -1,3 +1,5 @@
+<div class="container">
+
 <div class="modal fade" id="nluModal" tabindex="-1" role="dialog" aria-labelledby="nluModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -13,7 +15,8 @@
             <label for="intentText">Intent Text</label>
             <input type="text" class="form-control" id="intentText" placeholder="Insira o intent text" [(ngModel)]="nlu.intentText" name="intentText">
           </div>
-          <div>
+          <div formArrayName="texts">
+            <label for="texts">Texts</label>
             <div *ngFor="let text of nlu.texts; let i = index" class="form-group">
               <div class="input-group">
                 <input type="text" class="form-control" [attr.placeholder]="'Text ' + (i + 1)" [(ngModel)]="nlu.texts[i]" [name]="'text' + i">
@@ -32,4 +35,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

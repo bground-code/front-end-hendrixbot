@@ -1,0 +1,36 @@
+<!-- Importe os estilos do Bootstrap -->
+
+<div class="container-fluid py-3">
+  <div class="row">
+    <div class="col-md-12 mb-3">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="card-title text-primary">Gerenciar Intents e Respostas</h5>
+            <!-- Botão para adicionar NLU com ícone -->
+            <button class="btn btn-primary" (click)="openModal()">
+              <i class="bi bi-plus-lg"></i> Criar NLU
+            </button>
+          </div>
+          <!-- Loop através da propriedade nluData do componente -->
+          <div *ngFor="let data of nluData; let i = index" class="mb-3">
+            <div class="card bg-light">
+              <div class="card-body">
+                <!-- Exibe o intentText -->
+                <h6 class="card-subtitle mb-2">{{ data.intentText }}</h6>
+                <!-- Loop através dos texts associados a cada intentText -->
+                <ul class="list-unstyled">
+                  <li *ngFor="let text of data.texts">{{ text }}</li>
+                </ul>
+                <!-- Botão para deletar o intent com ícone -->
+                <button class="btn btn-danger" (click)="deleteIntent(data.id)">
+                  <i class="bi bi-trash"></i> Deletar Intent
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

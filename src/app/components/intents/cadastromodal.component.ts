@@ -28,11 +28,13 @@ export class CadastromodalComponent {
     public dialogRef: MatDialogRef<CadastromodalComponent>,
     private intentsService: IntentsService,
     private toastr: ToastrService
-  ) { }
+  ) {
+  }
 
   close(): void {
     this.dialogRef.close();
   }
+
   handleSalvar(): void {
     const responseData = {
       name: this.name,
@@ -57,6 +59,7 @@ export class CadastromodalComponent {
   addText(): void {
     this.texts.push('');
   }
+
   trackByTexts(index: number, item: string): number {
     return index;
   }
