@@ -65,10 +65,9 @@ import {SidebarStateService} from "./components/sidebar/sidebar-state.service";
     SidebarModule,
     CommonModule,
     MatDialogModule
-
   ],
   providers: [provideAnimations(), provideToastr(), SidebarStateService],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(library: FaIconLibrary) {
