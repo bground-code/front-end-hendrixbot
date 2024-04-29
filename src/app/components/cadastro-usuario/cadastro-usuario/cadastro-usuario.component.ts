@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlunoService } from '../../../client/cadastro.aluno.service';
 import { MatDialog } from '@angular/material/dialog';
-import { CadastroModalComponent } from './CadastroModalComponent';
+import { CadastromodalComponent } from './cadastromodal.component';
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from '@angular/common';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -79,7 +79,7 @@ export class CadastroUsuarioComponent implements OnInit {
   }
 
   openModal(): void {
-    const dialogRef = this.dialog.open(CadastroModalComponent, {
+    const dialogRef = this.dialog.open(CadastromodalComponent, {
       width: '400px',
       position: { top: '-30%', left: '50%', transform: 'translate(-50%, -50%)' } as any
     });
