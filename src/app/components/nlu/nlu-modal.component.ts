@@ -1,12 +1,17 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { NluService } from '../../client/nlu.service';
+import {Component, EventEmitter, Output} from '@angular/core';
+import {NluService} from '../../client/nlu.service';
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
+import {MatFormField} from "@angular/material/form-field";
+import {MatDialogRef} from "@angular/material/dialog";
+import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-nlu-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule],  // Garantir que CommonModule e FormsModule estejam aqui
+  imports: [CommonModule, FormsModule, MatFormField,
+  ],
   templateUrl: './nlu-modal.component.html',
   styleUrls: ['./nlu-modal.component.scss']
 })
@@ -17,7 +22,13 @@ export class NluModalComponent {
     texts: ['']
   };
 
-  constructor(private nluService: NluService) {}
+  constructor(
+    public dialogRef: MatDialogRef<NluModalComponent>,
+    private nluService: NluService,
+    private toastr: ToastrService,
+    private router: Router
+  ) {
+  }
 
   addText() {
     this.nlu.texts.push('');
@@ -45,6 +56,7 @@ export class NluModalComponent {
       }
     });
   }
+
   trackByTexts(index: number, item: string): number {
     return index;
   }
