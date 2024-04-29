@@ -6,7 +6,6 @@ import { FormsModule } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { MatDialog } from "@angular/material/dialog";
 import { NluModalComponent } from "./nlu-modal.component";
-import { NLUData } from "../../models/nlu";
 import {CadastroModalIntentsComponent} from "../intents/cadastro-modal-intents.component";
 import {MatCard, MatCardTitle} from "@angular/material/card";
 import {MatList, MatListItem} from "@angular/material/list";
@@ -14,6 +13,7 @@ import {MatLine} from "@angular/material/core";
 import {MatButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {CadastromodalComponent} from "../cadastro-usuario/cadastro-usuario/cadastromodal.component";
+import {NLUData} from "../../models/nlu";
 
 @Component({
   selector: 'app-nlu',
@@ -24,7 +24,9 @@ import {CadastromodalComponent} from "../cadastro-usuario/cadastro-usuario/cadas
   styleUrls: ['./nlu.component.scss']
 })
 export class NluComponent implements OnInit {
-
+  protected id: number | undefined ;
+  intentText: string = '';
+  texts: string[] = [];
   nluData: NLUData[] = [];
 
   constructor(
@@ -49,7 +51,7 @@ export class NluComponent implements OnInit {
     });
   }
 
-  deleteIntent(id: number): void {
+  deleteIntent(id: number | undefined): void {
     this.nluService.deleteIntent(id).subscribe(
       () => {
         this.toastr.success('Intent excluído com sucesso!');
