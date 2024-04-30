@@ -4,7 +4,7 @@
       <div class="card shadow-sm">
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-center mb-3">
-            <h5 class="card-title text-primary">Processamento de Linguagem</h5>
+            <h5 class="card-title">Processamento de Linguagem</h5>
             <button class="btn btn-primary" (click)="openModal()">
               <i class="bi bi-plus-lg"></i> Criar NLU
             </button>
@@ -12,16 +12,17 @@
           <div *ngFor="let data of nluData" class="mb-3">
             <div class="card bg-light">
               <div class="card-body">
-                <h6 class="card-subtitle mb-2">{{ data.intentText }}</h6>
+                <h6 class="card-subtitle">{{ data.intentText }}</h6>
                 <ul>
                   <li *ngFor="let text of data.texts">{{ text }}</li>
                 </ul>
-                <button class="btn btn-primary" (click)="editNlu(data)">Editar</button>
-                <button class="btn btn-danger" (click)="deleteIntent(data.id)">Deletar</button>
+                <div class="text-end">
+                  <button class="btn btn-primary" (click)="editNlu(data)">Editar</button>
+                  <button class="btn btn-danger" (click)="deleteIntent(data.id)">Deletar</button>
+                </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
