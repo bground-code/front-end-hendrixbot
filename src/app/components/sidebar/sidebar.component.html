@@ -18,12 +18,25 @@
       <fa-icon [icon]="faUser"></fa-icon>
       <span class="ms-1">Cadastro de Usuário</span>
     </li>
+
+    <hr />
+    <span class="ms-2">Hendrix</span>
+    <hr />
     <li [routerLink]="'/intents'" [routerLinkActive]="'active'" class="cursor-pointer p-2 list-group-item d-flex justify-content-start align-items-center border-0 rounded text-light" title="Ir para Cadastro de Usuário">
       <fa-icon [icon]="faGear"></fa-icon>
-      <span class="ms-1">Gerenciar Hendrix</span>
+      <span class="ms-1">Gerenciar Respostas</span>
     </li>
+    <li [routerLink]="'/historia'" [routerLinkActive]="'active'" class="cursor-pointer p-2 list-group-item d-flex justify-content-start align-items-center border-0 rounded text-light" title="Ir para Cadastro de Usuário">
+      <fa-icon [icon]="faGear"></fa-icon>
+      <span class="ms-1">Criar Historia</span>
+    </li>
+    <li [routerLink]="'/nlu'" [routerLinkActive]="'active'" class="cursor-pointer p-2 list-group-item d-flex justify-content-start align-items-center border-0 rounded text-light" title="Ir para Cadastro de Usuário">
+      <fa-icon [icon]="faGear"></fa-icon>
+      <span class="ms-1">Processamento</span>
+    </li>
+    <button class="btn btn-dark mt-auto align-self-end" (click)="toggleSidebar()">
+      <fa-icon [icon]="sidebarHidden ? faAngleDoubleRight : faAngleDoubleLeft"></fa-icon>
+    </button>
   </ul>
-  <button class="toggle-sidebar-button" (click)="toggleSidebar()">
-    <fa-icon [icon]="sidebarHidden ? faAngleDoubleRight : faAngleDoubleLeft"></fa-icon>
-  </button>
+
 </nav>

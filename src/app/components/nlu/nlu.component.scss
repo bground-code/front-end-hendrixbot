@@ -1,0 +1,43 @@
+.card {
+  // Sombra e borda mais suave para o card
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border: none;
+  border-radius: 4px;
+
+  .card-body {
+    // Espaçamento interno e organização do conteúdo
+    padding: 15px;
+
+    .card-subtitle {
+      // Estilo e espaçamento para o subtítulo
+      color: #333;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    ul {
+      padding-left: 20px;
+      list-style-type: disc; // Ou 'none' se preferir não ter bullets
+    }
+  }
+}
+
+.btn {
+  margin-right: 5px; // Espaço entre botões
+
+  &-primary {
+    background-color: #007bff; // Cor primária para botão 'Editar'
+    &:hover {
+      background-color: darken(#007bff, 10%);
+    }
+  }
+
+  &-danger {
+    background-color: #dc3545; // Cor de perigo para botão 'Deletar'
+    &:hover {
+      background-color: darken(#dc3545, 10%);
+    }
+  }
+}
+
+// Customizações adicionais para ícones e outros elementos se necessário...

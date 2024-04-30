@@ -1,32 +1,32 @@
-// Estilos para o sidebar e o botão
+/* Estilos para a transição do sidebar */
 .sidebar-transition {
-  transition: margin-left 0.5s;
+  transition: margin-left 0.5s ease;
 }
 
 .sidebar-hidden {
-  margin-left: -250px; // Ajuste para a largura do seu sidebar
+  margin-left: -250px; /* Ajuste para a largura do seu sidebar */
 }
 
 .toggle-sidebar-button {
   position: fixed;
-  top: 10px; // Ajuste de acordo com o alinhamento vertical desejado
+  top: 10px; /* Ajuste de acordo com o alinhamento vertical desejado */
   left: 0;
-  z-index: 999;
+  z-index: 1050; /* Garante que fique sobre o conteúdo, Bootstrap normalmente usa 1040 para modais, então 1050 é seguro */
   width: 40px;
   height: 40px;
-  border-radius: 50%; // Botão circular
-  background-color: #333; // Escolha uma cor que combine com seu esquema
+  border-radius: 50%; /* Botão circular */
+  background-color: #333; /* Escolha uma cor que combine com seu esquema */
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2); // Sombra suave para o botão
-  transition: all 0.5s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra suave para o botão */
+  transition: all 0.5s ease;
   cursor: pointer;
+}
 
-  &:hover {
-    background-color: darken(#333, 10%); // Escurece o botão no hover
-  }
+.toggle-sidebar-button:hover {
+  background-color: #424242; /* Escurecimento no hover, exemplo usando hexadecimal */
 }
 
 .sidebar-hidden + .toggle-sidebar-button > fa-icon {
@@ -34,5 +34,5 @@
 }
 
 .sidebar-hidden + .toggle-sidebar-button {
-  left: -10px;
+  left: -10px; /* Movimenta o botão para ser parcialmente visível */
 }

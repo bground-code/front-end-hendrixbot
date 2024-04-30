@@ -1,1 +1,40 @@
-<p>intents works!</p>
+<div class="container-fluid py-3">
+  <div class="row">
+    <!-- Coluna para Gerenciar Respostas -->
+    <div class="col-md-6 mb-3">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title text-primary">Gerenciar Respostas</h5>
+          <button class="btn btn-primary mb-3" (click)="openModal()">Criar Nova Resposta</button>
+          <div *ngFor="let response of responses; let i = index">
+            <div class="card bg-light mb-2">
+              <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">{{ response.name }}</h6>
+                <p class="card-text">{{ response.texts.join(', ') }}</p>
+                <button class="btn btn-danger" (click)="deleteResponse(i)">Deletar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coluna para Gerenciar Intents -->
+    <div class="col-md-6 mb-3">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title text-success">Gerenciar Intents</h5>
+          <button class="btn btn-success mb-3" (click)="openIntentModal()">Criar Novo Intent</button>
+          <div *ngFor="let intent of intents; let j = index">
+            <div class="card bg-light mb-2">
+              <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">{{ intent.name }}</h6>
+                <button class="btn btn-danger" (click)="deleteIntent(j)">Deletar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
