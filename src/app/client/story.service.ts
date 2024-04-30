@@ -35,7 +35,6 @@ export class StoryService {
     );
   }
 
-  // Atualizar uma história
   updateStory(storyId: number, storyData: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/stories/${storyId}`, storyData).pipe(
       tap(() => {
@@ -60,7 +59,6 @@ export class StoryService {
     );
   }
 
-  // Buscar intenções
   fetchIntents(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/rasa/intents`).pipe(
       catchError(error => {
@@ -70,7 +68,6 @@ export class StoryService {
     );
   }
 
-  // Buscar ações
   fetchActions(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/rasa/response`).pipe(
       catchError(error => {

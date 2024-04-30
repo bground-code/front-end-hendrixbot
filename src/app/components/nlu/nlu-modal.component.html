@@ -1,19 +1,31 @@
-<mat-dialog-content class="modal-body">
-  <mat-form-field class="form-group" appearance="fill">
-    <input matInput [(ngModel)]="nlu.intentText" placeholder="Insira o intent text" name="intentText">
-  </mat-form-field>
+<div class="container">
+  <mat-dialog-content class="modal-body p-3">
+    <div class="mb-3">
+      <label for="intentSelect" class="form-label">Choose Intent</label>
+      <select id="intentSelect" class="form-select" [(ngModel)]="nlu.intentText" (change)="onIntentChange($event)">
+        <option value="">Selecionar Intenção</option>
+        <option *ngFor="let intent of intents; trackBy: trackByIntent" [value]="intent.name">{{ intent.name }}</option>
+      </select>
+    </div>
 
-  <div *ngFor="let text of nlu.texts; let i = index" class="form-group">
-    <mat-form-field appearance="fill">
-      <input matInput [placeholder]="'Text ' + (i + 1)" [(ngModel)]="nlu.texts[i]" [name]="'text' + i">
-      <mat-icon matSuffix (click)="removeText(i)">remove_circle</mat-icon>
-    </mat-form-field>
-  </div>
 
-  <button mat-raised-button color="primary" (click)="addText()">Adicionar Text</button>
-</mat-dialog-content>
+    <div *ngFor="let text of nlu.texts; let i = index; trackBy: trackByTexts" class="mb-2">
+      <mat-form-field appearance="fill" class="w-100">
+        <input matInput placeholder="Text" [(ngModel)]="nlu.texts[i]" [name]="'text-' + i">
+        <button mat-icon-button matSuffix (click)="removeText(i)">
+          <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
 
-<mat-dialog-actions class="modal-footer">
-  <button mat-button mat-dialog-close class="btn-secondary">Cancelar</button>
-  <button mat-raised-button color="primary" (click)="saveNlu()">Salvar</button>
-</mat-dialog-actions>
+
+    <div class="text-center mt-3">
+      <button class="btn btn-outline-primary" (click)="addText()">Add Text</button>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="modal-footer justify-content-between border-top pt-3">
+    <button class="btn btn-outline-secondary" mat-dialog-close (click)="closeModal()">Cancel</button>
+    <button class="btn btn-primary" (click)="saveNlu()">Save</button>
+  </mat-dialog-actions>
+</div>

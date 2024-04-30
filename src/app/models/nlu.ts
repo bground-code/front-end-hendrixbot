@@ -1,6 +1,5 @@
-export class NLUData {
-
-  private _id: number | undefined ;
-  intentText: string = '';
-  texts: string[] = [];
+export interface NluData {
+  id: number;  // Se estiver sempre presente quando renderizado, não precisa ser opcional.
+  intentText: string;
+  texts: string[];
 }

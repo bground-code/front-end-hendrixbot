@@ -9,19 +9,19 @@
               <i class="bi bi-plus-lg"></i> Criar NLU
             </button>
           </div>
-          <div *ngFor="let data of nluData; let i = index" class="mb-3">
+          <div *ngFor="let data of nluData" class="mb-3">
             <div class="card bg-light">
               <div class="card-body">
                 <h6 class="card-subtitle mb-2">{{ data.intentText }}</h6>
-                <ul class="list-unstyled">
+                <ul>
                   <li *ngFor="let text of data.texts">{{ text }}</li>
                 </ul>
-                <button class="btn btn-danger" (click)="deleteIntent(id)">
-                  <i class="bi bi-trash"></i> Deletar Intent
-                </button>
+                <button class="btn btn-primary" (click)="editNlu(data)">Editar</button>
+                <button class="btn btn-danger" (click)="deleteIntent(data.id)">Deletar</button>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>

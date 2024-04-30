@@ -1,33 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { NluService } from '../../client/nlu.service';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from "@angular/forms";
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from "ngx-toastr";
-import { MatDialog } from "@angular/material/dialog";
+import { NluService } from '../../client/nlu.service';
+import { NluData } from '../../models/nlu';
 import { NluModalComponent } from "./nlu-modal.component";
-import {CadastroModalIntentsComponent} from "../intents/cadastro-modal-intents.component";
-import {MatCard, MatCardTitle} from "@angular/material/card";
-import {MatList, MatListItem} from "@angular/material/list";
-import {MatLine} from "@angular/material/core";
-import {MatButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
-import {CadastromodalComponent} from "../cadastro-usuario/cadastro-usuario/cadastromodal.component";
-import {NLUData} from "../../models/nlu";
+import {MatButton} from "@angular/material/button";
+import {MatLine} from "@angular/material/core";
+import {MatList, MatListItem} from "@angular/material/list";
+import {MatCard, MatCardTitle} from "@angular/material/card";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-nlu',
-  standalone: true,
-  imports: [CommonModule, MatCardTitle, MatCard, MatList, MatListItem, MatLine, MatButton, MatIcon],
-
   templateUrl: './nlu.component.html',
-  styleUrls: ['./nlu.component.scss']
+  styleUrls: ['./nlu.component.scss'],
+  imports: [
+    CommonModule, MatCard, MatCardTitle, MatList, MatListItem, MatLine, MatButton, MatIcon
+  ],
+  standalone: true
 })
 export class NluComponent implements OnInit {
-  protected id: number | undefined ;
-  intentText: string = '';
-  texts: string[] = [];
-  nluData: NLUData[] = [];
+  nluData: NluData[] | undefined;
+  private modalRef: MatDialogRef<any> | null = null;
 
   constructor(
     private nluService: NluService,
@@ -39,7 +34,7 @@ export class NluComponent implements OnInit {
     this.fetchNluData();
   }
 
-  private fetchNluData() {
+  fetchNluData() {
     this.nluService.getNluData().subscribe({
       next: (data) => {
         this.nluData = data;
@@ -51,7 +46,7 @@ export class NluComponent implements OnInit {
     });
   }
 
-  deleteIntent(id: number | undefined): void {
+  deleteIntent(id: number): void {
     this.nluService.deleteIntent(id).subscribe(
       () => {
         this.toastr.success('Intent excluído com sucesso!');
@@ -59,15 +54,45 @@ export class NluComponent implements OnInit {
       },
       error => {
         this.toastr.error('Erro ao excluir intent. Por favor, tente novamente.', 'Erro');
+        console.error('Error deleting intent:', error);
       }
     );
   }
+
   openModal(): void {
-    const dialogRef = this.dialog.open(NluModalComponent, {
+    if (this.modalRef) {
+      return; // Previne a abertura de múltiplos modais
+    }
+
+    this.modalRef = this.dialog.open(NluModalComponent, {
       width: '400px',
-      position: { top: '-30%', left: '50%', transform: 'translate(-50%, -50%)' } as any
+      position: { top: '-20%', left: '50%' },
+      panelClass: 'custom-modal2-class'
+    });
+
+    this.modalRef.afterClosed().subscribe(result => {
+      this.modalRef = null;
+      if (result) {
+        this.fetchNluData();
+      }
     });
   }
 
 
+  editNlu(data: NluData): void {
+    if (this.modalRef) {
+      return;
+    }
+    this.modalRef = this.dialog.open(NluModalComponent, {
+      width: '400px',
+      data: data  // Passa os dados para o modal
+    });
+
+    this.modalRef.afterClosed().subscribe(result => {
+      this.modalRef = null;
+      if (result) {
+        this.fetchNluData();
+      }
+    });
+  }
 }
