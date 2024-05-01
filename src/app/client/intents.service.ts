@@ -16,7 +16,7 @@ export class IntentsService {
   }
 
   createResponse(newResponse: any): Observable<any> {
-    return this.http.post('http://localhost:8081/rasa/response', newResponse);
+    return this.http.post(`${this.apiUrl}/rasa/response`, newResponse);
   }
   deleteResponse(responseId: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/rasa/response/${responseId}`);
@@ -26,7 +26,7 @@ export class IntentsService {
   }
 
   createIntent(intentData: { name: string }) {
-    return this.http.post('http://localhost:8081/rasa/intents', intentData);
+    return this.http.post(`${this.apiUrl}/rasa/intents`, intentData);
 
   }
 
