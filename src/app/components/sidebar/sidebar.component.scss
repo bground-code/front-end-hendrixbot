@@ -1,10 +1,21 @@
 .sidebar-transition {
-  transition: margin-left 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out; /* Adicionando transição suave para o transform */
 }
 
 .sidebar-dark {
-  background-color: #343a40; // Cor escura do sidebar
-  color: #fff; // Texto branco para contraste
+  background-color: #343a40;
+  color: #fff;
+  z-index: 1000;
+  width: 250px;
+  height: 100vh;
+  transform: translateX(0);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.sidebar-hidden {
+  transform: translateX(-100%); /* Alterando a transformação para mover o sidebar para fora da tela */
 }
 
 .sidebar-header {
@@ -13,30 +24,30 @@
   justify-content: center;
   padding: 1rem;
   letter-spacing: 15px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1); // Linha de separação
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .sidebar-logo {
-  max-height: 50px; // Ajuste para o tamanho do seu logo
+  max-height: 50px;
 }
 
-.components .list-group-item {
+.list-group-item {
   transition: background-color 0.3s ease-in-out;
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.1); // Efeito hover
-  }
+}
+
+.list-group-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .active {
-  background-color: #007bff; // Cor ativa para item selecionado
+  background-color: #007bff;
 }
 
 .toggle-sidebar-button {
   position: absolute;
-  top: 0;
-  left: 100%; // Coloca o botão à direita do sidebar
-  margin-left: -40px; // Ajuste para o botão ser parcialmente visível
-  background-color: #007bff; // Cor primária do botão
+  top: 400px; /* Movendo o botão um pouco para baixo */
+  left: 230px;
+  background-color: #343a40;
   color: #fff;
   border: none;
   border-radius: 50%;
@@ -49,17 +60,26 @@
   z-index: 1050;
 }
 
+
 .toggle-icon-animate {
   transition: transform 0.3s ease-in-out;
-  &.toggled {
-    transform: rotate(180deg);
+}
+
+.toggle-icon-animate.toggled {
+  transform: rotate(180deg);
+}
+
+.content {
+  transition: margin-left 0.5s ease-in-out; /* Adicionando transição suave para o conteúdo */
+  margin-left: 250px; /* Espaço inicial para o sidebar */
+}
+
+@media (max-width: 768px) {
+  .sidebar-dark {
+    width: 100%;
   }
-}
 
-.sidebar-hidden {
-  margin-left: -250px; // Esconda o sidebar
-}
-
-.sidebar-hidden + .toggle-sidebar-button {
-  left: 0; // Posicione o botão na borda visível
+  .toggle-sidebar-button {
+    left: 100%;
+  }
 }
