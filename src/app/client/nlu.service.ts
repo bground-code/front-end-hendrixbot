@@ -36,9 +36,9 @@ export class NluService {
   }
 
   atualizarNlu(nluData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/nlu`, nluData).pipe(
+    return this.http.put(`${this.apiUrl}/nlu/${nluData.id}`, nluData).pipe(
       tap(() => {
-        this.toastr.success('Story updated successfully');
+        this.toastr.success('Resposta atualizada com sucesso');
       }),
       catchError(error => {
         this.toastr.error('Error updating story');

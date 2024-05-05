@@ -10,10 +10,10 @@
   </header>
   <main class="content">
     <div class="question-list">
-      <h6 style="color: #000000; margin-left: 1px;">Respostas cadastradas</h6>  <!-- Título adicionado aqui -->
+      <h6 style="color: #000000; margin-left: 1px;">Resposta cadastrada</h6>  <!-- Título adicionado aqui -->
       <ul>
         <li *ngFor="let response of responses; let i = index" (click)="selectResponse(i)">
-          {{ response.name }}
+          <p> {{ response.name }} </p>
           <fa-icon [icon]="icons.faMessage"></fa-icon>
         </li>
       </ul>
@@ -21,11 +21,11 @@
     <div class="question-detail" *ngIf="selectedResponse || creatingNewResponse">
       <h3 style="margin-bottom: 10px;">Título da resposta</h3>
       <label for="responseTitle" class="visually-hidden">Título da Resposta</label>
-      <input type="text" id="responseTitle" [(ngModel)]="newResponse.name" placeholder="Título da Resposta" class="title-input"/>
-      <div class="responses">
-        <div *ngFor="let text of newResponse.texts; let j = index" class="response-bubble">
-          <h6 style="color: #000000; margin-left: 1px;">Respostas cadastradas</h6>
-
+      <input type="text" id="responseTitle" [(ngModel)]="newResponse.name" placeholder="Título da Resposta"
+             class="title-input"/>
+      <div class="response-container">
+        <div *ngFor="let text of newResponse.texts; let j = index trackBy:trackByText" class="response-bubble">
+          <h6 style="color: #000000; margin-left: 1px;">Cadatrar resposta</h6>
           <textarea [(ngModel)]="newResponse.texts[j]" placeholder="Texto da Resposta"></textarea>
 
           <button class="btn remove-bubble" (click)="removeResponseBubble(j)">

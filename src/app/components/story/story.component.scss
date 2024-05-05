@@ -13,7 +13,9 @@
   background-color: #f8f9fa;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   border-radius: 10px;
-  overflow: hidden;
+  overflow: hidden; /* Altere esta linha */
+  display: flex;
+  flex-direction: column;
 }
 
 .card-header {
@@ -27,6 +29,8 @@
 
 .card-body {
   padding: 20px;
+  overflow-y: auto; /* Adiciona a barra de rolagem vertical se necessário */
+  max-height: 300px; /* Define a altura máxima do card-body */
 }
 
 .form-select, .form-control {
@@ -115,7 +119,8 @@
   }
 
   .content {
-    flex: 1;
+    flex: 1; // Faz com que a content ocupe todo o espaço disponível
+    overflow-y: auto; // Adiciona uma barra de rolagem se o conteúdo exceder a altura da área visível
     padding: 20px;
     background-color: #F5F5F5;
 

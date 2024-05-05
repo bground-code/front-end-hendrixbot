@@ -20,22 +20,30 @@
       <div class="dialog-grid">
         <div *ngFor="let story of stories; let i = index" class="dialog-card">
           <div class="card-header">
-
             <strong>Diálogo: {{ story.name }}</strong>
           </div>
           <div class="card-body">
-            <label>Pergunta:</label>
-            <select [(ngModel)]="story.steps[0].intentName" class="form-select"
-                    (change)="updateStory(story.id, story.id)">
-              <option value="">Selecionar Pergunta</option>
-              <option *ngFor="let intent of intents" [value]="intent.name">{{ intent.name }}</option>
-            </select>
-            <label>Resposta:</label>
-            <select [(ngModel)]="story.steps[0].actionText" class="form-select"
-                    (change)="updateStory(story.id, story.id)">
-              <option value="">Selecionar Resposta</option>
-              <option *ngFor="let action of actions" [value]="action.name">{{ action.name }}</option>
-            </select>
+            <!-- Container Scrollable para perguntas e respostas -->
+            <div class="qa-container">
+              <!-- Repetição para perguntas e respostas -->
+              <div *ngFor="let step of story.steps">
+                <div>
+                  <label>Pergunta:</label>
+                  <select [(ngModel)]="step.intentName" class="form-select" (change)="updateStory(story.id, story.id)">
+                    <option value="">Selecionar Pergunta</option>
+                    <option *ngFor="let intent of intents" [value]="intent.name">{{ intent.name }}</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Resposta:</label>
+                  <select [(ngModel)]="step.actionText" class="form-select" (change)="updateStory(story.id, story.id)">
+                    <option value="">Selecionar Resposta</option>
+                    <option *ngFor="let action of actions" [value]="action.name">{{ action.name }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <!-- Botões de ação -->
             <div class="button-group">
               <button class="btn btn-primary btn-icon" (click)="openEditDialog(story)">
                 <i class="fas fa-edit"></i> Editar
@@ -46,6 +54,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </main>

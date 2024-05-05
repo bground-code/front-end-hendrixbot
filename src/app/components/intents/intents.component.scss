@@ -112,11 +112,20 @@
       .btn.save {
         background-color: #008CBA;
         color: white;
-        padding: 10px 20px;
+        padding: 10px 15px;
         border: none;
+        margin-left: 90%;
         cursor: pointer;
       }
     }
+  }
+  .response-container {
+    max-height: 600px; /* Altura máxima antes de começar a rolar */
+    overflow-y: auto; /* Ativa a barra de rolagem vertical quando necessário */
+    margin-top: 10px; /* Espaço acima do contêiner para estética */
+    padding-right: 5px; /* Previne que o conteúdo cole na barra de rolagem */
+    border: 1px solid #ccc; /* Borda opcional para melhorar a visibilidade */
+    border-radius: 25px; /* Bordas arredondadas para estética */
   }
 
   .remove-bubble {

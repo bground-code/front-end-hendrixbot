@@ -1,58 +1,16 @@
-.card {
-  // Sombra e borda mais suave para o card
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  border: none;
-  border-radius: 4px;
-
-  .card-body {
-    // Espaçamento interno e organização do conteúdo
-    padding: 15px;
-
-    .card-subtitle {
-      // Estilo e espaçamento para o subtítulo
-      color: #333;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-
-    ul {
-      padding-left: 20px;
-      list-style-type: disc; // Ou 'none' se preferir não ter bullets
-    }
-  }
-}
-
-.btn {
-  margin-right: 5px; // Espaço entre botões
-
-  &-primary {
-    background-color: #007bff; // Cor primária para botão 'Editar'
-    &:hover {
-      background-color: darken(#007bff, 10%);
-    }
-  }
-
-  &-danger {
-    background-color: #dc3545; // Cor de perigo para botão 'Deletar'
-    &:hover {
-      background-color: darken(#dc3545, 10%);
-    }
-  }
-}
-
 .bot-flow {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  font-family: Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   .header {
-    background-color: #343a40; // Cor escura do sidebar
+    background-color: #343a40;
     padding: 10px 20px;
     display: flex;
     align-items: center;
     color: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
     .btn {
       background-color: #4CAF50;
@@ -65,9 +23,10 @@
       margin-right: 20px;
     }
 
+
     .tabs {
       display: flex;
-      margin-left: auto;
+      margin-left: 51%;
 
       .tab {
         padding: 10px 15px;
@@ -82,9 +41,8 @@
         }
       }
     }
-
     .filter {
-      margin-left: 20px;
+      margin-left: auto;  /* Alinha o filtro à direita */
       padding: 8px;
       border-radius: 4px;
       border: none;
@@ -95,50 +53,85 @@
   }
 
   .content {
-    flex: 1;
+    display: flex;
+    flex-grow: 1;
     padding: 20px;
-    background-color: #F5F5F5;
 
-    .dialog-list {
+    .question-list {
+      flex-basis: 20%;  /* Define uma base para a largura da lista de perguntas */
+      max-height: calc(100vh - 60px);  /* Subtrai a altura do cabeçalho */
+      overflow-y: auto;
+
       ul {
-        list-style: none;
         padding: 0;
         margin: 0;
-        background-color: white;
-        box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+      }
 
-        li {
-          padding: 10px;
-          border-bottom: 1px solid #eee;
+      li {
+        padding: 10px;
+        border-bottom: 1px solid gray;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
-          .dialog-name {
-            font-weight: bold;
-            color: #666;
-
-            .icon {
-              margin-right: 5px;
-            }
-          }
-
-          .dialog-items {
-            margin-top: 5px;
-
-            span {
-              display: inline-block;
-              background-color: #E0E0E0;
-              padding: 5px;
-              margin-right: 5px;
-              border-radius: 4px;
-
-              .icon {
-                margin-right: 5px;
-              }
-            }
-          }
+        &:hover {
+          background-color: #f0f0f0;
         }
       }
     }
+
+    .question-detail {
+      flex: 1;
+      padding-left: 20px;
+
+      input,
+      .response-bubble textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+      }
+
+      .response-bubble {
+        background-color: #f0f0f0;
+        padding: 8px;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+
+        textarea {
+          flex-grow: 1;
+          margin-right: 10px;  /* Espaço entre o textarea e o botão de remoção */
+        }
+      }
+
+
+      .btn.save {
+        background-color: #008CBA;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        margin-left: 90%;
+        cursor: pointer;
+      }
+    }
+  }
+  .response-container {
+    max-height: 600px; /* Altura máxima antes de começar a rolar */
+    overflow-y: auto; /* Ativa a barra de rolagem vertical quando necessário */
+    margin-top: 10px; /* Espaço acima do contêiner para estética */
+    padding-right: 5px; /* Previne que o conteúdo cole na barra de rolagem */
+    border: 1px solid #ccc; /* Borda opcional para melhorar a visibilidade */
+    border-radius: 25px; /* Bordas arredondadas para estética */
+  }
+
+  .remove-bubble {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #c00;  /* Altera a cor para vermelho mais visível */
   }
 }
-
-

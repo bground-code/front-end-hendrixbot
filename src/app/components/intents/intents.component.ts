@@ -84,7 +84,12 @@ export class IntentsComponent implements OnInit {
 
   toggleCreateNewResponse() {
     this.creatingNewResponse = !this.creatingNewResponse;
-    this.selectedResponse = null;
+
+    if (this.creatingNewResponse) {
+      this.resetForm();
+      this.selectedResponse = null;
+      this.selectedResponseIndex = -1;
+    }
   }
 
 
@@ -127,11 +132,13 @@ export class IntentsComponent implements OnInit {
       );
     }
   }
+
   resetForm() {
     this.newResponse = { name: '', texts: [''] };
     this.selectedResponse = null;
     this.selectedResponseIndex = -1;
   }
+
 
   removeResponseBubble(index: number) {
     if (this.newResponse.texts && this.newResponse.texts.length > 1) {
@@ -214,5 +221,9 @@ export class IntentsComponent implements OnInit {
       this.newResponse.texts.push('');
     }
   }
+  trackByText(index: number, text: string): any {
+    return index; // ou uma chave única se disponível
+  }
+
 
 }
