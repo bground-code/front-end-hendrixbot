@@ -6,7 +6,6 @@ import {CadastroUsuarioComponent} from './components/cadastro-usuario/cadastro-u
 import {IntentsComponent} from './components/intents/intents.component';
 import {StoryComponent} from "./components/story/story.component";
 import {NluComponent} from "./components/nlu/nlu.component";
-import {DialogoComponent} from "./components/dialogo/dialogo.component";
 
 
 const routes: Routes = [
@@ -14,7 +13,6 @@ const routes: Routes = [
   {path: 'intents', component: IntentsComponent},
   {path: 'historia', component: StoryComponent},
   {path: 'nlu', component: NluComponent},
-  {path: 'dialogo', component: DialogoComponent},
 
 
   {
