@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faAngleDoubleLeft, faAngleDoubleRight, faGear, faHome, faUser } from '@fortawesome/free-solid-svg-icons';
+import {faAngleDoubleLeft, faAngleDoubleRight, faCog, faGear, faHome, faUser} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sidebar',
@@ -32,6 +32,8 @@ export class SidebarComponent implements OnInit {
       content.style.marginLeft = this.sidebarHidden ? '0' : sidebarWidth + 'px';
     }
   }
+
+  protected readonly faCog = faCog;
 }
 
 // Ajustar largura do conteúdo quando a página é carregada e redimensionada
