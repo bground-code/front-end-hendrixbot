@@ -1,10 +1,8 @@
 <nav class="nav-total border-end sidebar-transition sidebar-dark" id="sidebar" [class.sidebar-hidden]="sidebarHidden">
-<!-- Conteúdo do sidebar -->
   <div class="sidebar-header">
-    <img class="sidebar-logo my-4" alt="Logo hendrix" title="Logo brasão do TJRO">
+    <img class="sidebar-logo my-4" src="path/to/logo.png" alt="Logo hendrix">
   </div>
   <hr />
-
   <ul class="list-unstyled components m-0 list-group">
     <li [routerLink]="'/home'" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }" class="cursor-pointer p-2 list-group-item d-flex justify-content-start align-items-center border-0 rounded text-light" title="Ir para o Início">
       <fa-icon id="rcorners1" [icon]="faHome"></fa-icon>
@@ -15,25 +13,20 @@
       <fa-icon [icon]="faUser"></fa-icon>
       <span class="ms-1">Cadastro de Usuário</span>
     </li>
-    <li [routerLink]="'/intents'" [routerLinkActive]="'active'" class="cursor-pointer p-2 list-group-item d-flex justify-content-start align-items-center border-0 rounded text-light" title="Ir para Cadastro de Usuário">
-      <fa-icon [icon]="faGear"></fa-icon>
-      <span class="ms-1">Gerenciar Respostas</span>
-    </li>
-    <li [routerLink]="'/dialogo'" [routerLinkActive]="'active'" class="cursor-pointer p-2 list-group-item d-flex justify-content-start align-items-center border-0 rounded text-light" title="Ir para Cadastro de Usuário">
-      <fa-icon [icon]="faUser"></fa-icon>
-      <span class="ms-1">Gerenciar Hendrix</span>
-    </li>
+
     <li [routerLink]="'/historia'" [routerLinkActive]="'active'" class="cursor-pointer p-2 list-group-item d-flex justify-content-start align-items-center border-0 rounded text-light" title="Ir para Cadastro de Usuário">
       <fa-icon [icon]="faGear"></fa-icon>
-      <span class="ms-1">Criar Historia</span>
+      <span class="ms-1">Gerenciar Hendrix</span>
     </li>
-    <li [routerLink]="'/nlu'" [routerLinkActive]="'active'" class="cursor-pointer p-2 list-group-item d-flex justify-content-start align-items-center border-0 rounded text-light" title="Ir para Cadastro de Usuário">
+    <li [routerLink]="'/chat'" [routerLinkActive]="'active'" class="cursor-pointer p-2 list-group-item d-flex justify-content-start align-items-center border-0 rounded text-light" title="Ir para Cadastro de Usuário">
       <fa-icon [icon]="faGear"></fa-icon>
-      <span class="ms-1">Processamento</span>
+      <span class="ms-1">Chat Hendrix</span>
     </li>
-    <button class="btn btn-dark mt-auto align-self-end" (click)="toggleSidebar()">
+
+    <button class="btn btn-dark mt-auto align-self-end toggle-sidebar-button" (click)="toggleSidebar()">
       <fa-icon [icon]="sidebarHidden ? faAngleDoubleRight : faAngleDoubleLeft"></fa-icon>
     </button>
   </ul>
-
 </nav>
+<div class="content">
+</div>
