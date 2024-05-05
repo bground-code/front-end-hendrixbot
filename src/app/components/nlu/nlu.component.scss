@@ -1,43 +1,137 @@
-.card {
-  // Sombra e borda mais suave para o card
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  border: none;
-  border-radius: 4px;
+.bot-flow {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-  .card-body {
-    // Espaçamento interno e organização do conteúdo
-    padding: 15px;
+  .header {
+    background-color: #343a40;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
-    .card-subtitle {
-      // Estilo e espaçamento para o subtítulo
-      color: #333;
-      margin-bottom: 10px;
-      font-weight: bold;
+    .btn {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 4px;
+      text-transform: uppercase;
+      margin-right: 20px;
     }
 
-    ul {
+
+    .tabs {
+      display: flex;
+      margin-left: 51%;
+
+      .tab {
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 14px;
+        border-bottom: 3px solid transparent;
+        color: white;
+
+        &.active {
+          border-bottom: 3px solid #4CAF50;
+          color: #4CAF50;
+        }
+      }
+    }
+    .filter {
+      margin-left: auto;  /* Alinha o filtro à direita */
+      padding: 8px;
+      border-radius: 4px;
+      border: none;
+      background-color: white;
+      color: black;
+      width: 200px;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-grow: 1;
+    padding: 20px;
+
+    .question-list {
+      flex-basis: 20%;  /* Define uma base para a largura da lista de perguntas */
+      max-height: calc(100vh - 60px);  /* Subtrai a altura do cabeçalho */
+      overflow-y: auto;
+
+      ul {
+        padding: 0;
+        margin: 0;
+      }
+
+      li {
+        padding: 10px;
+        border-bottom: 1px solid gray;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &:hover {
+          background-color: #f0f0f0;
+        }
+      }
+    }
+
+    .question-detail {
+      flex: 1;
       padding-left: 20px;
-      list-style-type: disc; // Ou 'none' se preferir não ter bullets
+
+      input,
+      .response-bubble textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+      }
+
+      .response-bubble {
+        background-color: #f0f0f0;
+        padding: 8px;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+
+        textarea {
+          flex-grow: 1;
+          margin-right: 10px;  /* Espaço entre o textarea e o botão de remoção */
+        }
+      }
+
+
+      .btn.save {
+        background-color: #008CBA;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        margin-left: 90%;
+        cursor: pointer;
+      }
     }
+  }
+  .response-container {
+    max-height: 600px; /* Altura máxima antes de começar a rolar */
+    overflow-y: auto; /* Ativa a barra de rolagem vertical quando necessário */
+    margin-top: 10px; /* Espaço acima do contêiner para estética */
+    padding-right: 5px; /* Previne que o conteúdo cole na barra de rolagem */
+    border: 1px solid #ccc; /* Borda opcional para melhorar a visibilidade */
+    border-radius: 25px; /* Bordas arredondadas para estética */
+  }
+
+  .remove-bubble {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #c00;  /* Altera a cor para vermelho mais visível */
   }
 }
-
-.btn {
-  margin-right: 5px; // Espaço entre botões
-
-  &-primary {
-    background-color: #007bff; // Cor primária para botão 'Editar'
-    &:hover {
-      background-color: darken(#007bff, 10%);
-    }
-  }
-
-  &-danger {
-    background-color: #dc3545; // Cor de perigo para botão 'Deletar'
-    &:hover {
-      background-color: darken(#dc3545, 10%);
-    }
-  }
-}
-
-// Customizações adicionais para ícones e outros elementos se necessário...

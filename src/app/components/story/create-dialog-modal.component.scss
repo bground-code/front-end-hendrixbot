@@ -13,13 +13,11 @@
   background-color: #f8f9fa;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   border-radius: 10px;
-  overflow: hidden; /* Altere esta linha */
-  display: flex;
-  flex-direction: column;
+  overflow: hidden;
 }
 
 .card-header {
-  background-color: rgba(41, 55, 66, 0.86); // Cor escura do sidebar
+  background-color: #343a40; // Cor escura do sidebar
   color: white;
   padding: 10px;
   display: flex;
@@ -29,8 +27,6 @@
 
 .card-body {
   padding: 20px;
-  overflow-y: auto; /* Adiciona a barra de rolagem vertical se necessário */
-  max-height: 300px; /* Define a altura máxima do card-body */
 }
 
 .form-select, .form-control {
@@ -63,15 +59,8 @@
   height: 100vh;
   font-family: Arial, sans-serif;
 
-  .button-group {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;  /* Botao dentro do cargo */
-    margin-left: 90px;
-  }
-
   .header {
-    background-color: #343a40; // Cor escura do sidebar
+    background-color: #323232;
     padding: 10px 20px;
     display: flex;
     align-items: center;
@@ -119,8 +108,7 @@
   }
 
   .content {
-    flex: 1; // Faz com que a content ocupe todo o espaço disponível
-    overflow-y: auto; // Adiciona uma barra de rolagem se o conteúdo exceder a altura da área visível
+    flex: 1;
     padding: 20px;
     background-color: #F5F5F5;
 
@@ -164,4 +152,14 @@
       }
     }
   }
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: 10px;
+    background: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
 }

@@ -1,0 +1,23 @@
+<div class="card-header">
+  <button class="close-btn" (click)="onClose()">X</button>
+  <strong>Adicionar novo Diálogo</strong>
+</div>
+<div class="card-body">
+  <form [formGroup]="dialogForm" (ngSubmit)="onSubmit()">
+    <input formControlName="name" class="form-control" placeholder="Nome da nova história">
+    <div formArrayName="steps">
+      <div *ngFor="let step of steps.controls; let i = index" [formGroupName]="i">
+        <select formControlName="intentName" class="form-select">
+          <option value="">Selecionar Pergunta</option>
+          <option *ngFor="let intent of intents" [value]="intent.name">{{ intent.name }}</option>
+        </select>
+        <select formControlName="actionText" class="form-select">
+          <option value="">Selecionar Resposta</option>
+          <option *ngFor="let action of actions" [value]="action.name">{{ action.name }}</option>
+        </select>
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary" (click)="addStep()">Adicionar Passo</button>
+    <button type="submit" class="btn btn-success">Salvar Diálogo</button>
+  </form>
+</div>
