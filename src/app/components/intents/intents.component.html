@@ -1,40 +1,43 @@
-<div class="container-fluid py-3">
-  <div class="row">
-    <!-- Coluna para Gerenciar Respostas -->
-    <div class="col-md-6 mb-3">
-      <div class="card shadow-sm h-100">
-        <div class="card-body">
-          <h5 class="card-title text-primary">Gerenciar Respostas</h5>
-          <button class="btn btn-primary mb-3" (click)="openModal()">Criar Nova Resposta</button>
-          <div *ngFor="let response of responses; let i = index">
-            <div class="card bg-light mb-2">
-              <div class="card-body">
-                <h6 class="card-subtitle mb-2 text-muted">{{ response.name }}</h6>
-                <p class="card-text">{{ response.texts.join(', ') }}</p>
-                <button class="btn btn-danger" (click)="deleteResponse(i)">Deletar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+<div class="bot-flow">
+  <header class="header">
+    <button class="btn create" (click)="toggleCreateNewResponse()">CRIAR NOVA RESPOSTA</button>
+    <div class="tabs">
+      <a class="tab" routerLink="/historia" routerLinkActive="active">DIÁLOGOS</a>
+      <a class="tab" routerLink="/nlu" routerLinkActive="active">PERGUNTAS</a>
+      <a class="tab" routerLink="/intents" routerLinkActive="active">RESPOSTAS</a>
     </div>
+    <input type="text" class="filter" placeholder="Filtrar">
+  </header>
+  <main class="content">
+    <div class="question-list">
+      <h6 style="color: #000000; margin-left: 1px;">Respostas cadastradas</h6>  <!-- Título adicionado aqui -->
+      <ul>
+        <li *ngFor="let response of responses; let i = index" (click)="selectResponse(i)">
+          {{ response.name }}
+          <fa-icon [icon]="icons.faMessage"></fa-icon>
+        </li>
+      </ul>
+    </div>
+    <div class="question-detail" *ngIf="selectedResponse || creatingNewResponse">
+      <h3 style="margin-bottom: 10px;">Título da resposta</h3>
+      <label for="responseTitle" class="visually-hidden">Título da Resposta</label>
+      <input type="text" id="responseTitle" [(ngModel)]="newResponse.name" placeholder="Título da Resposta" class="title-input"/>
+      <div class="responses">
+        <div *ngFor="let text of newResponse.texts; let j = index" class="response-bubble">
+          <h6 style="color: #000000; margin-left: 1px;">Respostas cadastradas</h6>
 
-    <!-- Coluna para Gerenciar Intents -->
-    <div class="col-md-6 mb-3">
-      <div class="card shadow-sm h-100">
-        <div class="card-body">
-          <h5 class="card-title text-success">Gerenciar Intents</h5>
-          <button class="btn btn-success mb-3" (click)="openIntentModal()">Criar Novo Intent</button>
-          <div *ngFor="let intent of intents; let j = index">
-            <div class="card bg-light mb-2">
-              <div class="card-body">
-                <h6 class="card-subtitle mb-2 text-muted">{{ intent.name }}</h6>
-                <button class="btn btn-danger" (click)="deleteIntent(j)">Deletar</button>
-              </div>
-            </div>
-          </div>
+          <textarea [(ngModel)]="newResponse.texts[j]" placeholder="Texto da Resposta"></textarea>
+
+          <button class="btn remove-bubble" (click)="removeResponseBubble(j)">
+            <fa-icon [icon]="icons.faTrash"></fa-icon>
+          </button>
+
         </div>
+        <button class="btn add-bubble" (click)="addResponseBubble()">
+          <fa-icon [icon]="icons.faPlusCircle" size="2x"></fa-icon>
+        </button>
       </div>
+      <button class="btn save" (click)="handleSubmitNewResponse()">SALVAR</button>
     </div>
-  </div>
+  </main>
 </div>

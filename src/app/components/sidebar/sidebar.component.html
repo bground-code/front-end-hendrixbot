@@ -1,5 +1,5 @@
 <nav class="nav-total border-end sidebar-transition sidebar-dark" id="sidebar" [class.sidebar-hidden]="sidebarHidden">
-  <!-- Conteúdo do sidebar -->
+<!-- Conteúdo do sidebar -->
   <div class="sidebar-header">
     <img class="sidebar-logo my-4" alt="Logo hendrix" title="Logo brasão do TJRO">
   </div>
@@ -10,21 +10,18 @@
       <fa-icon id="rcorners1" [icon]="faHome"></fa-icon>
       <span class="ms-2">Início</span>
     </li>
-    <li [routerLink]="'/home/area-regiao'" [routerLinkActiveOptions]="{ exact: true }" [routerLinkActive]="'active'" class="cursor-pointer p-2 list-group-item d-flex justify-content-start align-items-center border-0 rounded text-light" title="Ir para Configuração de Área e Região">
-      <fa-icon [icon]="faGear"></fa-icon>
-      <span class="ms-1">Configuração de Áreas e Regiões</span>
-    </li>
+
     <li [routerLink]="'/cadastro-usuario'" [routerLinkActive]="'active'" class="cursor-pointer p-2 list-group-item d-flex justify-content-start align-items-center border-0 rounded text-light" title="Ir para Cadastro de Usuário">
       <fa-icon [icon]="faUser"></fa-icon>
       <span class="ms-1">Cadastro de Usuário</span>
     </li>
-
-    <hr />
-    <span class="ms-2">Hendrix</span>
-    <hr />
     <li [routerLink]="'/intents'" [routerLinkActive]="'active'" class="cursor-pointer p-2 list-group-item d-flex justify-content-start align-items-center border-0 rounded text-light" title="Ir para Cadastro de Usuário">
       <fa-icon [icon]="faGear"></fa-icon>
       <span class="ms-1">Gerenciar Respostas</span>
+    </li>
+    <li [routerLink]="'/dialogo'" [routerLinkActive]="'active'" class="cursor-pointer p-2 list-group-item d-flex justify-content-start align-items-center border-0 rounded text-light" title="Ir para Cadastro de Usuário">
+      <fa-icon [icon]="faUser"></fa-icon>
+      <span class="ms-1">Gerenciar Hendrix</span>
     </li>
     <li [routerLink]="'/historia'" [routerLinkActive]="'active'" class="cursor-pointer p-2 list-group-item d-flex justify-content-start align-items-center border-0 rounded text-light" title="Ir para Cadastro de Usuário">
       <fa-icon [icon]="faGear"></fa-icon>

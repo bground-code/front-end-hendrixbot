@@ -1,34 +1,162 @@
-/* story.component.scss */
 .container {
-  max-width: 800px; // Limitar a largura para não esticar muito em telas grandes
+  max-width: 100%;
+  padding: 20px;
+}
 
-  .card {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); // Sombra suave para os cartões
+.dialog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
 
-    .card-body {
-      &:first-child {
-        border-top: 4px solid #007bff; // Uma borda colorida no topo para destacar
+.dialog-card {
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-header {
+  background-color: rgba(41, 55, 66, 0.86); // Cor escura do sidebar
+  color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.form-select, .form-control {
+  margin-top: 10px;
+}
+
+.btn-icon {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+}
+
+.btn-danger {
+  background-color: red;
+  color: white;
+}
+
+.btn-primary {
+  background-color: green;
+  color: white;
+}
+
+.fas {
+  margin-right: 5px;
+}
+.bot-flow {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+
+  .button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;  /* Botao dentro do cargo */
+    margin-left: 90px;
+  }
+
+  .header {
+    background-color: #343a40; // Cor escura do sidebar
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+
+    .btn {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 4px;
+      text-transform: uppercase;
+      margin-right: 20px;
+    }
+
+    .tabs {
+      display: flex;
+      margin-left: auto;
+
+      .tab {
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 14px;
+        border-bottom: 3px solid transparent;
+        color: white;
+
+        &.active {
+          border-bottom: 3px solid #4CAF50;
+          color: #4CAF50;
+        }
       }
+    }
+
+    .filter {
+      margin-left: 20px;
+      padding: 8px;
+      border-radius: 4px;
+      border: none;
+      background-color: white;
+      color: black;
+      width: 200px;
     }
   }
 
-  .input-group, .list-group-item {
-    padding: 0.5rem;
-  }
+  .content {
+    flex: 1;
+    padding: 20px;
+    background-color: #F5F5F5;
 
-  .list-group-item {
-    background-color: #f8f9fa; // Um fundo mais claro para os itens da lista
-  }
+    .dialog-list {
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        background-color: white;
+        box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
 
-  .form-control, .form-select {
-    margin-bottom: 0.5rem; // Espaçamento entre os campos
-  }
+        li {
+          padding: 10px;
+          border-bottom: 1px solid #eee;
 
-  .btn-danger {
-    margin-left: 0.5rem; // Espaçar o botão de deletar do campo de texto
-  }
+          .dialog-name {
+            font-weight: bold;
+            color: #666;
 
-  .btn-success {
-    margin-left: 0.5rem; // Espaçar o botão de criar do último select
+            .icon {
+              margin-right: 5px;
+            }
+          }
+
+          .dialog-items {
+            margin-top: 5px;
+
+            span {
+              display: inline-block;
+              background-color: #E0E0E0;
+              padding: 5px;
+              margin-right: 5px;
+              border-radius: 4px;
+
+              .icon {
+                margin-right: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

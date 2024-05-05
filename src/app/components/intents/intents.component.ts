@@ -11,11 +11,15 @@ import { MatIcon } from "@angular/material/icon";
 import { CadastroModalIntentsComponent } from "./cadastro-modal-intents.component";
 import { NluData } from '../../models/nlu';
 import {CadastromodalComponent} from "./cadastromodal.component";
+import {RouterLink, RouterLinkActive} from "@angular/router";
+import {FormsModule} from "@angular/forms";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {faTrash, faPlusCircle, faMessage } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-intents',
   templateUrl: './intents.component.html',
-  imports: [CommonModule, MatCardTitle, MatCard, MatList, MatListItem, MatLine, MatButton, MatIcon],
+  imports: [CommonModule, MatCardTitle, MatCard, MatList, MatListItem, MatLine, MatButton, MatIcon, RouterLink, RouterLinkActive, FormsModule, FaIconComponent],
   standalone: true,
   styleUrls: ['./intents.component.scss']
 })
@@ -25,7 +29,11 @@ export class IntentsComponent implements OnInit {
   private dialogRef: MatDialogRef<CadastroModalIntentsComponent> | null = null;
   private dialogRefE: MatDialogRef<CadastromodalComponent> | null = null;
 
-
+  icons = {
+    faTrash,
+    faPlusCircle,
+    faMessage
+  };
   constructor(
     private intentsService: IntentsService,
     private toastr: ToastrService,
@@ -56,25 +64,84 @@ export class IntentsComponent implements OnInit {
       }
     );
   }
+  selectedResponse: any = null;
+  selectedResponseIndex: number = -1;
+  selectResponse(index: number) {
+    this.creatingNewResponse = true;
+    this.selectedResponse = this.responses[index];
+    this.selectedResponseIndex = index;
+
+    this.newResponse = {
+      name: this.selectedResponse.name,
+      texts: this.selectedResponse.texts
+    };
+  }
 
 
-  handleSubmitNewResponse(responseData: any) {
+
+  creatingNewResponse = false;
+  newResponse = { name: '', texts: [''] };
+
+  toggleCreateNewResponse() {
+    this.creatingNewResponse = !this.creatingNewResponse;
+    this.selectedResponse = null;
+  }
+
+
+  handleSubmitNewResponse() {
+    if (!this.newResponse.name || this.newResponse.texts.some(text => !text.trim())) {
+      this.toastr.error('Por favor, preencha todos os campos.', 'Erro');
+      return;
+    }
+
     const formattedData = {
-      name: responseData.name,
-      responses: responseData.texts.map((text: any) => ({ text }))
+      name: this.newResponse.name,
+      responses: this.newResponse.texts.map(text => ({ text: text.trim() }))
     };
 
-    this.intentsService.createResponse(formattedData).subscribe(
-      () => {
-        this.toastr.success('Resposta criada com sucesso!');
-        this.fetchResponses();
-      },
-      error => {
-        console.error('Error creating new response:', error);
-        this.toastr.error('Erro ao criar nova resposta. Por favor, tente novamente.', 'Erro');
-      }
-    );
+    if (this.selectedResponse) {
+      this.intentsService.editarResponse(this.selectedResponse.id, formattedData).subscribe(
+        () => {
+          this.toastr.success('Resposta atualizada com sucesso!');
+          this.fetchResponses();
+          this.creatingNewResponse = false;
+          this.resetForm();
+        },
+        error => {
+          console.error('Error updating response:', error);
+          this.toastr.error('Erro ao atualizar a resposta. Por favor, tente novamente.', 'Erro');
+        }
+      );
+    } else {
+      this.intentsService.createResponse(formattedData).subscribe(
+        () => {
+          this.toastr.success('Resposta criada com sucesso!');
+          this.fetchResponses();
+          this.creatingNewResponse = false;
+          this.resetForm();
+        },
+        error => {
+          console.error('Error creating new response:', error);
+          this.toastr.error('Erro ao criar nova resposta. Por favor, tente novamente.', 'Erro');
+        }
+      );
+    }
   }
+  resetForm() {
+    this.newResponse = { name: '', texts: [''] };
+    this.selectedResponse = null;
+    this.selectedResponseIndex = -1;
+  }
+
+  removeResponseBubble(index: number) {
+    if (this.newResponse.texts && this.newResponse.texts.length > 1) {
+      this.newResponse.texts.splice(index, 1);
+    } else {
+      this.toastr.error('Deve haver pelo menos uma resposta.');
+    }
+  }
+
+
 
   deleteResponse(index: number): void {
     const responseId = this.responses[index].id;
@@ -138,6 +205,14 @@ export class IntentsComponent implements OnInit {
         this.fetchIntents();
       }
     });
+  }
+
+  addResponseBubble() {
+    if (!this.newResponse.texts) {
+      this.newResponse.texts = [''];
+    } else {
+      this.newResponse.texts.push('');
+    }
   }
 
 }

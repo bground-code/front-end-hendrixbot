@@ -10,14 +10,15 @@ import {MatLine} from "@angular/material/core";
 import {MatList, MatListItem} from "@angular/material/list";
 import {MatCard, MatCardTitle} from "@angular/material/card";
 import {CommonModule} from "@angular/common";
+import {RouterLink, RouterLinkActive} from "@angular/router";
 
 @Component({
   selector: 'app-nlu',
   templateUrl: './nlu.component.html',
   styleUrls: ['./nlu.component.scss'],
-  imports: [
-    CommonModule, MatCard, MatCardTitle, MatList, MatListItem, MatLine, MatButton, MatIcon
-  ],
+    imports: [
+        CommonModule, MatCard, MatCardTitle, MatList, MatListItem, MatLine, MatButton, MatIcon, RouterLink, RouterLinkActive
+    ],
   standalone: true
 })
 export class NluComponent implements OnInit {
@@ -61,7 +62,7 @@ export class NluComponent implements OnInit {
 
   openModal(): void {
     if (this.modalRef) {
-      return; // Previne a abertura de múltiplos modais
+      return;
     }
 
     this.modalRef = this.dialog.open(NluModalComponent, {

@@ -16,7 +16,7 @@ import {MatIcon} from "@angular/material/icon";
 import {MatInput} from "@angular/material/input";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import { CommonModule } from '@angular/common';
-import { NluData } from '../../models/nlu'; // Atualize o caminho se necessário
+import { NluData } from '../../models/nlu';
 
 interface Intent {
   name: string;
