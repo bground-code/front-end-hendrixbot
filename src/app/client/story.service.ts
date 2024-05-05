@@ -17,7 +17,7 @@ export class StoryService {
     return this.http.get<any[]>(`${this.apiUrl}/stories`).pipe(
       tap(() => {}),
       catchError(error => {
-        this.toastr.error('Error fetching stories');
+        this.toastr.error('Erro ao buscar Diálogos');
         throw error;
       })
     );
@@ -26,23 +26,22 @@ export class StoryService {
   createStory(storyData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/stories`, storyData).pipe(
       tap(() => {
-        this.toastr.success('Story created successfully');
+        this.toastr.success('Diálogo criado com sucesso');
       }),
       catchError(error => {
-        this.toastr.error('Error creating story');
+        this.toastr.error('Erro ao criar Diálogo');
         throw error;
       })
     );
   }
 
-  // Atualizar uma história
   updateStory(storyId: number, storyData: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/stories/${storyId}`, storyData).pipe(
       tap(() => {
-        this.toastr.success('Story updated successfully');
+        this.toastr.success('Diálogo atualizado com sucesso');
       }),
       catchError(error => {
-        this.toastr.error('Error updating story');
+        this.toastr.error('Erro ao atualizar Diálogo');
         throw error;
       })
     );
@@ -51,16 +50,15 @@ export class StoryService {
   deleteStory(storyId: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/stories/${storyId}`).pipe(
       tap(() => {
-        this.toastr.success('Story deleted successfully');
+        this.toastr.success('Diálogo excluido com sucesso');
       }),
       catchError(error => {
-        this.toastr.error('Error deleting story');
+        this.toastr.error('Erro ao excluir Diálogo');
         throw error;
       })
     );
   }
 
-  // Buscar intenções
   fetchIntents(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/rasa/intents`).pipe(
       catchError(error => {
@@ -70,7 +68,6 @@ export class StoryService {
     );
   }
 
-  // Buscar ações
   fetchActions(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/rasa/response`).pipe(
       catchError(error => {

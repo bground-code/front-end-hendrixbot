@@ -1,12 +1,5 @@
-export class NLUData {
-  get id(): number {
-    return <number>this._id;
-  }
-
-  set id(value: number) {
-    this._id = value;
-  }
-  private _id: number | undefined ;
-  intentText: string = '';
-  texts: string[] = [];
+export interface NluData {
+  id: number;  // Se estiver sempre presente quando renderizado, não precisa ser opcional.
+  intentText: string;
+  texts: string[];
 }

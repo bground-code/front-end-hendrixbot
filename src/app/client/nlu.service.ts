@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {backendUrl} from "../../config";
-import {NLUData} from "../models/nlu";
-import {catchError} from "rxjs/operators";
+import { NluData} from "../models/nlu";
+import {catchError, tap} from "rxjs/operators";
 import {ToastrService} from "ngx-toastr";
 
 @Injectable({
@@ -14,12 +14,17 @@ export class NluService {
 
   constructor(private http: HttpClient, private toastr: ToastrService) { }
 
-  getNluData(): Observable<NLUData[]> {
-    return this.http.get<NLUData[]>(`${this.apiUrl}/nlu`);
+  getNluData(): Observable<NluData[]> {
+    return this.http.get<NluData[]>(`${this.apiUrl}/nlu`);
   }
 
-  saveNluData(newNlu: { texts: any; intentText: string }) {
-    return this.http.post('http://localhost:8081/rasa/nlu', newNlu );
+  saveNluData(nluData: { texts: string[]; intentText: string }): Observable<NluData> {
+    return this.http.post<NluData>(`${this.apiUrl}/nlu`, nluData).pipe(
+      catchError(error => {
+        this.toastr.error('Erro ao salvar NLU');
+        throw error;
+      })
+    );
   }
   fetchIntents(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/rasa/intents`).pipe(
@@ -29,8 +34,19 @@ export class NluService {
       })
     );
   }
-  deleteIntent(intentId: any) {
-    return this.http.delete(`${this.apiUrl}/nlu/${intentId}`);
 
+  atualizarNlu(nluData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/nlu/${nluData.id}`, nluData).pipe(
+      tap(() => {
+        this.toastr.success('Resposta atualizada com sucesso');
+      }),
+      catchError(error => {
+        this.toastr.error('Error updating story');
+        throw error;
+      })
+    );
+  }
+  deleteIntent(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/nlu/${id}`);
   }
 }

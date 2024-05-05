@@ -1,38 +1,85 @@
-/* Estilos para a transição do sidebar */
 .sidebar-transition {
-  transition: margin-left 0.5s ease;
+  transition: transform 0.5s ease-in-out; /* Adicionando transição suave para o transform */
+}
+
+.sidebar-dark {
+  background-color: #343a40;
+  color: #fff;
+  z-index: 1000;
+  width: 250px;
+  height: 100vh;
+  transform: translateX(0);
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .sidebar-hidden {
-  margin-left: -250px; /* Ajuste para a largura do seu sidebar */
+  transform: translateX(-100%); /* Alterando a transformação para mover o sidebar para fora da tela */
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  letter-spacing: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-logo {
+  max-height: 50px;
+}
+
+.list-group-item {
+  transition: background-color 0.3s ease-in-out;
+}
+
+.list-group-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.active {
+  background-color: #007bff;
 }
 
 .toggle-sidebar-button {
-  position: fixed;
-  top: 10px; /* Ajuste de acordo com o alinhamento vertical desejado */
-  left: 0;
-  z-index: 1050; /* Garante que fique sobre o conteúdo, Bootstrap normalmente usa 1040 para modais, então 1050 é seguro */
+  position: absolute;
+  top: 400px; /* Movendo o botão um pouco para baixo */
+  left: 230px;
+  background-color: #343a40;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
   width: 40px;
   height: 40px;
-  border-radius: 50%; /* Botão circular */
-  background-color: #333; /* Escolha uma cor que combine com seu esquema */
-  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra suave para o botão */
-  transition: all 0.5s ease;
   cursor: pointer;
+  z-index: 1050;
 }
 
-.toggle-sidebar-button:hover {
-  background-color: #424242; /* Escurecimento no hover, exemplo usando hexadecimal */
+
+.toggle-icon-animate {
+  transition: transform 0.3s ease-in-out;
 }
 
-.sidebar-hidden + .toggle-sidebar-button > fa-icon {
+.toggle-icon-animate.toggled {
   transform: rotate(180deg);
 }
 
-.sidebar-hidden + .toggle-sidebar-button {
-  left: -10px; /* Movimenta o botão para ser parcialmente visível */
+.content {
+  transition: margin-left 0.5s ease-in-out; /* Adicionando transição suave para o conteúdo */
+  margin-left: 250px; /* Espaço inicial para o sidebar */
+}
+
+@media (max-width: 768px) {
+  .sidebar-dark {
+    width: 100%;
+  }
+
+  .toggle-sidebar-button {
+    left: 100%;
+  }
 }

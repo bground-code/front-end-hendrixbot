@@ -1,59 +1,61 @@
-<div class="container mt-3">
-  <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Filtrar Histórias" [(ngModel)]="filterValue">
-    <button class="btn btn-outline-secondary" type="button" (click)="clearFilter()">Limpar Filtro</button>
-  </div>
+<div class="bot-flow">
+  <header class="header">
+    <button class="btn create" (click)="openCreateDialog()">CRIAR NOVO DIÁLOGO</button>
+    <div class="tabs">
+      <a class="tab" routerLink="/historia" routerLinkActive="active">DIÁLOGOS</a>
+      <a class="tab" routerLink="/nlu" routerLinkActive="active">PERGUNTAS</a>
+      <a class="tab" routerLink="/intents" routerLinkActive="active">RESPOSTAS</a>
+    </div>
+    <input type="text" class="filter" placeholder="Filtrar">
+  </header>
+  <main class="content">
 
-  <div *ngIf="stories.length === 0" class="alert alert-info">
-    Nenhuma história encontrada.
-  </div>
-
-  <div *ngFor="let story of stories; let i = index" class="card mb-3">
-    <div class="card-body">
-      <div class="d-flex justify-content-between">
-        <input [(ngModel)]="story.name" class="form-control" (change)="updateStory(story.id)">
-        <button class="btn btn-danger ms-2" (click)="deleteStory(story.id)">Deletar História</button>
+    <div class="container mt-3">
+      <div class="dialog-card new-dialog-card">
+      </div>
+      <div *ngIf="stories.length === 0" class="alert alert-info">
+        Nenhuma diálogo encontrado.
       </div>
 
-      <ul class="list-group list-group-flush mt-3">
-        <li *ngFor="let step of story.steps; let j = index" class="list-group-item">
-          <div class="row g-3 align-items-center">
-            <div class="col-auto">
-              <select [(ngModel)]="step.intentName" class="form-select" (change)="updateStory(story.id)">
-                <option value="">Selecionar Intenção</option>
-                <option *ngFor="let intent of intents" [value]="intent.name">{{ intent.name }}</option>
-              </select>
+      <div class="dialog-grid">
+        <div *ngFor="let story of stories; let i = index" class="dialog-card">
+          <div class="card-header">
+            <strong>Diálogo: {{ story.name }}</strong>
+          </div>
+          <div class="card-body">
+            <!-- Container Scrollable para perguntas e respostas -->
+            <div class="qa-container">
+              <!-- Repetição para perguntas e respostas -->
+              <div *ngFor="let step of story.steps">
+                <div>
+                  <label>Pergunta:</label>
+                  <select [(ngModel)]="step.intentName" class="form-select" (change)="updateStory(story.id, story.id)">
+                    <option value="">Selecionar Pergunta</option>
+                    <option *ngFor="let intent of intents" [value]="intent.name">{{ intent.name }}</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Resposta:</label>
+                  <select [(ngModel)]="step.actionText" class="form-select" (change)="updateStory(story.id, story.id)">
+                    <option value="">Selecionar Resposta</option>
+                    <option *ngFor="let action of actions" [value]="action.name">{{ action.name }}</option>
+                  </select>
+                </div>
+              </div>
             </div>
-
-            <div class="col-auto">
-              <select [(ngModel)]="step.actionText" class="form-select" (change)="updateStory(story.id)">
-                <option value="">Selecionar Ação</option>
-                <option *ngFor="let action of actions" [value]="action.name">{{ action.name }}</option>
-              </select>
+            <!-- Botões de ação -->
+            <div class="button-group">
+              <button class="btn btn-primary btn-icon" (click)="openEditDialog(story)">
+                <i class="fas fa-edit"></i> Editar
+              </button>
+              <button class="btn btn-danger btn-icon" (click)="deleteStory(story.id)">
+                <i class="fas fa-trash-alt"></i> Deletar
+              </button>
             </div>
           </div>
-        </li>
-      </ul>
+        </div>
 
-      <div class="mt-3">
-        <button class="btn btn-primary" (click)="updateStory(story.id)">Atualizar História</button>
       </div>
     </div>
-  </div>
-
-  <div class="card card-body">
-    <h5 class="card-title">Adicionar Nova História</h5>
-    <div class="input-group">
-      <input class="form-control" placeholder="Nome da nova história" [(ngModel)]="newStoryName">
-      <select class="form-select" [(ngModel)]="newStepIntent">
-        <option value="">Selecionar Intenção</option>
-        <option *ngFor="let intent of intents" [value]="intent.name">{{ intent.name }}</option>
-      </select>
-      <select class="form-select" [(ngModel)]="newStepAction">
-        <option value="">Selecionar Ação</option>
-        <option *ngFor="let action of actions" [value]="action.name">{{ action.name }}</option>
-      </select>
-      <button class="btn btn-success" type="button" (click)="createStory()">Criar História</button>
-    </div>
-  </div>
+  </main>
 </div>

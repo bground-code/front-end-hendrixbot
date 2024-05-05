@@ -3,6 +3,10 @@ import { StoryService } from '../../client/story.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
+import {RouterLink, RouterLinkActive} from "@angular/router";
+import {CreateDialogModalComponent} from "./create-dialog-modal.component";
+import {MatDialog} from "@angular/material/dialog";
+
 
 @Component({
   selector: 'app-story',
@@ -10,7 +14,9 @@ import {ToastrService} from "ngx-toastr";
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterLink,
+    RouterLinkActive,
   ],
   styleUrls: ['./story.component.scss']
 })
@@ -24,8 +30,9 @@ export class StoryComponent implements OnInit {
   private _id: any;
   filterValue: any;
 
-  constructor(private storyService: StoryService,     private toastr: ToastrService,
-  ) { }
+  constructor(private storyService: StoryService, private toastr: ToastrService, public diaog: MatDialog
+  ) {
+  }
 
   ngOnInit() {
     this.loadStories();
@@ -56,29 +63,43 @@ export class StoryComponent implements OnInit {
   }
 
   createStory(): void {
+    if (!this.newStoryName || !this.newStepIntent || !this.newStepAction) {
+      this.toastr.error('Todos os campos devem ser preenchidos!');
+      return;
+    }
+
     const newStory = {
       name: this.newStoryName,
       steps: [
-        { intentName: this.newStepIntent, actionText: this.newStepAction }
+        {intentName: this.newStepIntent, actionText: this.newStepAction}
       ]
     };
-    this.storyService.createStory(newStory).subscribe(() => {
-      this.loadStories();
-      this.newStoryName = '';
-      this.newStepIntent = '';
-      this.newStepAction = '';
+
+    this.storyService.createStory(newStory).subscribe({
+      next: () => {
+        this.toastr.success('Diálogo criado com sucesso!');
+        this.loadStories();
+        this.newStoryName = '';
+        this.newStepIntent = '';
+        this.newStepAction = '';
+      },
+      error: () => {
+        this.toastr.error('Erro ao criar diálogo. Tente novamente.');
+      }
     });
   }
-  updateStory(storyId: number): void {
+
+  updateStory(storyId: number, id: any): void {
+    this._id = id;
     const story = this.stories.find(s => s.id === storyId);
     if (story) {
       this.storyService.updateStory(storyId, story).subscribe({
         next: () => {
-          this.toastr.success('História atualizada com sucesso!');
+          this.toastr.success('Diálogo atualizada com sucesso!');
         },
         error: (error) => {
-          console.error('Erro ao atualizar história:', error);
-          this.toastr.error('Erro ao atualizar história. Por favor, tente novamente.');
+          console.error('Erro ao atualizar Diálogo:', error);
+          this.toastr.error('Erro ao atualizar Diálogo. Por favor, tente novamente.');
         }
       });
     }
@@ -88,6 +109,33 @@ export class StoryComponent implements OnInit {
   deleteStory(storyId: number): void {
     this.storyService.deleteStory(storyId).subscribe(() => {
       this.loadStories();
+    });
+  }
+
+  openCreateDialog() {
+    const dialogRef = this.diaog.open(CreateDialogModalComponent, {
+      width: '400px',
+      position: { top: '-40%', left: '50%' },
+      panelClass: 'custom-modal2-class',
+      data: { story: {...this} }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('The dialog was closed');
+    });
+  }
+  openEditDialog(story: any) {
+    const dialogRef = this.diaog.open(CreateDialogModalComponent, {
+      width: '600px',
+      position: { top: '-40%', left: '40%' },
+      panelClass: 'custom-modal2-class',
+      data: { story: { ...story } }
+    });
+
+    dialogRef.afterClosed().subscribe(updatedStory => {
+      if (updatedStory) {
+        this.updateStory(updatedStory, story.id);
+      }
     });
   }
 
