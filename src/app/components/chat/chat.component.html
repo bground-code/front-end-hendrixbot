@@ -1,8 +1,30 @@
-<div class="chat-box">
-  <form class="chat-form">
-    <mat-form-field class="chat-full-width">
-      <mat-label class="chat-label">Escreva aqui sua dúvida...</mat-label>
-      <textarea class="chat-text-area" matInput placeholder=""></textarea>
-    </mat-form-field>
-  </form>
+<div class="chat-container">
+  <div class="messages">
+    <div
+      *ngFor="let message of messages"
+      class="message"
+      [ngClass]="{
+        mine: message.type === 'sent',
+        server: message.type === 'received'
+      }"
+    >
+      <div class="content">
+        {{ message.text }}
+      </div>
+    </div>
+    <div *ngIf="isServerThinking" class="message server">
+      <div class="content">
+        <i>Hendrixbot está digitando...</i>
+      </div>
+    </div>
+  </div>
+  <div class="input-container">
+    <input
+      type="text"
+      [(ngModel)]="newMessage"
+      placeholder="Digite uma mensagem..."
+      (keyup.enter)="sendMessage()"
+    />
+    <button (click)="sendMessage()">Enviar</button>
+  </div>
 </div>
