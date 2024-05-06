@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import {
+  FontAwesomeModule,
+  FaIconLibrary,
+} from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -29,14 +32,17 @@ import { IconDirective } from '@coreui/icons-angular';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { provideToastr, ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
-
+import {
+  BrowserAnimationsModule,
+  provideAnimations,
+} from '@angular/platform-browser/animations';
+import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { faGear, faHome, faUser } from '@fortawesome/free-solid-svg-icons';
-import {SidebarModule} from "./components/sidebar/sidebar.module";
-import {SidebarStateService} from "./components/sidebar/sidebar-state.service";
+import { SidebarModule } from './components/sidebar/sidebar.module';
+import { SidebarStateService } from './components/sidebar/sidebar-state.service';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomeComponent],
+  declarations: [AppComponent, LoginComponent, HomeComponent, MainNavComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -64,8 +70,7 @@ import {SidebarStateService} from "./components/sidebar/sidebar-state.service";
     FontAwesomeModule,
     SidebarModule,
     CommonModule,
-    MatDialogModule
-
+    MatDialogModule,
   ],
   providers: [provideAnimations(), provideToastr(), SidebarStateService],
   bootstrap: [AppComponent],
