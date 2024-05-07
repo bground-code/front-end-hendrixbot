@@ -1,0 +1,83 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.sidebar-transition {
+  transition: margin-left 0.5s ease-in-out;
+}
+
+.sidebar-dark {
+  background-color: #343a40; // Cor escura do sidebar
+  color: #fff; // Texto branco para contraste
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  letter-spacing: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); // Linha de separação
+}
+
+.sidebar-logo {
+  max-height: 50px; // Ajuste para o tamanho do seu logo
+}
+
+.components .list-group-item {
+  transition: background-color 0.3s ease-in-out;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1); // Efeito hover
+  }
+}
+
+.active {
+  background-color: #007bff; // Cor ativa para item selecionado
+}
+
+.toggle-sidebar-button {
+  position: absolute;
+  top: 0;
+  left: 100%; // Coloca o botão à direita do sidebar
+  margin-left: -40px; // Ajuste para o botão ser parcialmente visível
+  background-color: #007bff; // Cor primária do botão
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1050;
+}
+
+.toggle-icon-animate {
+  transition: transform 0.3s ease-in-out;
+  &.toggled {
+    transform: rotate(180deg);
+  }
+}
+
+.sidebar-hidden {
+  margin-left: -250px; // Esconda o sidebar
+}
+
+.sidebar-hidden + .toggle-sidebar-button {
+  left: 0; // Posicione o botão na borda visível
+}

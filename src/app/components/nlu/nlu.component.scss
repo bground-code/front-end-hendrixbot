@@ -1,55 +1,54 @@
 .bot-flow {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  //   display: flex;
+  //   flex-direction: column;
+  //   height: 100vh;
+  //   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   .header {
-    background-color: #343a40;
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
-    color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    // background-color: #343a40;
+    // padding: 10px 20px;
+    // display: flex;
+    // align-items: center;
+    // color: white;
+    // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
-    .btn {
-      background-color: #4CAF50;
-      border: none;
-      color: white;
-      padding: 10px 15px;
-      cursor: pointer;
-      border-radius: 4px;
-      text-transform: uppercase;
-      margin-right: 20px;
-    }
+    // .btn {
+    //   background-color: #4caf50;
+    //   border: none;
+    //   color: white;
+    //   padding: 10px 15px;
+    //   cursor: pointer;
+    //   border-radius: 4px;
+    //   text-transform: uppercase;
+    //   margin-right: 20px;
+    // }
 
+    // .tabs {
+    //   display: flex;
+    //   margin-left: 51%;
 
-    .tabs {
-      display: flex;
-      margin-left: 51%;
+    //   .tab {
+    //     padding: 10px 15px;
+    //     cursor: pointer;
+    //     font-size: 14px;
+    //     border-bottom: 3px solid transparent;
+    //     color: white;
 
-      .tab {
-        padding: 10px 15px;
-        cursor: pointer;
-        font-size: 14px;
-        border-bottom: 3px solid transparent;
-        color: white;
-
-        &.active {
-          border-bottom: 3px solid #4CAF50;
-          color: #4CAF50;
-        }
-      }
-    }
-    .filter {
-      margin-left: auto;  /* Alinha o filtro à direita */
-      padding: 8px;
-      border-radius: 4px;
-      border: none;
-      background-color: white;
-      color: black;
-      width: 200px;
-    }
+    //     &.active {
+    //       border-bottom: 3px solid #4caf50;
+    //       color: #4caf50;
+    //     }
+    //   }
+    // }
+    // .filter {
+    //   margin-left: auto; /* Alinha o filtro à direita */
+    //   padding: 8px;
+    //   border-radius: 4px;
+    //   border: none;
+    //   background-color: white;
+    //   color: black;
+    //   width: 200px;
+    // }
   }
 
   .content {
@@ -58,8 +57,8 @@
     padding: 20px;
 
     .question-list {
-      flex-basis: 20%;  /* Define uma base para a largura da lista de perguntas */
-      max-height: calc(100vh - 60px);  /* Subtrai a altura do cabeçalho */
+      flex-basis: 20%; /* Define uma base para a largura da lista de perguntas */
+      max-height: calc(100vh - 100px); /* Subtrai a altura do cabeçalho */
       overflow-y: auto;
 
       ul {
@@ -69,7 +68,7 @@
 
       li {
         padding: 10px;
-        border-bottom: 1px solid gray;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.4);
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -92,7 +91,7 @@
         margin: 10px 0;
         border: none;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        border-radius: 15px;
+        // border-radius: 15px;
       }
 
       .response-bubble {
@@ -104,18 +103,12 @@
 
         textarea {
           flex-grow: 1;
-          margin-right: 10px;  /* Espaço entre o textarea e o botão de remoção */
+          margin-right: 10px; /* Espaço entre o textarea e o botão de remoção */
         }
       }
 
-
       .btn.save {
-        background-color: #008CBA;
-        color: white;
-        padding: 10px 15px;
-        border: none;
         margin-left: 90%;
-        cursor: pointer;
       }
     }
   }
@@ -125,13 +118,13 @@
     margin-top: 10px; /* Espaço acima do contêiner para estética */
     padding-right: 5px; /* Previne que o conteúdo cole na barra de rolagem */
     border: 1px solid #ccc; /* Borda opcional para melhorar a visibilidade */
-    border-radius: 25px; /* Bordas arredondadas para estética */
+    // border-radius: 25px; /* Bordas arredondadas para estética */
   }
 
   .remove-bubble {
-    border: none;
-    background: none;
-    cursor: pointer;
-    color: #c00;  /* Altera a cor para vermelho mais visível */
+    // border: none;
+    // background: none;
+    // cursor: pointer;
+    // color: #c00; /* Altera a cor para vermelho mais visível */
   }
 }
