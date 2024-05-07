@@ -1,22 +1,77 @@
-.card-title {
-  margin-bottom: 1rem;
+.bot-flow {
+  height: 80vh;
 }
 
-.card-subtitle {
-  font-weight: bold;
+.content {
+  .question-list {
+    // flex-basis: 20%; /* Define uma base para a largura da lista de perguntas */
+    max-height: calc(100vh - 100px); /* Subtrai a altura do cabeçalho */
+    overflow-y: auto;
+
+    ul {
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      padding: 10px;
+      border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &:hover {
+        background-color: #f0f0f0;
+      }
+    }
+  }
+
+  .question-detail {
+    flex: 1;
+    padding-left: 20px;
+
+    input,
+    .response-bubble textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      //   border-radius: 15px;
+    }
+
+    .response-bubble {
+      background-color: #f0f0f0;
+      padding: 8px;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+
+      textarea {
+        flex-grow: 1;
+        margin-right: 10px; /* Espaço entre o textarea e o botão de remoção */
+      }
+    }
+
+    .btn.save {
+      margin-left: 90%;
+    }
+  }
+}
+.response-container {
+  max-height: 600px; /* Altura máxima antes de começar a rolar */
+  overflow-y: auto; /* Ativa a barra de rolagem vertical quando necessário */
+  margin-top: 10px; /* Espaço acima do contêiner para estética */
+  padding-right: 5px; /* Previne que o conteúdo cole na barra de rolagem */
+  border: 1px solid #ccc; /* Borda opcional para melhorar a visibilidade */
+  //   border-radius: 25px; /* Bordas arredondadas para estética */
 }
 
-.card-text {
-  margin-bottom: 1rem;
-}
-
-button.btn {
-  width: auto; // Override default button block width
-  padding: 0.375rem 0.75rem; // Padding for buttons
-}
-
-.btn-danger {
-  margin-left: 1rem; // Spacing between text and delete button
-}
-
-
+// .remove-bubble {
+//   border: none;
+//   background: none;
+//   cursor: pointer;
+//   color: #c00; /* Altera a cor para vermelho mais visível */
+// }
+// }

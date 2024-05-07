@@ -1,0 +1,140 @@
+<div class="bot-flow mt-0">
+  <header class="header bg-gray-800 p1">
+    <button
+      class="flex justify-center rounded-md bg-violet-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 uppercase"
+      (click)="openCreateDialog()"
+    >
+      Criar novo diálogo
+    </button>
+    <div class="tabs">
+      <a
+        class="tab font-semibold leading-6 text-zinc-100 hover:text-indigo-500 mr-2 uppercase"
+        routerLink="/historia"
+        routerLinkActive="active"
+        >Diálogos</a
+      >
+      <a
+        class="tab font-semibold leading-6 text-zinc-100 hover:text-indigo-500 mr-2 uppercase"
+        routerLink="/nlu"
+        routerLinkActive="active"
+        >Perguntas</a
+      >
+      <a
+        class="tab font-semibold leading-6 text-zinc-100 hover:text-indigo-500 mr-2 uppercase"
+        routerLink="/intents"
+        routerLinkActive="active"
+        >Respostas</a
+      >
+    </div>
+    <input
+      type="text"
+      class="filter rounded-md border-0 py-1.5 text-zinc-900 shadow-sm ring-1 ring-inset ring-rinc-300 placeholder:text-zinc-500 focus:ring-2 focus:ring-inset focus:ring-violet-600"
+      placeholder="Filtrar"
+    />
+  </header>
+  <main class="content">
+    <div class="container mt-3">
+      <div class="dialog-card new-dialog-card"></div>
+      <div *ngIf="stories.length === 0" class="alert alert-info">
+        Nenhuma diálogo encontrado.
+      </div>
+
+      <div class="dialog-grid">
+        <div
+          *ngFor="let story of stories; let i = index"
+          class="dialog-card rounded"
+        >
+          <div class="card-header">
+            <h3 class="text-base font-semibold leading-7 text-gray-50">
+              Diálogo: {{ story.name }}
+            </h3>
+          </div>
+          <div class="card-body">
+            <!-- Container Scrollable para perguntas e respostas -->
+            <div class="qa-container">
+              <!-- Repetição para perguntas e respostas -->
+              <div *ngFor="let step of story.steps">
+                <div>
+                  <label class="text-sm font-medium leading-6 text-gray-900"
+                    >Pergunta:</label
+                  >
+                  <select
+                    [(ngModel)]="step.intentName"
+                    class="form-select rounded-md border-0 py-1.5 text-zinc-900 shadow-sm ring-1 ring-inset ring-rinc-300 placeholder:text-zinc-500 focus:ring-2 focus:ring-inset focus:ring-violet-600"
+                    (change)="updateStory(story.id, story.id)"
+                  >
+                    <option value="">Selecionar Pergunta</option>
+                    <option
+                      *ngFor="let intent of intents"
+                      [value]="intent.name"
+                    >
+                      {{ intent.name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="mt-1">
+                  <label class="text-sm font-medium leading-6 text-gray-900"
+                    >Resposta:</label
+                  >
+                  <select
+                    [(ngModel)]="step.actionText"
+                    class="form-select rounded-md border-0 py-1.5 text-zinc-900 shadow-sm ring-1 ring-inset ring-rinc-300 placeholder:text-zinc-500 focus:ring-2 focus:ring-inset focus:ring-violet-600"
+                    (change)="updateStory(story.id, story.id)"
+                  >
+                    <option value="">Selecionar Resposta</option>
+                    <option
+                      *ngFor="let action of actions"
+                      [value]="action.name"
+                    >
+                      {{ action.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <!-- Botões de ação -->
+            <div class="button-group">
+              <button
+                class="btn btn-primary bg-teal-600 btn-icon"
+                (click)="openEditDialog(story)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z"
+                  />
+                  <path
+                    d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z"
+                  />
+                </svg>
+                <p>Editar</p>
+              </button>
+              <button
+                class="btn btn-danger bg-red-600 btn-icon"
+                (click)="deleteStory(story.id)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <p>Deletar</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

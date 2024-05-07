@@ -1,51 +1,110 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {Component, EventEmitter, Output, OnInit, Inject} from '@angular/core';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef
+} from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { NluService } from '../../client/nlu.service';
+import { IntentsService } from '../../client/intents.service';
+import {MatFormField} from "@angular/material/form-field";
+import {MatOption, MatSelect} from "@angular/material/select";
 import {FormsModule} from "@angular/forms";
-import {CommonModule} from "@angular/common";
+import {MatIcon} from "@angular/material/icon";
+import {MatInput} from "@angular/material/input";
+import {MatButton, MatIconButton} from "@angular/material/button";
+import { CommonModule } from '@angular/common';
+import { NluData } from '../../models/nlu';
+
+interface Intent {
+  name: string;
+}
 
 @Component({
   selector: 'app-nlu-modal',
-  standalone: true,
-  imports: [CommonModule, FormsModule],  // Garantir que CommonModule e FormsModule estejam aqui
   templateUrl: './nlu-modal.component.html',
-  styleUrls: ['./nlu-modal.component.scss']
+  styleUrls: ['./nlu-modal.component.scss'],
+  imports: [
+    MatDialogContent, MatFormField, MatSelect, MatOption, FormsModule,
+    MatIcon, MatInput, MatButton, MatDialogActions, MatDialogClose, CommonModule, MatIconButton
+  ],
+  standalone: true
 })
-export class NluModalComponent {
-  @Output() nluSaved = new EventEmitter<any>();
-  nlu = {
-    intentText: '',
-    texts: ['']
-  };
+export class NluModalComponent implements OnInit {
+  @Output() nluSaved = new EventEmitter<NluData>();
+  nlu: { texts: any[]; intentText: string } = { intentText: '', texts: [] };
+  intents: Intent[] = [];
 
-  constructor(private nluService: NluService) {}
-
-  addText() {
-    this.nlu.texts.push('');
+  constructor(
+    public dialogRef: MatDialogRef<NluModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: NluData,
+    private nluService: NluService,
+    private intentsService: IntentsService,
+    private toastr: ToastrService
+  ) {
+    if (data) {
+      this.nlu = data;
+    }
   }
 
-  removeText(index: number) {
+  ngOnInit(): void {
+    this.loadIntents();
+  }
+
+
+  addText(): void {
+    this.nlu.texts.push('');
+    this.nlu = { ...this.nlu, texts: [...this.nlu.texts] };
+  }
+
+
+  removeText(index: number): void {
     if (this.nlu.texts.length > 1) {
       this.nlu.texts.splice(index, 1);
     }
   }
 
-  saveNlu() {
-    const newNlu = {
-      intentText: this.nlu.intentText,
-      texts: this.nlu.texts
-    };
-
-    this.nluService.saveNluData(newNlu).subscribe({
-      next: (data) => {
+  saveNlu(): void {
+    this.nluService.saveNluData(this.nlu).subscribe({
+      next: (data: NluData) => {
         this.nluSaved.emit(data);
-
+        this.toastr.success('NLU salva com sucesso');
+        this.closeModal();
       },
       error: (error) => {
+        this.toastr.error('Erro ao salvar NLU');
         console.error('Error saving NLU data:', error);
       }
     });
   }
-  trackByTexts(index: number, item: string): number {
+
+
+  loadIntents(): void {
+    this.intentsService.fetchIntents().subscribe({
+      next: (data: Intent[]) => {
+        this.intents = data;
+      },
+      error: () => {
+        this.toastr.error('Error loading intents');
+      }
+    });
+  }
+
+  trackByIntent(index: number, item: Intent): string {
+    return item.name;
+  }
+  trackByTexts(index: number, item: any): number {
     return index;
+  }
+
+  closeModal(): void {
+    this.dialogRef.close();
+  }
+
+  onIntentChange(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    this.nlu.intentText = selectElement.value;
   }
 }
