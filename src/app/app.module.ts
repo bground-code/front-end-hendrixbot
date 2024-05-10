@@ -3,10 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
+import { TokenInterceptor } from './client/TokenInterceptor'; // Importe o interceptor aqui
+
 import {
   ButtonDirective,
   CardBodyComponent,
@@ -67,7 +69,9 @@ import {SidebarStateService} from "./components/sidebar/sidebar-state.service";
     MatDialogModule
 
   ],
-  providers: [provideAnimations(), provideToastr(), SidebarStateService],
+  providers: [provideAnimations(), provideToastr(), SidebarStateService,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {
