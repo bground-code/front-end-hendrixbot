@@ -1,0 +1,15 @@
+<div *ngIf="loading">Carregando mensagens...</div>
+<div *ngIf="!loading" class="chat-container">
+  <div *ngIf="messages.length > 0; else noMessagesTemplate">
+    <div *ngFor="let message of messages" class="message" [ngClass]="{'mine': message.tipo === 'USUARIO', 'server': message.tipo === 'HENDRIX'}">
+      <div class="content">
+        <p>{{ message.message }}</p>
+        <p class="timestamp">{{ message.dataConversa }}</p>
+      </div>
+    </div>
+  </div>
+  <ng-template #noMessagesTemplate>
+    <p>Nenhuma mensagem encontrada.</p>
+  </ng-template>
+</div>
+<button class="btn btn-secondary" (click)="voltarParaHistorico()">Voltar para o histórico</button>

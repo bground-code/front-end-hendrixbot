@@ -24,8 +24,9 @@ export class ChatService {
   getMessages$(): Observable<MessageDTO> {
     return this.chatWebSocket.asObservable().pipe(
       map(data => {
+        const message = Array.isArray(data) ? data[0]?.text : data?.text;
         return {
-          text: data.text || data[0].text,
+          text: message || '',
           type: 'received'
         };
       })
