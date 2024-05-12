@@ -34,6 +34,7 @@ export class IntentsComponent implements OnInit {
     faPlusCircle,
     faMessage
   };
+
   constructor(
     private intentsService: IntentsService,
     private toastr: ToastrService,
@@ -64,6 +65,7 @@ export class IntentsComponent implements OnInit {
       }
     );
   }
+
   selectedResponse: any = null;
   selectedResponseIndex: number = -1;
   selectResponse(index: number) {
@@ -92,7 +94,6 @@ export class IntentsComponent implements OnInit {
     }
   }
 
-
   handleSubmitNewResponse() {
     if (!this.newResponse.name || this.newResponse.texts.some(text => !text.trim())) {
       this.toastr.error('Por favor, preencha todos os campos.', 'Erro');
@@ -100,8 +101,9 @@ export class IntentsComponent implements OnInit {
     }
 
     const formattedData = {
+      id: this.selectedResponse ? this.selectedResponse.id : undefined, // Adicionamos o ID apenas se estiver editando
       name: this.newResponse.name,
-      responses: this.newResponse.texts.map(text => ({ text: text.trim() }))
+      texts: this.newResponse.texts
     };
 
     if (this.selectedResponse) {
@@ -133,12 +135,12 @@ export class IntentsComponent implements OnInit {
     }
   }
 
+
   resetForm() {
     this.newResponse = { name: '', texts: [''] };
     this.selectedResponse = null;
     this.selectedResponseIndex = -1;
   }
-
 
   removeResponseBubble(index: number) {
     if (this.newResponse.texts && this.newResponse.texts.length > 1) {
@@ -147,8 +149,6 @@ export class IntentsComponent implements OnInit {
       this.toastr.error('Deve haver pelo menos uma resposta.');
     }
   }
-
-
 
   deleteResponse(index: number): void {
     const responseId = this.responses[index].id;
@@ -222,7 +222,7 @@ export class IntentsComponent implements OnInit {
     }
   }
   trackByText(index: number, text: string): any {
-    return index; // ou uma chave única se disponível
+    return index;
   }
 
 
