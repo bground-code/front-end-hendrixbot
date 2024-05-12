@@ -15,7 +15,9 @@
 }
 
 .sidebar-hidden {
-  transform: translateX(-100%); /* Alterando a transformação para mover o sidebar para fora da tela */
+  transform: translateX(
+    -100%
+  ); /* Alterando a transformação para mover o sidebar para fora da tela */
 }
 
 .sidebar-header {
@@ -40,14 +42,14 @@
 }
 
 .active {
-  background-color: #007bff;
+  background-color: #5b21b6;
 }
 
 .toggle-sidebar-button {
   position: absolute;
   top: 400px; /* Movendo o botão um pouco para baixo */
   left: 230px;
-  background-color: #343a40;
+  background-color: #5b21b6;
   color: #fff;
   border: none;
   border-radius: 50%;
@@ -59,7 +61,6 @@
   cursor: pointer;
   z-index: 1050;
 }
-
 
 .toggle-icon-animate {
   transition: transform 0.3s ease-in-out;
