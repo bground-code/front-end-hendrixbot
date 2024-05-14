@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import {RouterLink} from "@angular/router";
-import {FaIconComponent} from "@fortawesome/angular-fontawesome";
-import {faBars} from "@fortawesome/free-solid-svg-icons/faBars";
-import {faArrowRightToBracket, faUser} from "@fortawesome/free-solid-svg-icons";
+import { RouterLink } from '@angular/router';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons/faBars';
+import {
+  faArrowRightToBracket,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [
-    RouterLink,
-    FaIconComponent
-  ],
+  imports: [RouterLink, FaIconComponent],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
   toggleMenu() {
@@ -35,5 +35,4 @@ export class HeaderComponent {
     calendar: '',
     list: '',
   };
-
 }

@@ -1,7 +1,9 @@
 .bot-flow {
   height: 80vh;
 }
-
+.header {
+  margin-top: -18px;
+}
 .content {
   .question-list {
     // flex-basis: 20%; /* Define uma base para a largura da lista de perguntas */

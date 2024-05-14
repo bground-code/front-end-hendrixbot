@@ -7,13 +7,20 @@ import { IntentsComponent } from './components/intents/intents.component';
 import { StoryComponent } from './components/story/story.component';
 import { NluComponent } from './components/nlu/nlu.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { HistoricoComponent } from './components/historico/historico.component';
+import { VisualizarConversaComponent } from './components/historico/visualizar.component';
 
 const routes: Routes = [
   { path: 'cadastro-usuario', component: CadastroUsuarioComponent },
   { path: 'intents', component: IntentsComponent },
   { path: 'historia', component: StoryComponent },
   { path: 'nlu', component: NluComponent },
-  { path: 'chat', component: ChatComponent },
+  { path: 'home', component: ChatComponent },
+  { path: 'historico', component: HistoricoComponent },
+  {
+    path: 'visualizar-conversa/:sessionId',
+    component: VisualizarConversaComponent,
+  },
 
   {
     path: '',
@@ -23,10 +30,10 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
-  {
-    path: 'home',
-    component: HomeComponent,
-  },
+  // {
+  //   path: 'home',
+  //   component: HomeComponent,
+  // },
 ];
 
 @NgModule({
