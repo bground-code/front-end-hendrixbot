@@ -80,8 +80,8 @@ export class CadastroUsuarioComponent implements OnInit {
 
   openModal(): void {
     const dialogRef = this.dialog.open(CadastromodalComponent, {
-      width: '400px',
-      position: { top: '-30%', left: '50%', transform: 'translate(-50%, -50%)' } as any
+      width: '1000px',
+      position: { top: '-45%', left: '30%', transform: 'translate(-50%, -50%)' } as any
     });
   }
 
