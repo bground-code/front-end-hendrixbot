@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import {
+  FontAwesomeModule,
+  FaIconLibrary,
+} from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
@@ -31,13 +34,16 @@ import { IconDirective } from '@coreui/icons-angular';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { provideToastr, ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
-
+import {
+  BrowserAnimationsModule,
+  provideAnimations,
+} from '@angular/platform-browser/animations';
+import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { faGear, faHome, faUser } from '@fortawesome/free-solid-svg-icons';
-import {SidebarModule} from "./components/sidebar/sidebar.module";
-import {SidebarStateService} from "./components/sidebar/sidebar-state.service";
-import {VisualizarConversaComponent} from "./components/historico/visualizar.component";
-import {HistoricoComponent} from "./components/historico/historico.component";
+import { SidebarModule } from './components/sidebar/sidebar.module';
+import { SidebarStateService } from './components/sidebar/sidebar-state.service';
+import { VisualizarConversaComponent } from './components/historico/visualizar.component';
+import { HistoricoComponent } from './components/historico/historico.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +51,7 @@ import {HistoricoComponent} from "./components/historico/historico.component";
     LoginComponent,
     HomeComponent,
     VisualizarConversaComponent,
-    HistoricoComponent
+    HistoricoComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,7 +86,7 @@ import {HistoricoComponent} from "./components/historico/historico.component";
     provideAnimations(),
     provideToastr(),
     SidebarStateService,
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
