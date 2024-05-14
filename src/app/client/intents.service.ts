@@ -3,9 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { backendUrl } from "../../config";
 
-class updatedData {
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -38,7 +35,7 @@ export class IntentsService {
     return this.http.delete(`${this.apiUrl}/rasa/intents/${intentId}`);
   }
 
-  editarResponse(id: number, updatedData: updatedData): Observable<any> {
+  editarResponse(id: number, updatedData: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/rasa/response/${id}`, updatedData);
   }
 }

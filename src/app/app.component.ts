@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Usuario } from './models/usuario';
 import { UsuarioService } from './client/usuario.service';
-import { faGear, faHome, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faGear, faHome, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +14,10 @@ export class AppComponent {
   usuario = new Usuario();
   showSidebar: boolean = true;
 
-  constructor(private usuarioService: UsuarioService, private router: Router) {
+  constructor(
+    private usuarioService: UsuarioService,
+    private router: Router,
+  ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.showSidebar = !event.url.includes('/login');
@@ -41,7 +44,5 @@ export class AppComponent {
   protected readonly faGear = faGear;
   protected readonly faHome = faHome;
 
-  toggleMenu() {
-
-  }
+  toggleMenu() {}
 }

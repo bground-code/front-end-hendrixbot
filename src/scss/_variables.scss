@@ -3,3 +3,9 @@
 // If you want to customize your project please add your variables below.
 
 $enable-deprecation-messages: false !default;
+
+:root {
+  --color-primary: #6e4293;
+  --color-primary-light: #c5b3d4;
+  --color-primary-dark: #21142c;
+}
