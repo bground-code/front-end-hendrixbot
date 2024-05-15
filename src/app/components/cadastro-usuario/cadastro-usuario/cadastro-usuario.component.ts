@@ -5,8 +5,16 @@ import { CadastromodalComponent } from './cadastromodal.component';
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from '@angular/common';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { ToastrService } from "ngx-toastr"; // Importe o ToastrService
+import {
+  MatCell,
+  MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable,
+  MatTableDataSource
+} from '@angular/material/table';
+import { ToastrService } from "ngx-toastr";
+import { MatButton } from "@angular/material/button";
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -16,6 +24,17 @@ import { ToastrService } from "ngx-toastr"; // Importe o ToastrService
     FormsModule,
     CommonModule,
     MatPaginator,
+    MatCell,
+    MatHeaderCell,
+    MatColumnDef,
+    MatHeaderCellDef,
+    MatCellDef,
+    MatHeaderRow,
+    MatRow,
+    MatButton,
+    MatTable,
+    MatRowDef,
+    MatHeaderRowDef,
   ],
   styleUrls: ['./cadastro-usuario.component.scss']
 })
@@ -27,15 +46,16 @@ export class CadastroUsuarioComponent implements OnInit {
   senha: string = '';
   confirmarSenha: string = '';
   contato: string = '';
-  responsavel: string = '';
+  responsavel1: string = '';
   papelUsuario: string = '';
   alunos: any[] = [];
   totalElements: number = 0;
   page = 0;
   pageSize = 10;
-  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
-  dataSource: MatTableDataSource<any> | undefined;
-  displayedColumns: string[] = ['nome', 'email', 'cpf', 'dataNascimento', 'acoes'];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  dataSource: MatTableDataSource<any> = new MatTableDataSource();
+
+  displayedColumns: string[] = ['nome', 'email', 'cpf', 'dataNascimento', 'contato', 'responsavel1', 'papelUsuario', 'acoes'];
 
   constructor(
     private alunoService: AlunoService,
@@ -44,14 +64,11 @@ export class CadastroUsuarioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<any>(this.alunos);
     this.buscarAlunos();
   }
 
   ngAfterViewInit() {
-    if (this.dataSource && this.paginator) {
-      this.dataSource.paginator = this.paginator;
-    }
+    this.dataSource.paginator = this.paginator;
   }
 
   handleSalvar(): void {
@@ -63,7 +80,7 @@ export class CadastroUsuarioComponent implements OnInit {
       senha: this.senha,
       confirmarSenha: this.confirmarSenha,
       contato: this.contato,
-      responsavel: this.responsavel,
+      responsavel1: this.responsavel1,
       papelUsuario: this.papelUsuario
     };
 
@@ -71,6 +88,7 @@ export class CadastroUsuarioComponent implements OnInit {
       response => {
         console.log('Aluno cadastrado com sucesso:', response);
         this.buscarAlunos();
+        this.toastrService.success('Aluno cadastrado com sucesso!');
       },
       error => {
         console.error('Erro ao cadastrar aluno:', error);
@@ -80,8 +98,12 @@ export class CadastroUsuarioComponent implements OnInit {
 
   openModal(): void {
     const dialogRef = this.dialog.open(CadastromodalComponent, {
-      width: '400px',
-      position: { top: '-30%', left: '50%', transform: 'translate(-50%, -50%)' } as any
+      width: '1000px',
+      position: { top: '-45%', left: '30%', transform: 'translate(-50%, -50%)' } as any
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.buscarAlunos();
     });
   }
 
@@ -90,9 +112,7 @@ export class CadastroUsuarioComponent implements OnInit {
       (response: any) => {
         this.alunos = response.content;
         this.totalElements = response.totalElements;
-        if (this.dataSource) {
-          this.dataSource.data = this.alunos;
-        }
+        this.dataSource.data = this.alunos;
         console.log(this.alunos);
       },
       error => {
@@ -101,7 +121,7 @@ export class CadastroUsuarioComponent implements OnInit {
     );
   }
 
-  onPageChange(event: any): void {
+  onPageChange(event: PageEvent): void {
     this.page = event.pageIndex;
     this.pageSize = event.pageSize;
     this.buscarAlunos();
@@ -112,7 +132,7 @@ export class CadastroUsuarioComponent implements OnInit {
       () => {
         console.log(`Aluno com ID ${id} excluído com sucesso.`);
         this.toastrService.success(`Aluno com ID ${id} excluído com sucesso.`);
-        this.buscarAlunos(); // Atualizar a lista após a exclusão
+        this.buscarAlunos();
       },
       error => {
         console.error(`Erro ao excluir aluno com ID ${id}:`, error);

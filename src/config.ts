@@ -1,1 +1,1 @@
-export const backendUrl = 'http://localhost:8081';
+export const backendUrl = 'http://hendrixbot.com.br:8081';

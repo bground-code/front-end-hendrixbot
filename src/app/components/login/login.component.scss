@@ -1,14 +1,6 @@
 .container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: space-around;
-}
-
-.card-login {
-  background-color: #e2d9e9;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
   justify-content: center;
 }

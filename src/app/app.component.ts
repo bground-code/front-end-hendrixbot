@@ -44,5 +44,10 @@ export class AppComponent {
   protected readonly faGear = faGear;
   protected readonly faHome = faHome;
 
-  toggleMenu() {}
+  toggleMenu() {
+
+  }
+  logout(){
+    localStorage.clear();
+  }
 }
