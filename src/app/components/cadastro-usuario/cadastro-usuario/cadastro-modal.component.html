@@ -8,7 +8,6 @@
     <label for="email">E-mail</label>
     <input id="email" class="form-control" type="email" [(ngModel)]="email">
   </div>
-
   <div class="form-group">
     <label for="senha">Senha</label>
     <input id="senha" class="form-control" type="password" [(ngModel)]="senha">
@@ -17,7 +16,6 @@
     <label for="confirmarSenha">Confirme a senha</label>
     <input id="confirmarSenha" class="form-control" type="password" [(ngModel)]="confirmarSenha">
   </div>
-
   <div class="row">
     <div class="col-6">
       <div class="form-group">
@@ -28,36 +26,34 @@
     <div class="col-6">
       <div class="form-group">
         <label for="dataNascimento">Data de nascimento</label>
-        <input id="dataNascimento" class="form-control" type="text" [(ngModel)]="dataNascimento" >
+        <input id="dataNascimento" class="form-control" type="date" [(ngModel)]="dataNascimento">
       </div>
     </div>
   </div>
-
   <div class="form-group">
     <label for="contato">Contato</label>
     <input id="contato" class="form-control" type="text" [(ngModel)]="contato">
   </div>
   <div class="form-group">
-    <label for="responsavel">Responsável</label>
-    <input id="responsavel" class="form-control" type="text" [(ngModel)]="responsavel">
+    <label for="responsavel1">Responsável</label>
+    <input id="responsavel1" class="form-control" type="text" [(ngModel)]="responsavel1">
   </div>
   <div class="form-group" id="papelUsuario">
     <label for="papelUsuario">Papel do Usuário:</label>
     <div>
       <label>
-        <input type="radio" name="papelUsuario" [(ngModel)]="papelUsuario" value="auno"> Aluno
+        <input type="radio" name="papelUsuario" [(ngModel)]="papelUsuario" value="ALUNO"> Aluno
       </label>
       <label>
-        <input type="radio" name="papelUsuario" [(ngModel)]="papelUsuario" value="gerente"> Gerente
+        <input type="radio" name="papelUsuario" [(ngModel)]="papelUsuario" value="GERENTE"> Gerente
       </label>
       <label>
-        <input type="radio" name="papelUsuario" [(ngModel)]="papelUsuario" value="admin"> Admin
+        <input type="radio" name="papelUsuario" [(ngModel)]="papelUsuario" value="ADMIN"> Admin
       </label>
     </div>
   </div>
   <div class="form-group" align="right">
     <button class="btn btn-primary" (click)="handleSalvar()">Salvar</button>
-
     <button class="btn btn-secondary" (click)="close()">Cancelar</button>
   </div>
 </div>
