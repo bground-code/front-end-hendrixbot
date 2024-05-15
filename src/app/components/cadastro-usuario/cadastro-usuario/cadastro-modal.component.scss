@@ -8,15 +8,23 @@
   bottom: 0;
   left: 0;
   z-index: 9999;
+  overflow: hidden; /* Oculta a barra de rolagem */
 }
 
 .modal-content {
   width: 800px;
   max-width: 90%;
-  padding: 30px;
+  padding: 20px;
+  margin: auto; /* Centraliza verticalmente */
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: auto; /* Adiciona rolagem interna, se necessário */
+}
+
+.tituloModal{
+  font-size: 22px;
+  font-weight: bold;
 }
 
 .close-button {
@@ -39,3 +47,12 @@
   border-color: #007bff;
   outline: none;
 }
+
+.btn {
+  margin-right: 18px; /* Add horizontal margin */
+}
+
+.container{
+  margin-bottom: 6px;
+  margin-top: 6px;
+  }

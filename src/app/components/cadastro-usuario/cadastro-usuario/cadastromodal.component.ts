@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AlunoService } from '../../../client/cadastro.aluno.service';
 import { Router } from '@angular/router';
-import {FormsModule} from "@angular/forms"; // Importe o Router
+import { FormsModule } from "@angular/forms";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-cadastro-modal',
@@ -18,7 +19,8 @@ export class CadastromodalComponent {
   constructor(
     public dialogRef: MatDialogRef<CadastromodalComponent>,
     private alunoService: AlunoService,
-    private router: Router
+    private router: Router,
+    private toastrService: ToastrService
   ) { }
 
   close(): void {
@@ -28,11 +30,11 @@ export class CadastromodalComponent {
   nome: string = '';
   email: string = '';
   cpf: string = '';
-  dataNascimento: string = '';
+  dataNascimento: string = '';  // string para o input date
   senha: string = '';
   confirmarSenha: string = '';
   contato: string = '';
-  responsavel: string = '';
+  responsavel1: string = '';
   papelUsuario: string = '';
 
   handleSalvar(): void {
@@ -40,22 +42,29 @@ export class CadastromodalComponent {
       nome: this.nome,
       email: this.email,
       cpf: this.cpf,
-      dataNascimento: this.dataNascimento,
+      dataNascimento: this.formatDate(this.dataNascimento),  // formatar data para LocalDate
       senha: this.senha,
-      confirmarSenha: this.confirmarSenha,
-      contato: this.contato,
-      responsavel: this.responsavel,
-      papelUsuario: this.papelUsuario
+      papelUsuario: this.papelUsuario,
+      telefone: this.contato,
+      responsavel1: this.responsavel1,
     };
 
     this.alunoService.cadastrarAluno(alunoData).subscribe(
       response => {
         console.log('Aluno cadastrado com sucesso:', response);
-        this.router.navigate(['/cadastrar-usuario']); 
+        this.toastrService.success('Cadastrado realizado com sucesso!');
+        this.router.navigate(['/cadastrar-usuario']);
+        this.dialogRef.close();
       },
       error => {
         console.error('Erro ao cadastrar aluno:', error);
+        this.toastrService.error('Erro ao cadastrar aluno.');
       }
     );
+  }
+
+  private formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    return date.toISOString().split('T')[0];  // formato 'yyyy-MM-dd'
   }
 }

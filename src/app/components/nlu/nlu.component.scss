@@ -1,3 +1,9 @@
+.header{
+  margin-top: -18px;
+  background-color: #f5f5f5;
+  height: 70px;
+}
+
 .bot-flow {
   //   display: flex;
   //   flex-direction: column;
@@ -41,13 +47,16 @@
     //   }
     // }
     // .filter {
-    //   margin-left: auto; /* Alinha o filtro à direita */
+    // margin-left: 80px; /* Alinha o filtro à direita */
     //   padding: 8px;
     //   border-radius: 4px;
     //   border: none;
     //   background-color: white;
     //   color: black;
-    //   width: 200px;
+   //    width: 100px;
+  //  position: absolute;
+
+    margin-top: -18px;
     // }
   }
 
