@@ -1,8 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'ngx-toastr/toastr';
 
 // If you want to override variables do it here
-@import "variables";
+@import "scss/variables";
 
 // Import styles with default layout.
 @import "@coreui/coreui/scss/coreui";
@@ -11,15 +10,37 @@
 @import "@coreui/chartjs/scss/coreui-chartjs";
 
 // Custom styles for this theme
-@import "theme";
+@import "scss/theme";
 
 // Some temp fixes
 //@import "fixes";
 
 // If you want to add custom CSS you can put it here.
-@import "custom";
+@import "scss/custom";
 
 // Examples
 // We use those styles to show code examples, you should remove them in your application.
-@import "examples";
+@import "scss/examples";
 
+// Tailwind CSS
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Adicione estilos globais personalizados aqui */
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+input::placeholder {
+  color: #a0aec0;
+  opacity: 1; /* Firefox */
+}
+
+input:-ms-input-placeholder {
+  color: #a0aec0;
+}
+
+input::-ms-input-placeholder {
+  color: #a0aec0;
+}
