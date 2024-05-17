@@ -1,18 +1,33 @@
-<div class="chat-container">
-  <div class="messages">
-    <div *ngFor="let message of messages" class="message" [ngClass]="{'mine': message.type === 'sent', 'server': message.type === 'received'}">
-      <div class="content">
-        {{ message.text }}
+<div class="flex flex-col items-center justify-center w-screen min-h-screen bg-gray-100 text-gray-800 p-10">
+  <div class="flex flex-col flex-grow w-full max-w-xl bg-white shadow-xl rounded-lg overflow-hidden">
+    <div class="flex flex-col flex-grow h-0 p-4 overflow-auto">
+      <div *ngFor="let message of messages" class="flex w-full mt-2 space-x-3 max-w-xs" [ngClass]="{'ml-auto justify-end': message.type === 'sent'}">
+        <div *ngIf="message.type === 'received'" class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+        <div>
+          <div [ngClass]="{'bg-gray-300': message.type === 'received', 'bg-blue-600 text-white': message.type === 'sent'}"
+               class="p-3"
+               [ngClass]="{'rounded-l-lg rounded-br-lg': message.type === 'sent', 'rounded-r-lg rounded-bl-lg': message.type === 'received'}">
+            <p class="text-sm">{{ message.text }}</p>
+          </div>
+          <span class="text-xs text-gray-500 leading-none">2 min ago</span>
+        </div>
+        <div *ngIf="message.type === 'sent'" class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+      </div>
+      <div *ngIf="isServerThinking" class="flex w-full mt-2 space-x-3 max-w-xs">
+        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+        <div>
+          <div class="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
+            <p class="text-sm"><i>Hendrixbot está digitando...</i></p>
+          </div>
+        </div>
       </div>
     </div>
-    <div *ngIf="isServerThinking" class="message server">
-      <div class="content">
-        <i>Hendrixbot está digitando...</i>
-      </div>
+    <div class="bg-gray-300 p-4 flex">
+      <input class="flex items-center h-10 w-full rounded px-3 text-sm border border-gray-300" [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" placeholder="Digite uma mensagem..." />
+      <button class="ml-2 px-3 py-1 bg-blue-600 text-white rounded" (click)="sendMessage()">Enviar</button>
+      <button class="ml-2 px-3 py-1" [ngClass]="{'bg-green-600 text-white': !isListening, 'bg-red-600 text-white': isListening}" (mousedown)="startListening()" (mouseup)="stopListening()">
+        {{ isListening ? 'Parar' : '🎤' }}
+      </button>
     </div>
-  </div>
-  <div class="input-container">
-    <input type="text" [(ngModel)]="newMessage" placeholder="Digite uma mensagem..." (keyup.enter)="sendMessage()" />
-    <button (click)="sendMessage()">Enviar</button>
   </div>
 </div>
