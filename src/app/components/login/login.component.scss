@@ -1,6 +1,9 @@
 .container {
   display: flex;
+<<<<<<< Updated upstream
   flex-direction: column;
+=======
+>>>>>>> Stashed changes
   align-items: center;
   justify-content: space-around;
 }
@@ -11,4 +14,13 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  min-height: 100vh;
+}
+
+.card-login {
+  background: rgba(154, 123, 179, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.1);
 }
