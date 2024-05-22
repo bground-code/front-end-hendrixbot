@@ -33,17 +33,18 @@
   <main class="content flex flex-grow p-3">
     <div class="question-list basis-1/5">
       <h6 class="text-gray-900 ml-1 font-semibold">Resposta cadastrada</h6>
-      <!-- Título adicionado aqui -->
       <ul>
-        <li
-          *ngFor="let response of responses; let i = index"
-          (click)="selectResponse(i)"
-        >
+        <li *ngFor="let response of responses; let i = index" (click)="selectResponse(i)">
           <p>{{ response.name }}</p>
           <fa-icon [icon]="icons.faMessage"></fa-icon>
+          <!-- Adiciona o botão de exclusão -->
+          <button class="btn remove-bubble" (click)="deleteResponse(i, $event)">
+            <fa-icon [icon]="icons.faTrash"></fa-icon>
+          </button>
         </li>
       </ul>
     </div>
+
     <div
       class="question-detail"
       *ngIf="selectedResponse || creatingNewResponse"

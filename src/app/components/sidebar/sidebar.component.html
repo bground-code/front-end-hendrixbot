@@ -33,7 +33,6 @@
       <fa-icon id="rcorners1" [icon]="faHome"></fa-icon>
       <span class="ms-2">Início</span>
     </li>
-
     <li
       [routerLink]="'/cadastro-usuario'"
       [routerLinkActive]="'active'"
@@ -43,7 +42,6 @@
       <fa-icon [icon]="faUser"></fa-icon>
       <span class="ms-1">Cadastro de Usuário</span>
     </li>
-
     <li
       [routerLink]="'/historia'"
       [routerLinkActive]="'active'"
@@ -70,6 +68,14 @@
     >
       <fa-icon [icon]="faGear"></fa-icon>
       <span class="ms-1">Historico de conversas</span>
+    </li>
+    <li
+      [routerLink]="'/atendimento'"
+      [routerLinkActive]="'active'"
+      class="cursor-pointer p-3 list-group-item d-flex justify-content-start align-items-center border-0 text-light"
+    >
+      <fa-icon [icon]="faGear"></fa-icon>
+      <span class="ms-1">Atendimento</span>
     </li>
 
     <button

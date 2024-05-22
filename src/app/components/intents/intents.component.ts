@@ -79,8 +79,6 @@ export class IntentsComponent implements OnInit {
     };
   }
 
-
-
   creatingNewResponse = false;
   newResponse = { name: '', texts: [''] };
 
@@ -135,7 +133,6 @@ export class IntentsComponent implements OnInit {
     }
   }
 
-
   resetForm() {
     this.newResponse = { name: '', texts: [''] };
     this.selectedResponse = null;
@@ -150,7 +147,8 @@ export class IntentsComponent implements OnInit {
     }
   }
 
-  deleteResponse(index: number): void {
+  deleteResponse(index: number, event: MouseEvent): void {
+    event.stopPropagation(); // Evita que o evento de clique no item seja disparado
     const responseId = this.responses[index].id;
     this.intentsService.deleteResponse(responseId).subscribe(
       () => {
@@ -221,9 +219,8 @@ export class IntentsComponent implements OnInit {
       this.newResponse.texts.push('');
     }
   }
+
   trackByText(index: number, text: string): any {
     return index;
   }
-
-
 }

@@ -9,6 +9,7 @@ import {NluComponent} from "./components/nlu/nlu.component";
 import {ChatComponent} from "./components/chat/chat.component";
 import {HistoricoComponent} from "./components/historico/historico.component";
 import {VisualizarConversaComponent} from "./components/historico/visualizar.component";
+import {AtendimentoComponent} from "./components/atendimento/atendimento.component";
 
 
 const routes: Routes = [
@@ -19,6 +20,8 @@ const routes: Routes = [
   {path: 'chat', component: ChatComponent},
   {path: 'historico', component: HistoricoComponent},
   {path: 'visualizar-conversa/:sessionId', component: VisualizarConversaComponent},
+  {path: 'atendimento', component: AtendimentoComponent},
+
 
   {
     path: '',
