@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { StoryService } from '../../client/story.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from "@angular/forms";
-import {ToastrService} from "ngx-toastr";
-import {RouterLink, RouterLinkActive} from "@angular/router";
-import {CreateDialogModalComponent} from "./create-dialog-modal.component";
-import {MatDialog} from "@angular/material/dialog";
-
+import { ToastrService } from "ngx-toastr";
+import { RouterLink, RouterLinkActive } from "@angular/router";
+import { CreateDialogModalComponent } from "./create-dialog-modal.component";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: 'app-story',
@@ -30,9 +29,7 @@ export class StoryComponent implements OnInit {
   private _id: any;
   filterValue: any;
 
-  constructor(private storyService: StoryService, private toastr: ToastrService, public diaog: MatDialog
-  ) {
-  }
+  constructor(private storyService: StoryService, private toastr: ToastrService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.loadStories();
@@ -71,7 +68,7 @@ export class StoryComponent implements OnInit {
     const newStory = {
       name: this.newStoryName,
       steps: [
-        {intentName: this.newStepIntent, actionText: this.newStepAction}
+        { intentName: this.newStepIntent, actionText: this.newStepAction }
       ]
     };
 
@@ -105,7 +102,6 @@ export class StoryComponent implements OnInit {
     }
   }
 
-
   deleteStory(storyId: number): void {
     this.storyService.deleteStory(storyId).subscribe(() => {
       this.loadStories();
@@ -113,19 +109,20 @@ export class StoryComponent implements OnInit {
   }
 
   openCreateDialog() {
-    const dialogRef = this.diaog.open(CreateDialogModalComponent, {
+    const dialogRef = this.dialog.open(CreateDialogModalComponent, {
       width: '400px',
       position: { top: '-40%', left: '50%' },
       panelClass: 'custom-modal2-class',
-      data: { story: {...this} }
+      data: { story: { ...this } }
     });
 
     dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
     });
   }
+
   openEditDialog(story: any) {
-    const dialogRef = this.diaog.open(CreateDialogModalComponent, {
+    const dialogRef = this.dialog.open(CreateDialogModalComponent, {
       width: '600px',
       position: { top: '-40%', left: '40%' },
       panelClass: 'custom-modal2-class',
@@ -139,4 +136,15 @@ export class StoryComponent implements OnInit {
     });
   }
 
+  // Novo método trainModel
+  trainModel(): void {
+    this.storyService.trainModel().subscribe({
+      next: () => {
+        this.toastr.success('Modelo treinado com sucesso!');
+      },
+      error: () => {
+        this.toastr.error('Erro ao treinar o modelo. Tente novamente.');
+      }
+    });
+  }
 }

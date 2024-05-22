@@ -11,19 +11,19 @@
         class="tab font-semibold leading-6 text-black-80 hover:text-indigo-500 mr-2 uppercase"
         routerLink="/historia"
         routerLinkActive="active"
-        >Diálogos</a
+      >Diálogos</a
       >
       <a
         class="tab font-semibold leading-6 text-black-80 hover:text-indigo-500 mr-2 uppercase"
         routerLink="/nlu"
         routerLinkActive="active"
-        >Perguntas</a
+      >Perguntas</a
       >
       <a
         class="tab font-semibold leading-6 text-black-80 hover:text-indigo-500 mr-2 uppercase"
         routerLink="/intents"
         routerLinkActive="active"
-        >Respostas</a
+      >Respostas</a
       >
     </div>
     <div>
@@ -37,6 +37,9 @@
         <li *ngFor="let data of nluData; let i = index" (click)="selectData(i)">
           <p>{{ data.intentText }}</p>
           <fa-icon [icon]="icons.faReply"></fa-icon>
+          <button class="btn remove-bubble" (click)="deleteData(data.id, $event)">
+            <fa-icon [icon]="icons.faTrash"></fa-icon>
+          </button>
         </li>
       </ul>
     </div>
