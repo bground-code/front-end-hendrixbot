@@ -16,7 +16,7 @@ export class ChatService {
   private chatWebSocket: WebSocketSubject<any>;
 
   constructor() {
-    this.chatWebSocket = webSocket('ws://localhost:8081/chat');
+    this.chatWebSocket = webSocket('ws://hendrixbot.com.br:8081/chat');
   }
 
   sendMessage(message: string, humanAssumed: boolean): void {
