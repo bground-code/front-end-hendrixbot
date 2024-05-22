@@ -13,7 +13,7 @@ export interface MessageDTO {
   providedIn: 'root'
 })
 export class AtendimentoWebSocketService {
-  private wsUrl = 'ws://localhost:8081/atendimento';
+  private wsUrl = 'ws://hendrixbot.com.br:8081/atendimento';
   private webSocket: WebSocketSubject<any>;
 
   constructor() {
