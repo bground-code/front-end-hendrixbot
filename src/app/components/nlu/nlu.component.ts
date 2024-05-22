@@ -115,21 +115,19 @@ export class NluComponent implements OnInit {
     }
   }
 
-
-  deleteData(index: number): void {
-    const idData = this.selectedData?.id;
-    this.nluService.deleteIntent(1).subscribe(
+  deleteData(id: number, event: MouseEvent): void {
+    event.stopPropagation(); // Evita que o evento de clique no item seja disparado
+    this.nluService.deleteIntent(id).subscribe(
       () => {
-        this.toastr.success('Dados excluídos com sucesso!');
+        this.toastr.success('Pergunta excluída com sucesso!');
         this.fetchNluData();
       },
       error => {
-        this.toastr.error('Erro ao excluir dados. Por favor, tente novamente.', 'Erro');
+        this.toastr.error('Erro ao excluir a pergunta. Por favor, tente novamente.', 'Erro');
         console.error('Error deleting data:', error);
       }
     );
   }
-
 
   selectData(index: number) {
     if (this.nluData && index < this.nluData.length) {
@@ -153,9 +151,8 @@ export class NluComponent implements OnInit {
       this.toastr.error('Deve haver pelo menos um texto.');
     }
   }
+
   trackByText(index: number, text: string): any {
     return index;
   }
-
-
 }

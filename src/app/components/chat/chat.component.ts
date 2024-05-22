@@ -14,12 +14,14 @@ import { SpeechRecognitionService } from '../../client/speech-recognition.servic
     CommonModule,
     FormsModule,
   ],
+  providers: [ChatService]
 })
 export class ChatComponent implements OnInit, OnDestroy {
   messages: MessageDTO[] = [];
   newMessage = '';
   isServerThinking = false;
   isListening = false;
+  humanAssumed = false;
 
   private messagesSubscription: Subscription | undefined;
 
@@ -31,8 +33,13 @@ export class ChatComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.messagesSubscription = this.chatService.getMessages$().subscribe((message: MessageDTO) => {
       setTimeout(() => {
-        this.messages.push(message);
+        if (!this.humanAssumed || message.sender !== 'chatbot') {
+          this.messages.push(message);
+        }
         this.isServerThinking = false;
+        if (message.type === 'info' && message.text.includes('redirecionado para um atendimento humano')) {
+          this.humanAssumed = true;
+        }
       }, 2000);
     });
 
@@ -46,15 +53,21 @@ export class ChatComponent implements OnInit, OnDestroy {
       console.error('Speech recognition error:', error);
       this.isListening = false;
     };
+
+    const savedMessages = localStorage.getItem('chatMessages');
+    if (savedMessages) {
+      this.messages = JSON.parse(savedMessages);
+    }
   }
 
   sendMessage() {
     if (this.newMessage.trim()) {
-      const msg: MessageDTO = { text: this.newMessage, type: 'sent' };
+      const msg: MessageDTO = { text: this.newMessage, type: 'sent', sender: 'user' };
       this.messages.push(msg);
-      this.chatService.sendMessage(this.newMessage);
+      this.chatService.sendMessage(this.newMessage, this.humanAssumed);
       this.newMessage = '';
-      this.isServerThinking = true;
+      this.isServerThinking = !this.humanAssumed;
+      localStorage.setItem('chatMessages', JSON.stringify(this.messages));
     }
   }
 

@@ -12,21 +12,20 @@ export interface MessageDTO {
 @Injectable({
   providedIn: 'root'
 })
-export class ChatService {
-  private chatWebSocket: WebSocketSubject<any>;
+export class AtendimentoWebSocketService {
+  private wsUrl = 'ws://localhost:8081/atendimento';
+  private webSocket: WebSocketSubject<any>;
 
   constructor() {
-    this.chatWebSocket = webSocket('ws://localhost:8081/chat');
+    this.webSocket = webSocket(this.wsUrl);
   }
 
-  sendMessage(message: string, humanAssumed: boolean): void {
-    const sessionId = localStorage.getItem('sessionId');
-    const sender = humanAssumed ? 'atendente' : 'user';
-    this.chatWebSocket.next({ text: message, type: 'sent', sender, sessionId });
+  sendMessage(message: string, sessionId: string | undefined): void {
+    this.webSocket.next({ text: message, type: 'sent', sender: 'atendente', sessionId });
   }
 
   getMessages$(): Observable<MessageDTO> {
-    return this.chatWebSocket.asObservable().pipe(
+    return this.webSocket.asObservable().pipe(
       map(data => {
         if (typeof data === 'object' && data.text) {
           return {
@@ -37,6 +36,21 @@ export class ChatService {
           };
         }
         return { text: '', type: 'received', sender: 'user', sessionId: undefined };
+      })
+    );
+  }
+
+  assumeConversation(sessionId: string): void {
+    this.webSocket.next({ text: sessionId, type: 'assume', sessionId });
+  }
+
+  getActiveSessions$(): Observable<string[]> {
+    return this.webSocket.asObservable().pipe(
+      map(data => {
+        if (Array.isArray(data)) {
+          return data;
+        }
+        return [];
       })
     );
   }

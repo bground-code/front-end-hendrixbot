@@ -4,12 +4,12 @@
       <div *ngFor="let message of messages" class="flex w-full mt-2 space-x-3 max-w-xs" [ngClass]="{'ml-auto justify-end': message.type === 'sent'}">
         <div *ngIf="message.type === 'received'" class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
         <div>
-          <div [ngClass]="{'bg-gray-300': message.type === 'received', 'bg-blue-600 text-white': message.type === 'sent'}"
+          <div [ngClass]="{'bg-gray-300': message.type === 'received', 'bg-blue-600 text-white': message.type === 'sent', 'bg-yellow-200': message.type === 'info'}"
                class="p-3"
-               [ngClass]="{'rounded-l-lg rounded-br-lg': message.type === 'sent', 'rounded-r-lg rounded-bl-lg': message.type === 'received'}">
+               [ngClass]="{'rounded-l-lg rounded-br-lg': message.type === 'sent', 'rounded-r-lg rounded-bl-lg': message.type === 'received', 'rounded-lg': message.type === 'info'}">
             <p class="text-sm">{{ message.text }}</p>
           </div>
-          <span class="text-xs text-gray-500 leading-none">2 min ago</span>
+          <span *ngIf="message.type !== 'info'" class="text-xs text-gray-500 leading-none">2 min ago</span>
         </div>
         <div *ngIf="message.type === 'sent'" class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
       </div>

@@ -76,4 +76,15 @@ export class StoryService {
       })
     );
   }
+  trainModel(): Observable<any> {
+    return this.http.post(`${this.apiUrl}/chat/train`, {}).pipe(
+      tap(() => {
+        this.toastr.success('Modelo treinado com sucesso');
+      }),
+      catchError(error => {
+        this.toastr.error('Erro ao treinar o modelo');
+        throw error;
+      })
+    );
+  }
 }
