@@ -21,8 +21,10 @@
 // Examples
 // We use those styles to show code examples, you should remove them in your application.
 @import "scss/examples";
+@import "scss/base";
+@import "scss/variables";
 
 // Tailwind CSS
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
