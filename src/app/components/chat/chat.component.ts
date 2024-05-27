@@ -21,7 +21,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   newMessage = '';
   isServerThinking = false;
   isListening = false;
-  humanAssumed = false;
 
   private messagesSubscription: Subscription | undefined;
 
@@ -32,14 +31,12 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.messagesSubscription = this.chatService.getMessages$().subscribe((message: MessageDTO) => {
+      if (message.type === 'received' && message.sender === 'atendente' && message.sessionId) {
+        localStorage.setItem('atendenteSessionId', message.sessionId);
+      }
       setTimeout(() => {
-        if (!this.humanAssumed || message.sender !== 'chatbot') {
-          this.messages.push(message);
-        }
+        this.messages.push(message);
         this.isServerThinking = false;
-        if (message.type === 'info' && message.text.includes('redirecionado para um atendimento humano')) {
-          this.humanAssumed = true;
-        }
       }, 2000);
     });
 
@@ -64,9 +61,9 @@ export class ChatComponent implements OnInit, OnDestroy {
     if (this.newMessage.trim()) {
       const msg: MessageDTO = { text: this.newMessage, type: 'sent', sender: 'user' };
       this.messages.push(msg);
-      this.chatService.sendMessage(this.newMessage, this.humanAssumed);
+      this.chatService.sendMessage(this.newMessage);
       this.newMessage = '';
-      this.isServerThinking = !this.humanAssumed;
+      this.isServerThinking = true;
       localStorage.setItem('chatMessages', JSON.stringify(this.messages));
     }
   }
