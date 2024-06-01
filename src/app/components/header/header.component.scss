@@ -25,21 +25,32 @@
 
 .menu__button-box {
   margin-right: 1rem;
+  display: flex;
+  align-items: center;
 
   & > * {
     padding: 1rem;
     cursor: pointer;
   }
-
-  & > *:hover {
-    background-color: var(--color-grey-light-4);
-    border-radius: 50%;
-  }
 }
 
 .menu__icon {
   height: 3.25rem;
+  fill: #333;
+  transition: 0.4s;
 }
+
+.logout__icon {
+  fill: #333;
+  transition: 0.4s;
+  height: 3rem;
+}
+
+.menu__icon:hover,
+.logout__icon:hover {
+  fill: #9a7bb3;
+}
+
 .logo-icon {
   height: 3.25rem;
 }
@@ -53,13 +64,4 @@
     padding: 1rem;
     cursor: pointer;
   }
-
-  & > *:hover {
-    background-color: var(--color-grey-light-4);
-    border-radius: 50%;
-  }
-}
-
-.logout__icon {
-  height: 3rem;
 }
