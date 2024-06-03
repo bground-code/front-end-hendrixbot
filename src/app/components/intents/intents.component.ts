@@ -7,14 +7,12 @@ import { MatCard, MatCardTitle } from "@angular/material/card";
 import { MatList, MatListItem } from "@angular/material/list";
 import { MatLine } from "@angular/material/core";
 import { MatButton } from "@angular/material/button";
-import { MatIcon } from "@angular/material/icon";
-import { CadastroModalIntentsComponent } from "./cadastro-modal-intents.component";
 import { NluData } from '../../models/nlu';
-import {CadastromodalComponent} from "./cadastromodal.component";
-import {RouterLink, RouterLinkActive} from "@angular/router";
-import {FormsModule} from "@angular/forms";
-import {FaIconComponent} from "@fortawesome/angular-fontawesome";
-import {faTrash, faPlusCircle, faMessage } from "@fortawesome/free-solid-svg-icons";
+import { RouterLink, RouterLinkActive } from "@angular/router";
+import { FormsModule } from "@angular/forms";
+import { FaIconComponent } from "@fortawesome/angular-fontawesome";
+import { faTrash, faPlusCircle, faMessage } from "@fortawesome/free-solid-svg-icons";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-intents',
@@ -26,9 +24,6 @@ import {faTrash, faPlusCircle, faMessage } from "@fortawesome/free-solid-svg-ico
 export class IntentsComponent implements OnInit {
   responses: any[] = [];
   intents: any[] = [];
-  private dialogRef: MatDialogRef<CadastroModalIntentsComponent> | null = null;
-  private dialogRefE: MatDialogRef<CadastromodalComponent> | null = null;
-
   icons = {
     faTrash,
     faPlusCircle,
@@ -156,7 +151,9 @@ export class IntentsComponent implements OnInit {
         this.fetchResponses();
       },
       error => {
-        this.toastr.error('Erro ao excluir resposta. Por favor, tente novamente.', 'Erro');
+        const errorMessage = error.error?.message || 'Erro ao excluir resposta. Por favor, tente novamente.';
+        this.toastr.info(errorMessage, 'Atenção');
+        console.error('Erro ao excluir resposta:', error);
       }
     );
   }
@@ -174,43 +171,6 @@ export class IntentsComponent implements OnInit {
     );
   }
 
-  openIntentModal(): void {
-    if (this.dialogRef) {
-      return;
-    }
-
-    this.dialogRef = this.dialog.open(CadastroModalIntentsComponent, {
-      width: '400px',
-      position: { top: '-20%', left: '50%' },
-      panelClass: 'custom-modal-class'
-    });
-
-    this.dialogRef.afterClosed().subscribe(result => {
-      this.dialogRef = null;
-      if (result === true) {
-        this.fetchIntents();
-      }
-    });
-  }
-
-  openModal(): void {
-    if (this.dialogRefE) {
-      return;
-    }
-
-    this.dialogRefE = this.dialog.open(CadastromodalComponent, {
-      width: '400px',
-      position: { top: '-20%', left: '50%' },
-      panelClass: 'custom-modal2-class'
-    });
-
-    this.dialogRefE.afterClosed().subscribe(result => {
-      this.dialogRefE = null;
-      if (result === true) {
-        this.fetchIntents();
-      }
-    });
-  }
 
   addResponseBubble() {
     if (!this.newResponse.texts) {

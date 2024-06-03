@@ -20,6 +20,7 @@ export class AtendimentoComponent implements OnInit {
   messages: MessageDTO[] = [];
   currentMessage: string = '';
   sessionId: string | undefined;
+  atendenteSessionId: string | undefined;
   humanAssumed: boolean = false;
 
   constructor(private atendimentoService: AtendimentoWebSocketService) {}
@@ -37,6 +38,11 @@ export class AtendimentoComponent implements OnInit {
     if (savedSessionId) {
       this.sessionId = savedSessionId;
     }
+
+    const savedAtendenteSessionId = localStorage.getItem('atendenteSessionId');
+    if (savedAtendenteSessionId) {
+      this.atendenteSessionId = savedAtendenteSessionId;
+    }
   }
 
   subscribeToActiveSessions(): void {
@@ -49,6 +55,8 @@ export class AtendimentoComponent implements OnInit {
     if (sessionId) {
       this.sessionId = sessionId;
       this.humanAssumed = true;
+      localStorage.setItem('atendenteSessionId', sessionId);
+      this.atendenteSessionId = sessionId;
       this.atendimentoService.assumeConversation(sessionId);
       this.messages = [];
       this.subscribeToMessages();
@@ -61,7 +69,7 @@ export class AtendimentoComponent implements OnInit {
 
   sendMessage(): void {
     if (this.currentMessage.trim() && this.sessionId) {
-      const message: MessageDTO = { text: this.currentMessage, type: 'sent', sender: 'atendente', sessionId: this.sessionId };
+      const message: MessageDTO = { text: this.currentMessage, type: 'sent', sender: 'atendente', sessionId: this.sessionId, atendenteSessionId: this.atendenteSessionId };
       this.atendimentoService.sendMessage(this.currentMessage, this.sessionId);
       this.messages.push(message);
       this.currentMessage = '';
@@ -71,11 +79,10 @@ export class AtendimentoComponent implements OnInit {
 
   private subscribeToMessages(): void {
     this.atendimentoService.getMessages$().subscribe(message => {
-      if (this.sessionId && message.sessionId === this.sessionId && message.text) {
-        if (message.sender !== 'atendente') {
-          this.messages.push(message);
-          localStorage.setItem('atendimentoMessages', JSON.stringify(this.messages));
-        }
+      const mappedAtendenteSessionId = this.atendimentoService.getMappedAtendenteSessionId(message.sessionId!);
+      if (mappedAtendenteSessionId === this.atendenteSessionId && message.text) {
+        this.messages.push(message);
+        localStorage.setItem('atendimentoMessages', JSON.stringify(this.messages));
       }
     });
   }
