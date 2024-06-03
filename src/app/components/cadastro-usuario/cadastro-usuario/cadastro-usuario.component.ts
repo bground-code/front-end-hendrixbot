@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { AlunoService } from '../../../client/cadastro.aluno.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CadastromodalComponent } from './cadastromodal.component';
@@ -52,6 +52,8 @@ export class CadastroUsuarioComponent implements OnInit {
   totalElements: number = 0;
   page = 0;
   pageSize = 10;
+  dropdownStates: { [key: number]: boolean } = {};
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
@@ -62,6 +64,23 @@ export class CadastroUsuarioComponent implements OnInit {
     private dialog: MatDialog,
     private toastrService: ToastrService,
   ) { }
+
+  toggleDropdown(event: MouseEvent, idUsuario: number) {
+    event.stopPropagation();
+    this.dropdownStates[idUsuario] = !this.dropdownStates[idUsuario];
+  }
+
+
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: Event) {
+    const target = event.target as HTMLElement;
+    const clickedInside = target.closest('.relative.inline-block.text-left');
+    if (!clickedInside) {
+      for (let key in this.dropdownStates) {
+        this.dropdownStates[key] = false;
+      }
+    }
+  }
 
   ngOnInit(): void {
     this.buscarAlunos();
@@ -107,6 +126,18 @@ export class CadastroUsuarioComponent implements OnInit {
     });
   }
 
+  openEditModal(usuario: any): void {
+    const dialogRef = this.dialog.open(CadastromodalComponent, {
+      width: '1000px',
+      position: { top: '-45%', left: '30%', transform: 'translate(-50%, -50%)' } as any,
+      data: { usuario } // Passa o usuário como dado para a modal
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.buscarAlunos();
+    });
+  }
+
   buscarAlunos(): void {
     this.alunoService.buscarAlunos(this.page, this.pageSize).subscribe(
       (response: any) => {
@@ -114,6 +145,10 @@ export class CadastroUsuarioComponent implements OnInit {
         this.totalElements = response.totalElements;
         this.dataSource.data = this.alunos;
         console.log(this.alunos);
+
+        this.alunos.forEach(element => {
+          this.dropdownStates[element.idUsuario] = false;
+        });
       },
       error => {
         console.error('Erro ao buscar alunos:', error);
