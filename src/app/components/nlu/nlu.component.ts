@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from "ngx-toastr";
 import { NluService } from '../../client/nlu.service';
 import { NluData } from '../../models/nlu';
@@ -28,7 +28,6 @@ export class NluComponent implements OnInit {
   selectedData: NluData | null = null;
   creatingNewData: boolean = false;
   newData: { intentText: string, texts: string[] } = { intentText: '', texts: [''] };
-  private modalRef: MatDialogRef<any> | null = null;
 
   icons = {
     faTrash,
@@ -53,7 +52,7 @@ export class NluComponent implements OnInit {
         this.nluData = data;
       },
       error: (error) => {
-        console.error('Error fetching NLU data:', error);
+        console.error('Error ao buscar perguntas:', error);
         this.toastr.error('Erro ao carregar os dados NLU. Por favor, tente novamente.', 'Erro');
       }
     });
@@ -85,14 +84,16 @@ export class NluComponent implements OnInit {
       };
       this.nluService.atualizarNlu(updatedNluData).subscribe(
         () => {
-          this.toastr.success('Pergunta atualizada com sucesso!');
           this.fetchNluData();
           this.creatingNewData = false;
           this.selectedData = null;
+          this.toastr.success('Pergunta atualizada com sucesso!');
+
         },
         error => {
-          console.error('Erro ao atualizar a pergunta:', error);
-          this.toastr.error('Erro ao atualizar a pergunta. Por favor, tente novamente.', 'Erro');
+          const errorMessage = error.error?.message || 'Erro ao excluir a pergunta. Por favor, tente novamente.';
+          this.toastr.info(errorMessage, 'Erro');
+          console.error('Error updating data:', error);
         }
       );
     } else {
@@ -102,28 +103,29 @@ export class NluComponent implements OnInit {
       };
       this.nluService.saveNluData(newNluData).subscribe(
         () => {
-          this.toastr.success('Nova pergunta NLU criada com sucesso!');
+          this.toastr.success('Nova pergunta criada com sucesso!');
           this.fetchNluData();
           this.creatingNewData = false;
           this.newData = { intentText: '', texts: [''] };
         },
         error => {
-          console.error('Erro ao salvar a nova pergunta NLU:', error);
-          this.toastr.error('Erro ao salvar nova pergunta. Por favor, tente novamente.', 'Erro');
+          const errorMessage = error.error?.message || 'Erro ao salvar a pergunta. Por favor, tente novamente.';
+          console.error('Error saving data:', error);
         }
       );
     }
   }
 
   deleteData(id: number, event: MouseEvent): void {
-    event.stopPropagation(); // Evita que o evento de clique no item seja disparado
+    event.stopPropagation();
     this.nluService.deleteIntent(id).subscribe(
       () => {
         this.toastr.success('Pergunta excluída com sucesso!');
         this.fetchNluData();
       },
       error => {
-        this.toastr.error('Erro ao excluir a pergunta. Por favor, tente novamente.', 'Erro');
+        const errorMessage = error.error?.message || 'Erro ao excluir a pergunta. Por favor, tente novamente.';
+        this.toastr.info(errorMessage, 'Atenção');
         console.error('Error deleting data:', error);
       }
     );

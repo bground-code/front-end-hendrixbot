@@ -6,7 +6,7 @@
         <div>
           <div [ngClass]="{'bg-gray-300': message.type === 'received', 'bg-blue-600 text-white': message.type === 'sent', 'bg-yellow-200': message.type === 'info'}"
                class="p-3"
-               [ngClass]="{'rounded-l-lg rounded-br-lg': message.type === 'sent', 'rounded-r-lg rounded-bl-lg': message.type === 'received', 'rounded-lg': message.type === 'info'}">
+          >
             <p class="text-sm">{{ message.text }}</p>
           </div>
           <span *ngIf="message.type !== 'info'" class="text-xs text-gray-500 leading-none">2 min ago</span>
