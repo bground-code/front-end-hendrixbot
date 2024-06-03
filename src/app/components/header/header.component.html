@@ -1,8 +1,14 @@
 <header class="header">
   <div class="logo__box">
     <div class="menu__button-box">
-      <!-- <input type="checkbox" class="nav__checkbox" id="navo-toggle" /> -->
-      <label for="" class="nav__button">
+      <label for="navi-toggle" class="nav__button">
+        <input
+          type="checkbox"
+          class="nav__checkbox"
+          id="navi-toggle"
+          (change)="onCheckboxChange($event)"
+        />
+
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -16,13 +22,7 @@
           />
         </svg>
       </label>
-      <!-- <div class="nav__background">&nbsp;</div> -->
     </div>
-    <!-- <img
-    src="../../../assets/images/logo-bot.svg"
-    class="logo-icon"
-    alt="Logo Icon"
-  /> -->
 
     <img
       src="../../../assets/images/logo-name.svg"
