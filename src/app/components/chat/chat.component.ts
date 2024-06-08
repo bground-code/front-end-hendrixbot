@@ -14,7 +14,6 @@ import { SpeechRecognitionService } from '../../client/speech-recognition.servic
     CommonModule,
     FormsModule,
   ],
-  providers: [ChatService]
 })
 export class ChatComponent implements OnInit, OnDestroy {
   messages: MessageDTO[] = [];
@@ -31,9 +30,6 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.messagesSubscription = this.chatService.getMessages$().subscribe((message: MessageDTO) => {
-      if (message.type === 'received' && message.sender === 'atendente' && message.sessionId) {
-        localStorage.setItem('atendenteSessionId', message.sessionId);
-      }
       setTimeout(() => {
         this.messages.push(message);
         this.isServerThinking = false;
@@ -50,21 +46,15 @@ export class ChatComponent implements OnInit, OnDestroy {
       console.error('Speech recognition error:', error);
       this.isListening = false;
     };
-
-    const savedMessages = localStorage.getItem('chatMessages');
-    if (savedMessages) {
-      this.messages = JSON.parse(savedMessages);
-    }
   }
 
   sendMessage() {
     if (this.newMessage.trim()) {
-      const msg: MessageDTO = { text: this.newMessage, type: 'sent', sender: 'user' };
+      const msg: MessageDTO = { text: this.newMessage, type: 'sent' };
       this.messages.push(msg);
       this.chatService.sendMessage(this.newMessage);
       this.newMessage = '';
       this.isServerThinking = true;
-      localStorage.setItem('chatMessages', JSON.stringify(this.messages));
     }
   }
 
