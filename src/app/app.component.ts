@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Usuario } from './models/usuario';
 import { UsuarioService } from './client/usuario.service';
+import { StateService } from './shared/state.service';
 import { faGear, faHome, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -13,10 +14,12 @@ export class AppComponent {
   title = 'Hendrix-Bot';
   usuario = new Usuario();
   showSidebar: boolean = true;
+  isSideBarChecked = false;
 
   constructor(
     private usuarioService: UsuarioService,
     private router: Router,
+    private stateService: StateService,
   ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -25,7 +28,11 @@ export class AppComponent {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.stateService.isSideBarChecked$.subscribe((isChecked) => {
+      this.isSideBarChecked = isChecked;
+    });
+  }
 
   login() {
     console.log(this.usuario);
@@ -44,10 +51,8 @@ export class AppComponent {
   protected readonly faGear = faGear;
   protected readonly faHome = faHome;
 
-  toggleMenu() {
-
-  }
-  logout(){
+  toggleMenu() {}
+  logout() {
     localStorage.clear();
   }
 }
