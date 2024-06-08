@@ -22,25 +22,10 @@
 // We use those styles to show code examples, you should remove them in your application.
 @import "scss/examples";
 
+@import "base";
+@import "variables";
+@import "mixins";
 // Tailwind CSS
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
-/* Adicione estilos globais personalizados aqui */
-body {
-  font-family: 'Inter', sans-serif;
-}
-
-input::placeholder {
-  color: #a0aec0;
-  opacity: 1; /* Firefox */
-}
-
-input:-ms-input-placeholder {
-  color: #a0aec0;
-}
-
-input::-ms-input-placeholder {
-  color: #a0aec0;
-}
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";

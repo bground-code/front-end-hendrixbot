@@ -1,38 +1,23 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons/faBars';
-import {
-  faArrowRightToBracket,
-  faUser,
-} from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router'; // Importar Router
+import { StateService } from 'src/app/shared/state.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, FaIconComponent],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss',
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  toggleMenu() {
-    this.collapsed = !this.collapsed;
-    document.querySelector('body')?.classList.toggle('collapsedMenu');
+  constructor(private stateService: StateService, private router: Router) {} // Injetar Router
+
+  onCheckboxChange(event: Event) {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    this.stateService.setSideBarChecked(isChecked);
   }
-  collapsed: boolean = false;
-  ngOnInit(): void {}
 
-  protected readonly faBars = faBars;
-  protected readonly faArrowRightToBracket = faArrowRightToBracket;
-  protected readonly faUser = faUser;
-
-  labelEvent = {
-    application: 'Sistema de Plantão Judicial',
-    titleApplication: 'Sistema de Plantão Judicial',
-    sgc: '',
-    title: '',
-    cardInfo: '',
-    calendar: '',
-    list: '',
-  };
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/login']); // Redirecionar para a página de login
+  }
 }

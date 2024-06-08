@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
-import { CommonModule } from '@angular/common';
+
 import { TokenInterceptor } from './client/TokenInterceptor';
 
 import {
@@ -17,27 +16,26 @@ import {
   CardHeaderComponent,
   ColComponent,
   ContainerComponent,
-  DropdownComponent,
   FormControlDirective,
   FormDirective,
   InputGroupComponent,
   InputGroupTextDirective,
-  NavComponent,
-  NavItemComponent,
-  NavLinkDirective,
   RowComponent,
 } from '@coreui/angular';
 import { IconDirective } from '@coreui/icons-angular';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { provideToastr, ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
-
+import {
+  BrowserAnimationsModule,
+  provideAnimations,
+} from '@angular/platform-browser/animations';
+import { HeaderComponent } from './components/header/header.component';
 import { faGear, faHome, faUser } from '@fortawesome/free-solid-svg-icons';
-import {SidebarModule} from "./components/sidebar/sidebar.module";
-import {SidebarStateService} from "./components/sidebar/sidebar-state.service";
-import {VisualizarConversaComponent} from "./components/historico/visualizar.component";
-import {HistoricoComponent} from "./components/historico/historico.component";
+
+import { VisualizarConversaComponent } from './components/historico/visualizar.component';
+import { HistoricoComponent } from './components/historico/historico.component';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +43,7 @@ import {HistoricoComponent} from "./components/historico/historico.component";
     LoginComponent,
     HomeComponent,
     VisualizarConversaComponent,
-    HistoricoComponent
+    HistoricoComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,20 +65,13 @@ import {HistoricoComponent} from "./components/historico/historico.component";
     FormDirective,
     ToastrModule.forRoot(),
     CardHeaderComponent,
-    NavComponent,
-    NavItemComponent,
-    NavLinkDirective,
-    DropdownComponent,
-    FontAwesomeModule,
-    SidebarModule,
-    CommonModule,
-    MatDialogModule,
+    HeaderComponent,
+    SideBarComponent,
   ],
   providers: [
     provideAnimations(),
     provideToastr(),
-    SidebarStateService,
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
