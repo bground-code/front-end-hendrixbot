@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Usuario } from './models/usuario';
 import { UsuarioService } from './client/usuario.service';
-import { StateService } from './shared/state.service';
+import { StateService } from './client/state.service';
 import { faGear, faHome, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({

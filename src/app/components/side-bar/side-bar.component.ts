@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StateService } from 'src/app/shared/state.service';
+import { StateService } from 'src/app/client/state.service';
 
 @Component({
   selector: 'app-side-bar',

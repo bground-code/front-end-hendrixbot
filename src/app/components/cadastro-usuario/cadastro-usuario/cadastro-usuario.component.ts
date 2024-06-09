@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlunoService } from '../../../client/cadastro.aluno.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CadastromodalComponent } from './cadastromodal.component';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import {
@@ -10,11 +10,16 @@ import {
   MatCellDef,
   MatColumnDef,
   MatHeaderCell,
-  MatHeaderCellDef, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable,
-  MatTableDataSource
+  MatHeaderCellDef,
+  MatHeaderRow,
+  MatHeaderRowDef,
+  MatRow,
+  MatRowDef,
+  MatTable,
+  MatTableDataSource,
 } from '@angular/material/table';
-import { ToastrService } from "ngx-toastr";
-import { MatButton } from "@angular/material/button";
+import { ToastrService } from 'ngx-toastr';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -36,7 +41,7 @@ import { MatButton } from "@angular/material/button";
     MatRowDef,
     MatHeaderRowDef,
   ],
-  styleUrls: ['./cadastro-usuario.component.scss']
+  styleUrls: ['./cadastro-usuario.component.scss'],
 })
 export class CadastroUsuarioComponent implements OnInit {
   nome: string = '';
@@ -49,19 +54,34 @@ export class CadastroUsuarioComponent implements OnInit {
   responsavel1: string = '';
   papelUsuario: string = '';
   alunos: any[] = [];
-  totalElements: number = 0;
-  page = 0;
-  pageSize = 10;
+  totalElements: number = 100; // Total number of elements
+  pageSize: number = 10; // Number of items per page
+  currentPage: number = 1; // Current page number
+  totalPages: number = 1; // Total number of pages
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
-  displayedColumns: string[] = ['nome', 'email', 'cpf', 'dataNascimento', 'contato', 'responsavel1', 'papelUsuario', 'acoes'];
+  displayedColumns: string[] = [
+    'nome',
+    'email',
+    'cpf',
+    'dataNascimento',
+    'contato',
+    'responsavel1',
+    'papelUsuario',
+    'acoes',
+  ];
 
   constructor(
     private alunoService: AlunoService,
     private dialog: MatDialog,
     private toastrService: ToastrService,
-  ) { }
+  ) {
+    this.calculateTotalPages();
+  }
+  calculateTotalPages() {
+    this.totalPages = Math.ceil(this.totalElements / this.pageSize);
+  }
 
   ngOnInit(): void {
     this.buscarAlunos();
@@ -81,25 +101,29 @@ export class CadastroUsuarioComponent implements OnInit {
       confirmarSenha: this.confirmarSenha,
       contato: this.contato,
       responsavel1: this.responsavel1,
-      papelUsuario: this.papelUsuario
+      papelUsuario: this.papelUsuario,
     };
 
     this.alunoService.cadastrarAluno(alunoData).subscribe(
-      response => {
+      (response) => {
         console.log('Aluno cadastrado com sucesso:', response);
         this.buscarAlunos();
         this.toastrService.success('Aluno cadastrado com sucesso!');
       },
-      error => {
+      (error) => {
         console.error('Erro ao cadastrar aluno:', error);
-      }
+      },
     );
   }
 
   openModal(): void {
     const dialogRef = this.dialog.open(CadastromodalComponent, {
       width: '1000px',
-      position: { top: '-45%', left: '30%', transform: 'translate(-50%, -50%)' } as any
+      position: {
+        top: '-45%',
+        left: '30%',
+        transform: 'translate(-50%, -50%)',
+      } as any,
     });
 
     dialogRef.afterClosed().subscribe(() => {
@@ -108,22 +132,34 @@ export class CadastroUsuarioComponent implements OnInit {
   }
 
   buscarAlunos(): void {
-    this.alunoService.buscarAlunos(this.page, this.pageSize).subscribe(
+    this.alunoService.buscarAlunos(this.currentPage, this.pageSize).subscribe(
       (response: any) => {
         this.alunos = response.content;
         this.totalElements = response.totalElements;
         this.dataSource.data = this.alunos;
         console.log(this.alunos);
       },
-      error => {
+      (error) => {
         console.error('Erro ao buscar alunos:', error);
-      }
+      },
     );
+  }
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
   }
 
   onPageChange(event: PageEvent): void {
-    this.page = event.pageIndex;
+    this.currentPage = event.pageIndex + 1;
     this.pageSize = event.pageSize;
+
     this.buscarAlunos();
   }
 
@@ -134,9 +170,9 @@ export class CadastroUsuarioComponent implements OnInit {
         this.toastrService.success(`Aluno com ID ${id} excluído com sucesso.`);
         this.buscarAlunos();
       },
-      error => {
+      (error) => {
         console.error(`Erro ao excluir aluno com ID ${id}:`, error);
-      }
+      },
     );
   }
 }

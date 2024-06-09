@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
+import { CommonModule } from '@angular/common';
 import { TokenInterceptor } from './client/TokenInterceptor';
 
 import {
@@ -33,7 +33,6 @@ import {
 import { HeaderComponent } from './components/header/header.component';
 import { faGear, faHome, faUser } from '@fortawesome/free-solid-svg-icons';
 
-import { SidebarStateService } from './components/sidebar/sidebar-state.service';
 import { VisualizarConversaComponent } from './components/historico/visualizar.component';
 import { HistoricoComponent } from './components/historico/historico.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
@@ -68,11 +67,12 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
     CardHeaderComponent,
     HeaderComponent,
     SideBarComponent,
+    CommonModule,
   ],
   providers: [
     provideAnimations(),
     provideToastr(),
-    SidebarStateService,
+
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
