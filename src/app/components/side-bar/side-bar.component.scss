@@ -4,7 +4,8 @@
   flex-direction: column;
   justify-content: space-between;
   position: fixed;
-  top: 7rem;
+  top: 0; // Ensure it starts below the header
+  left: 0;
   bottom: 0;
   opacity: 0;
   width: 0;
@@ -15,18 +16,40 @@
   &.checked {
     opacity: 1;
     width: 25%;
+
+    @media only screen and (max-width: 37.5em) {
+      //600
+      min-width: 100%;
+    }
+
+    @media only screen and (max-width: 56.25em) {
+      //900
+      width: 40%;
+    }
+
+    @media only screen and (max-width: 75em) {
+      //1200
+      width: 30%;
+    }
+
+    @media only screen and (min-width: 112.5em) {
+      //1800
+      width: 25%;
+    }
   }
 }
+
 .side-nav {
   font-size: 1.4rem;
   list-style: none;
-  margin-top: 3.5rem;
+  margin-top: 8rem;
   margin-bottom: 3.5rem;
 }
 
 .side-nav__item {
   position: relative;
 }
+
 .side-nav__item:not(:last-child) {
   margin-bottom: 0.5rem;
 }
@@ -56,7 +79,8 @@
 }
 
 .side-nav__link:link,
-.side-nav__link:visited {
+.side-nav__link:visited,
+.side-nav__link {
   color: var(--color-grey-light-1);
   text-decoration: none;
   text-transform: uppercase;
@@ -64,9 +88,9 @@
   padding: 1.5rem 3rem;
   position: relative;
   z-index: 10;
-
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .side-nav__icon {

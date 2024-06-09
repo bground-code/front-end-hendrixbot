@@ -1,11 +1,30 @@
-<div class="row">
-  <div class="col-sm-6" *ngFor="let conversa of conversas">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Sessão: {{ conversa.sessionId }}</h5>
-        <p class="card-text">Data e Hora da Conversa: {{ conversa.creationTime }}</p>
-        <button class="btn btn-primary" (click)="verConversa(conversa.sessionId)">Ver Conversa</button>
+<div
+  class="rounded-xl bg-zinc-50 shadow-xl flex flex-col flex-shrink-0 mt-6 mx-10 p-6"
+>
+  <ul
+    role="list"
+    class="divide-y divide-gray-100"
+    *ngFor="let conversa of conversas"
+  >
+    <li class="flex justify-between gap-x-6 py-4 border-b">
+      <div class="flex min-w-0 gap-x-4">
+        <div class="min-w-0 flex-auto">
+          <p class="text-xl font-semibold leading-6 text-zinc-900">
+            Data e Hora da Conversa: {{ conversa.creationTime }}
+          </p>
+          <p class="mt-1 truncate text-lg leading-5 text-zinc-500">
+            Sessão: {{ conversa.sessionId }}
+          </p>
+        </div>
       </div>
-    </div>
-  </div>
+      <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+        <button
+          class="bg-purple-500 rounded-lg text-zinc-50 text-semibold text-xl py-3 px-4"
+          (click)="verConversa(conversa.sessionId)"
+        >
+          Ver Conversa
+        </button>
+      </div>
+    </li>
+  </ul>
 </div>
