@@ -193,12 +193,59 @@
           <ng-container matColumnDef="acoes">
             <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
             <td mat-cell *matCellDef="let element">
-              <button
-                class="btn btn-danger"
-                (click)="excluirAluno(element.idUsuario)"
-              >
-                Excluir
-              </button>
+              <div class="inline-block text-left">
+                <div>
+                  <button
+                    type="button"
+                    id="menu-button"
+                    aria-expanded="true"
+                    aria-haspopup="true"
+                    (click)="toggleDropdown($event, element.idUsuario)"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                <div
+                  *ngIf="dropdownStates[element.idUsuario]"
+                  class="absolute right-10 mt-2 z-50 w-56 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="menu-button"
+                  tabindex="-1"
+                >
+                  <div class="py-1" role="none">
+                    <button
+                      class="text-gray-700 block px-4 py-2 text-sm"
+                      (click)="openEditModal(element)"
+                    >
+                      Editar
+                    </button>
+                    <a
+                      href="#"
+                      class="text-gray-700 block px-4 py-2 text-sm"
+                      role="menuitem"
+                      tabindex="-1"
+                      id="1"
+                      (click)="excluirAluno(element.idUsuario)"
+                      >Remover</a
+                    >
+                  </div>
+                </div>
+              </div>
             </td>
           </ng-container>
 

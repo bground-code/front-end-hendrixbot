@@ -1,7 +1,11 @@
 <nav class="side-bar" [class.checked]="isChecked">
   <ul class="side-nav">
     <li class="side-nav__item">
-      <a href="#" class="side-nav__link flex-row flex">
+      <button
+        routerLink="/home"
+        routerLinkActive="active-link"
+        class="side-nav__link flex-row flex"
+      >
         <div class="flex">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -18,10 +22,14 @@
           </svg>
         </div>
         <span class="flex">Home</span>
-      </a>
+      </button>
     </li>
     <li class="side-nav__item">
-      <a href="#" class="side-nav__link">
+      <a
+        routerLink="/cadastro-usuario"
+        routerLinkActive="active-link"
+        class="side-nav__link flex-row flex"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"

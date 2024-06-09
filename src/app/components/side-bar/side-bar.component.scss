@@ -79,7 +79,8 @@
 }
 
 .side-nav__link:link,
-.side-nav__link:visited {
+.side-nav__link:visited,
+.side-nav__link {
   color: var(--color-grey-light-1);
   text-decoration: none;
   text-transform: uppercase;
@@ -89,6 +90,7 @@
   z-index: 10;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .side-nav__icon {

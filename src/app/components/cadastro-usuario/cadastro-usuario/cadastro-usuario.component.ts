@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { AlunoService } from '../../../client/cadastro.aluno.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CadastromodalComponent } from './cadastromodal.component';
@@ -54,10 +54,11 @@ export class CadastroUsuarioComponent implements OnInit {
   responsavel1: string = '';
   papelUsuario: string = '';
   alunos: any[] = [];
-  totalElements: number = 100; // Total number of elements
-  pageSize: number = 10; // Number of items per page
-  currentPage: number = 1; // Current page number
-  totalPages: number = 1; // Total number of pages
+  dropdownStates: { [key: number]: boolean } = {};
+  totalElements: number = 100;
+  pageSize: number = 10;
+  currentPage: number = 1;
+  totalPages: number = 1;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
@@ -79,6 +80,23 @@ export class CadastroUsuarioComponent implements OnInit {
   ) {
     this.calculateTotalPages();
   }
+
+  toggleDropdown(event: MouseEvent, idUsuario: number) {
+    event.stopPropagation();
+    this.dropdownStates[idUsuario] = !this.dropdownStates[idUsuario];
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: Event) {
+    const target = event.target as HTMLElement;
+    const clickedInside = target.closest('.relative.inline-block.text-left');
+    if (!clickedInside) {
+      for (let key in this.dropdownStates) {
+        this.dropdownStates[key] = false;
+      }
+    }
+  }
+
   calculateTotalPages() {
     this.totalPages = Math.ceil(this.totalElements / this.pageSize);
   }
@@ -131,6 +149,22 @@ export class CadastroUsuarioComponent implements OnInit {
     });
   }
 
+  openEditModal(usuario: any): void {
+    const dialogRef = this.dialog.open(CadastromodalComponent, {
+      width: '1000px',
+      position: {
+        top: '-45%',
+        left: '30%',
+        transform: 'translate(-50%, -50%)',
+      } as any,
+      data: { usuario }, // Passa o usuário como dado para a modal
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.buscarAlunos();
+    });
+  }
+
   buscarAlunos(): void {
     this.alunoService.buscarAlunos(this.currentPage, this.pageSize).subscribe(
       (response: any) => {
@@ -138,6 +172,9 @@ export class CadastroUsuarioComponent implements OnInit {
         this.totalElements = response.totalElements;
         this.dataSource.data = this.alunos;
         console.log(this.alunos);
+        this.alunos.forEach((element) => {
+          this.dropdownStates[element.idUsuario] = false;
+        });
       },
       (error) => {
         console.error('Erro ao buscar alunos:', error);

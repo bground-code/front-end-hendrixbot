@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { backendUrl } from "../../config";
+import { backendUrl } from '../../config';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AlunoService {
   private apiUrl = `${backendUrl}`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   cadastrarAluno(alunoData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/cadastrar`, alunoData);
@@ -25,5 +25,12 @@ export class AlunoService {
 
   excluirAluno(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/cadastrar/alunos/${id}`);
+  }
+
+  editarAluno(id: number, alunoData: any): Observable<any> {
+    return this.http.put<any>(
+      `${this.apiUrl}/cadastrar/editar/${id}`,
+      alunoData,
+    );
   }
 }
