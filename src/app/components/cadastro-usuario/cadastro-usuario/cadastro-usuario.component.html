@@ -1,21 +1,15 @@
-<div class="container">
+<div class="container mt-6">
   <div
-    class="relative flex flex-col w-full h-full text-zinc-700 bg-zinc-50 shadow-md rounded-xl bg-clip-border"
+    class="relative flex flex-col w-full min-h-full text-zinc-700 bg-zinc-50 shadow-md rounded-xl bg-clip-border"
   >
     <div
-      class="relative mx-4 mt-4 overflow-hidden text-zinc-700 bg-zinc-50 rounded-none bg-clip-border"
+      class="relative mx-4 mt-4 overflow-hidden text-zinc-700 bg-zinc-50 rounded-none bg-clip-border min-h-full"
     >
-      <div class="flex items-center justify-between gap-8 mb-8">
-        <div>
-          <!-- <h5
-            class="block font-sans text-4xl antialiased font-semibold leading-snug tracking-normal text-zinc-900"
-          >
-            Usuários
-          </h5> -->
-        </div>
+      <div class="flex items-center justify-between gap-4 mb-4">
+        <div></div>
         <div class="flex flex-col gap-2 shrink-0 sm:flex-row">
           <button
-            class="flex select-none items-center gap-3 rounded-lg bg-zinc-900 py-2 px-4 text-center align-middle font-sans text-xl font-bold uppercase text-zinc-50 shadow-md shadow-zinc-900/10 transition-all hover:shadow-lg hover:shadow-zinc-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            class="flex select-none items-center gap-3 rounded-lg bg-zinc-900 py-2 px-4 text-center align-middle font-sans text-xl font-semibold uppercase text-zinc-50 shadow-md shadow-zinc-900/10 transition-all hover:shadow-lg hover:shadow-zinc-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
             type="button"
             (click)="openModal()"
           >
@@ -35,27 +29,27 @@
           </button>
         </div>
       </div>
-      <div class="p-6 px-0 overflow-scroll">
+      <div class="inner-scrollable-content p-4 overflow-auto">
         <table
           mat-table
           [dataSource]="dataSource"
-          class="w-full mt-4 text-left table-auto min-w-max"
+          class="w-full mt-2 text-left table-auto min-w-max"
         >
           <ng-container matColumnDef="nome">
             <th
-              class="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50"
+              class="p-2 border-b border-purple-950 bg-blue-gray-50/50"
               mat-header-cell
               *matHeaderCellDef
             >
               <p
-                class="block font-sans text-4xl antialiased font-normal leading-none text-blue-gray-900 opacity-70"
+                class="block font-sans text-2xl antialiased font-normal leading-none text-blue-gray-900 opacity-70"
               >
                 Nome
               </p>
             </th>
             <td mat-cell *matCellDef="let element">
               <p
-                class="block min-w-max font-sans text-3xl antialiased font-normal leading-normal text-blue-gray-900"
+                class="block min-w-max font-sans text-1xl antialiased font-normal leading-normal text-blue-gray-900"
               >
                 {{ element.nome }}
               </p>
@@ -64,19 +58,19 @@
 
           <ng-container matColumnDef="email">
             <th
-              class="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50"
+              class="p-2 border-b border-purple-950 bg-blue-gray-50/50"
               mat-header-cell
               *matHeaderCellDef
             >
               <p
-                class="block font-sans text-4xl antialiased font-normal leading-none text-blue-gray-900 opacity-70"
+                class="block font-sans text-2xl antialiased font-normal leading-none text-blue-gray-900 opacity-70"
               >
                 E-mail
               </p>
             </th>
             <td mat-cell *matCellDef="let element">
               <p
-                class="block min-w-max font-sans text-3xl antialiased font-normal leading-normal text-blue-gray-900"
+                class="block min-w-max font-sans text-1xl antialiased font-normal leading-normal text-blue-gray-900"
               >
                 {{ element.email }}
               </p>
@@ -85,19 +79,19 @@
 
           <ng-container matColumnDef="cpf">
             <th
-              class="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50"
+              class="p-2 border-b border-purple-950 bg-blue-gray-50/50"
               mat-header-cell
               *matHeaderCellDef
             >
               <p
-                class="block font-sans text-4xl antialiased font-normal leading-none text-blue-gray-900 opacity-70"
+                class="block font-sans text-2xl antialiased font-normal leading-none text-blue-gray-900 opacity-70"
               >
                 CPF
               </p>
             </th>
             <td mat-cell *matCellDef="let element">
               <p
-                class="block min-w-max font-sans text-3xl antialiased font-normal leading-normal text-blue-gray-900"
+                class="block min-w-max font-sans text-1xl antialiased font-normal leading-normal text-blue-gray-900"
               >
                 {{ element.cpf }}
               </p>
@@ -106,19 +100,19 @@
 
           <ng-container matColumnDef="dataNascimento">
             <th
-              class="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50"
+              class="p-2 border-b border-purple-950 bg-blue-gray-50/50"
               mat-header-cell
               *matHeaderCellDef
             >
               <p
-                class="block font-sans text-4xl antialiased font-normal leading-none text-blue-gray-900 opacity-70"
+                class="block font-sans text-2xl antialiased font-normal leading-none text-blue-gray-900 opacity-70"
               >
                 Data de Nascimento
               </p>
             </th>
             <td mat-cell *matCellDef="let element">
               <p
-                class="block min-w-max font-sans text-3xl antialiased font-normal leading-normal text-blue-gray-900"
+                class="block min-w-max font-sans text-1xl antialiased font-normal leading-normal text-blue-gray-900"
               >
                 {{ element.dataNascimento | date: "dd/MM/yyyy" }}
               </p>
@@ -127,19 +121,19 @@
 
           <ng-container matColumnDef="contato">
             <th
-              class="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50"
+              class="p-2 border-b border-purple-950 bg-blue-gray-50/50"
               mat-header-cell
               *matHeaderCellDef
             >
               <p
-                class="block font-sans text-4xl antialiased font-normal leading-none text-blue-gray-900 opacity-70"
+                class="block font-sans text-2xl antialiased font-normal leading-none text-blue-gray-900 opacity-70"
               >
                 Contato
               </p>
             </th>
             <td mat-cell *matCellDef="let element">
               <p
-                class="block min-w-max font-sans text-3xl antialiased font-normal leading-normal text-blue-gray-900"
+                class="block min-w-max font-sans text-1xl antialiased font-normal leading-normal text-blue-gray-900"
               >
                 {{ element.contatoWhatsapp }}
               </p>
@@ -148,19 +142,19 @@
 
           <ng-container matColumnDef="responsavel1">
             <th
-              class="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50"
+              class="p-2 border-b border-purple-950 bg-blue-gray-50/50"
               mat-header-cell
               *matHeaderCellDef
             >
               <p
-                class="block font-sans text-4xl antialiased font-normal leading-none text-blue-gray-900 opacity-70"
+                class="block font-sans text-2xl antialiased font-normal leading-none text-blue-gray-900 opacity-70"
               >
                 Responsável
               </p>
             </th>
             <td mat-cell *matCellDef="let element">
               <p
-                class="block min-w-max font-sans text-3xl antialiased font-normal leading-normal text-blue-gray-900"
+                class="block min-w-max font-sans text-1xl antialiased font-normal leading-normal text-blue-gray-900"
               >
                 {{ element.responsavel1 }}
               </p>
@@ -169,12 +163,12 @@
 
           <ng-container matColumnDef="papelUsuario">
             <th
-              class="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50"
+              class="p-2 border-b border-purple-950 bg-blue-gray-50/50"
               mat-header-cell
               *matHeaderCellDef
             >
               <p
-                class="block font-sans text-4xl antialiased font-normal leading-none text-blue-gray-900 opacity-70"
+                class="block font-sans text-2xl antialiased font-normal leading-none text-blue-gray-900 opacity-70"
               >
                 Tipo de Usuário
               </p>
@@ -182,7 +176,7 @@
             <td mat-cell *matCellDef="let element">
               <div class="flex flex-col">
                 <p
-                  class="block min-w-max font-sans text-3xl antialiased font-normal leading-normal text-blue-gray-900"
+                  class="block min-w-max font-sans text-1xl capitalize antialiased font-normal leading-normal text-blue-gray-900"
                 >
                   {{ element.papelUsuario }}
                 </p>
@@ -221,7 +215,7 @@
 
                 <div
                   *ngIf="dropdownStates[element.idUsuario]"
-                  class="absolute right-10 mt-2 z-50 w-56 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  class="absolute right-10 mt-2 z-50 w-56 origin-top-left rounded-md bg-zinc-50 shadow-lg ring-1 ring-zinc-800 ring-opacity-5 focus:outline-none"
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="menu-button"
@@ -229,14 +223,14 @@
                 >
                   <div class="py-1" role="none">
                     <button
-                      class="text-gray-700 block px-4 py-2 text-sm"
+                      class="text-zinc-700 block px-4 py-2 text-md"
                       (click)="openEditModal(element)"
                     >
                       Editar
                     </button>
                     <a
                       href="#"
-                      class="text-gray-700 block px-4 py-2 text-sm"
+                      class="text-zinc-700 block px-4 py-2 text-md"
                       role="menuitem"
                       tabindex="-1"
                       id="1"
@@ -254,16 +248,16 @@
         </table>
       </div>
       <div
-        class="flex items-center justify-between p-4 border-t border-blue-gray-50"
+        class="flex items-center justify-between p-4 border-b-2 border-zinc-300"
       >
         <p
-          class="block font-sans text-3xl antialiased font-normal leading-normal text-blue-gray-900"
+          class="block font-sans text-2xl antialiased font-normal leading-normal text-blue-gray-900"
         >
           Página {{ currentPage }} de {{ totalPages }}
         </p>
         <div class="flex gap-2">
           <button
-            class="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-3xl font-bold uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            class="select-none rounded-lg border border-zinc-900 py-2 px-4 text-center align-middle font-sans text-2xl capitalize text-zinc-900 transition-all hover:opacity-75 focus:ring focus:ring-zinc-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
             type="button"
             (click)="previousPage()"
             [disabled]="currentPage === 1"
@@ -271,7 +265,7 @@
             Anterior
           </button>
           <button
-            class="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-3xl font-bold uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            class="select-none rounded-lg border border-zinc-900 py-2 px-4 text-center align-middle font-sans text-2xl capitalize text-zinc-900 transition-all hover:opacity-75 focus:ring focus:ring-zinc-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
             type="button"
             (click)="nextPage()"
             [disabled]="currentPage === totalPages"
@@ -280,14 +274,6 @@
           </button>
         </div>
       </div>
-
-      <!-- <mat-paginator
-        [length]="totalElements"
-        [pageSize]="pageSize"
-        [pageSizeOptions]="[5, 10, 25, 100]"
-        (page)="onPageChange($event)"
-        showFirstLastButtons
-      ></mat-paginator> -->
     </div>
   </div>
 </div>
