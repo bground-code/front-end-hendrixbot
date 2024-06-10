@@ -1,54 +1,279 @@
-<div class="container">
-  <div class="form-group ml-auto text-right">
-    <button class="btn btn-primary" (click)="openModal()">Cadastrar Usuário</button>
+<div class="container mt-6">
+  <div
+    class="relative flex flex-col w-full min-h-full text-zinc-700 bg-zinc-50 shadow-md rounded-xl bg-clip-border"
+  >
+    <div
+      class="relative mx-4 mt-4 overflow-hidden text-zinc-700 bg-zinc-50 rounded-none bg-clip-border min-h-full"
+    >
+      <div class="flex items-center justify-between gap-4 mb-4">
+        <div></div>
+        <div class="flex flex-col gap-2 shrink-0 sm:flex-row">
+          <button
+            class="flex select-none items-center gap-3 rounded-lg bg-zinc-900 py-2 px-4 text-center align-middle font-sans text-xl font-semibold uppercase text-zinc-50 shadow-md shadow-zinc-900/10 transition-all hover:shadow-lg hover:shadow-zinc-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            type="button"
+            (click)="openModal()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+              stroke-width="2"
+              class="w-6 h-6"
+            >
+              <path
+                d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z"
+              ></path>
+            </svg>
+            Adicionar Usuário
+          </button>
+        </div>
+      </div>
+      <div class="inner-scrollable-content p-4 overflow-auto">
+        <table
+          mat-table
+          [dataSource]="dataSource"
+          class="w-full mt-2 text-left table-auto min-w-max"
+        >
+          <ng-container matColumnDef="nome">
+            <th
+              class="p-2 border-b border-purple-950 bg-blue-gray-50/50"
+              mat-header-cell
+              *matHeaderCellDef
+            >
+              <p
+                class="block font-sans text-2xl antialiased font-normal leading-none text-blue-gray-900 opacity-70"
+              >
+                Nome
+              </p>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <p
+                class="block min-w-max font-sans text-1xl antialiased font-normal leading-normal text-blue-gray-900"
+              >
+                {{ element.nome }}
+              </p>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th
+              class="p-2 border-b border-purple-950 bg-blue-gray-50/50"
+              mat-header-cell
+              *matHeaderCellDef
+            >
+              <p
+                class="block font-sans text-2xl antialiased font-normal leading-none text-blue-gray-900 opacity-70"
+              >
+                E-mail
+              </p>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <p
+                class="block min-w-max font-sans text-1xl antialiased font-normal leading-normal text-blue-gray-900"
+              >
+                {{ element.email }}
+              </p>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cpf">
+            <th
+              class="p-2 border-b border-purple-950 bg-blue-gray-50/50"
+              mat-header-cell
+              *matHeaderCellDef
+            >
+              <p
+                class="block font-sans text-2xl antialiased font-normal leading-none text-blue-gray-900 opacity-70"
+              >
+                CPF
+              </p>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <p
+                class="block min-w-max font-sans text-1xl antialiased font-normal leading-normal text-blue-gray-900"
+              >
+                {{ element.cpf }}
+              </p>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="dataNascimento">
+            <th
+              class="p-2 border-b border-purple-950 bg-blue-gray-50/50"
+              mat-header-cell
+              *matHeaderCellDef
+            >
+              <p
+                class="block font-sans text-2xl antialiased font-normal leading-none text-blue-gray-900 opacity-70"
+              >
+                Data de Nascimento
+              </p>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <p
+                class="block min-w-max font-sans text-1xl antialiased font-normal leading-normal text-blue-gray-900"
+              >
+                {{ element.dataNascimento | date: "dd/MM/yyyy" }}
+              </p>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="contato">
+            <th
+              class="p-2 border-b border-purple-950 bg-blue-gray-50/50"
+              mat-header-cell
+              *matHeaderCellDef
+            >
+              <p
+                class="block font-sans text-2xl antialiased font-normal leading-none text-blue-gray-900 opacity-70"
+              >
+                Contato
+              </p>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <p
+                class="block min-w-max font-sans text-1xl antialiased font-normal leading-normal text-blue-gray-900"
+              >
+                {{ element.contatoWhatsapp }}
+              </p>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="responsavel1">
+            <th
+              class="p-2 border-b border-purple-950 bg-blue-gray-50/50"
+              mat-header-cell
+              *matHeaderCellDef
+            >
+              <p
+                class="block font-sans text-2xl antialiased font-normal leading-none text-blue-gray-900 opacity-70"
+              >
+                Responsável
+              </p>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <p
+                class="block min-w-max font-sans text-1xl antialiased font-normal leading-normal text-blue-gray-900"
+              >
+                {{ element.responsavel1 }}
+              </p>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="papelUsuario">
+            <th
+              class="p-2 border-b border-purple-950 bg-blue-gray-50/50"
+              mat-header-cell
+              *matHeaderCellDef
+            >
+              <p
+                class="block font-sans text-2xl antialiased font-normal leading-none text-blue-gray-900 opacity-70"
+              >
+                Tipo de Usuário
+              </p>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <div class="flex flex-col">
+                <p
+                  class="block min-w-max font-sans text-1xl capitalize antialiased font-normal leading-normal text-blue-gray-900"
+                >
+                  {{ element.papelUsuario }}
+                </p>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="acoes">
+            <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+            <td mat-cell *matCellDef="let element">
+              <div class="inline-block text-left">
+                <div>
+                  <button
+                    type="button"
+                    id="menu-button"
+                    aria-expanded="true"
+                    aria-haspopup="true"
+                    (click)="toggleDropdown($event, element.idUsuario)"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                <div
+                  *ngIf="dropdownStates[element.idUsuario]"
+                  class="absolute right-10 mt-2 z-50 w-56 origin-top-left rounded-md bg-zinc-50 shadow-lg ring-1 ring-zinc-800 ring-opacity-5 focus:outline-none"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="menu-button"
+                  tabindex="-1"
+                >
+                  <div class="py-1" role="none">
+                    <button
+                      class="text-zinc-700 block px-4 py-2 text-md"
+                      (click)="openEditModal(element)"
+                    >
+                      Editar
+                    </button>
+                    <a
+                      href="#"
+                      class="text-zinc-700 block px-4 py-2 text-md"
+                      role="menuitem"
+                      tabindex="-1"
+                      id="1"
+                      (click)="excluirAluno(element.idUsuario)"
+                      >Remover</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+      <div
+        class="flex items-center justify-between p-4 border-b-2 border-zinc-300"
+      >
+        <p
+          class="block font-sans text-2xl antialiased font-normal leading-normal text-blue-gray-900"
+        >
+          Página {{ currentPage }} de {{ totalPages }}
+        </p>
+        <div class="flex gap-2">
+          <button
+            class="select-none rounded-lg border border-zinc-900 py-2 px-4 text-center align-middle font-sans text-2xl capitalize text-zinc-900 transition-all hover:opacity-75 focus:ring focus:ring-zinc-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            type="button"
+            (click)="previousPage()"
+            [disabled]="currentPage === 1"
+          >
+            Anterior
+          </button>
+          <button
+            class="select-none rounded-lg border border-zinc-900 py-2 px-4 text-center align-middle font-sans text-2xl capitalize text-zinc-900 transition-all hover:opacity-75 focus:ring focus:ring-zinc-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            type="button"
+            (click)="nextPage()"
+            [disabled]="currentPage === totalPages"
+          >
+            Próxima
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <ng-container matColumnDef="nome">
-      <th mat-header-cell *matHeaderCellDef> Nome </th>
-      <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> E-mail </th>
-      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="cpf">
-      <th mat-header-cell *matHeaderCellDef> CPF </th>
-      <td mat-cell *matCellDef="let element"> {{element.cpf}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="dataNascimento">
-      <th mat-header-cell *matHeaderCellDef> Data de Nascimento </th>
-      <td mat-cell *matCellDef="let element"> {{element.dataNascimento | date:'dd/MM/yyyy'}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="contato">
-      <th mat-header-cell *matHeaderCellDef> Contato </th>
-      <td mat-cell *matCellDef="let element"> {{element.contatoWhatsapp}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="responsavel1">
-      <th mat-header-cell *matHeaderCellDef> Responsável </th>
-      <td mat-cell *matCellDef="let element"> {{element.responsavel1}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="papelUsuario">
-      <th mat-header-cell *matHeaderCellDef> Papel do Usuário </th>
-      <td mat-cell *matCellDef="let element"> {{element.papelUsuario}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="acoes">
-      <th mat-header-cell *matHeaderCellDef> Ações </th>
-      <td mat-cell *matCellDef="let element">
-        <button class="btn btn-danger" (click)="excluirAluno(element.idUsuario)">Excluir</button>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
-  <mat-paginator [length]="totalElements" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]" (page)="onPageChange($event)" showFirstLastButtons></mat-paginator>
 </div>
