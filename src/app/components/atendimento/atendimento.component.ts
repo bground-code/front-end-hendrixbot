@@ -22,6 +22,7 @@ export class AtendimentoComponent implements OnInit {
   sessionId: string | undefined;
   atendenteSessionId: string | undefined;
   humanAssumed: boolean = false;
+  isServerThinking: any;
 
   constructor(private atendimentoService: AtendimentoWebSocketService) {}
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { Observable, map } from 'rxjs';
+import { backendUrl, backendUrlws } from "../../config";
 
 export interface MessageDTO {
   text: string;
@@ -8,6 +9,9 @@ export interface MessageDTO {
   sender?: 'user' | 'chatbot' | 'atendente';
   sessionId?: string;
   atendenteSessionId?: string;
+  accessToken?: string;
+  userName?: string; // Adiciona o nome do usuário
+  idUsario?: any;
 }
 
 @Injectable({
@@ -15,15 +19,24 @@ export interface MessageDTO {
 })
 export class ChatService {
   private chatWebSocket: WebSocketSubject<any>;
+  private apiUrl = `${backendUrlws}`;
 
   constructor() {
-    this.chatWebSocket = webSocket('ws://hendrixbot.com.br8081/chat');
+    this.chatWebSocket = webSocket(backendUrlws);
   }
 
   sendMessage(message: string): void {
     const sessionId = localStorage.getItem('sessionId');
     const atendenteSessionId = localStorage.getItem('atendenteSessionId');
-    this.chatWebSocket.next({ text: message, type: 'sent', sender: 'user', sessionId, atendenteSessionId });
+    const accessToken = localStorage.getItem('accessToken');
+    const dadosUsuario = localStorage.getItem('dadosUsuario');
+    let userName = '';
+    if (dadosUsuario) {
+      const parsedDadosUsuario = JSON.parse(dadosUsuario);
+      userName = parsedDadosUsuario.nome;
+
+    }
+    this.chatWebSocket.next({ text: message, type: 'sent', sender: 'user', sessionId, atendenteSessionId, accessToken, userName });
   }
 
   getMessages$(): Observable<MessageDTO> {

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { Observable, map } from 'rxjs';
+import { backendUrlws, wsUrl } from '../../config';
 
 export interface MessageDTO {
   text: string;
@@ -14,12 +15,16 @@ export interface MessageDTO {
   providedIn: 'root'
 })
 export class AtendimentoWebSocketService {
-  private wsUrl = 'ws://hendrixbot.com.br:8081/atendimento';
   private webSocket: WebSocketSubject<any>;
   private sessionMapping: { [userSessionId: string]: string } = {};
+  private apiUrl = `${wsUrl}`;
 
   constructor() {
-    this.webSocket = webSocket(this.wsUrl);
+    const token = localStorage.getItem('acessToken') || '';
+    this.webSocket = webSocket({
+      url: wsUrl,
+      protocol: token // Token is guaranteed to be a string
+    });
   }
 
   sendMessage(message: string, sessionId: string | undefined): void {
