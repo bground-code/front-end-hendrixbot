@@ -11,34 +11,40 @@
         class="tab font-semibold leading-6 text-black-80 hover:text-indigo-500 mr-2 uppercase active:text-violet-500"
         routerLink="/historia"
         routerLinkActive="active"
-      >Diálogos</a
+        >Diálogos</a
       >
       <a
         class="tab font-semibold leading-6 text-black-80 hover:text-violet-500 mr-2 uppercase active:text-violet-500"
         routerLink="/nlu"
         routerLinkActive="active"
-      >Perguntas</a
+        >Perguntas</a
       >
       <a
         class="tab font-semibold leading-6 text-black-80 hover:text-violet-500 mr-2 uppercase active:text-violet-500"
         routerLink="/intents"
         routerLinkActive="active"
-      >Respostas</a
+        >Respostas</a
       >
     </div>
     <div>
-      <br>
+      <br />
     </div>
   </header>
   <main class="content flex flex-grow p-3">
     <div class="question-list basis-1/5">
       <h6 class="text-gray-900 ml-1 font-semibold">Resposta cadastrada</h6>
       <ul>
-        <li *ngFor="let response of responses; let i = index" (click)="selectResponse(i)">
+        <li
+          *ngFor="let response of responses; let i = index"
+          (click)="selectResponse(i)"
+        >
           <p>{{ response.name }}</p>
           <div class="icons">
             <fa-icon [icon]="icons.faMessage"></fa-icon>
-            <button class="btn remove-bubble" (click)="deleteResponse(i, $event)">
+            <button
+              class="btn remove-bubble"
+              (click)="deleteResponse(i, $event)"
+            >
               <fa-icon [icon]="icons.faTrash"></fa-icon>
             </button>
           </div>
@@ -46,9 +52,14 @@
       </ul>
     </div>
 
-    <div class="question-detail" *ngIf="selectedResponse || creatingNewResponse">
+    <div
+      class="question-detail"
+      *ngIf="selectedResponse || creatingNewResponse"
+    >
       <h3 class="font-semibold mb-3">Título da resposta</h3>
-      <label for="responseTitle" class="visually-hidden">Título da Resposta</label>
+      <label for="responseTitle" class="visually-hidden"
+        >Título da Resposta</label
+      >
       <input
         type="text"
         id="responseTitle"
@@ -58,7 +69,11 @@
       />
       <div class="response-container rounded">
         <div
-          *ngFor="let text of newResponse.texts; let j = index; trackBy: trackByText"
+          *ngFor="
+            let text of newResponse.texts;
+            let j = index;
+            trackBy: trackByText
+          "
           class="response-bubble"
         >
           <textarea
