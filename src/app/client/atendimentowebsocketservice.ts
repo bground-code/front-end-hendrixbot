@@ -12,7 +12,7 @@ export interface MessageDTO {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AtendimentoWebSocketService {
   private webSocket: WebSocketSubject<any>;
@@ -23,20 +23,28 @@ export class AtendimentoWebSocketService {
     const token = localStorage.getItem('acessToken') || '';
     this.webSocket = webSocket({
       url: wsUrl,
-      protocol: token // Token is guaranteed to be a string
+      protocol: token, // Token is guaranteed to be a string
     });
   }
 
   sendMessage(message: string, sessionId: string | undefined): void {
     const atendenteSessionId = localStorage.getItem('atendenteSessionId');
-    this.webSocket.next({ text: message, type: 'sent', sender: 'atendente', sessionId, atendenteSessionId });
+    this.webSocket.next({
+      text: message,
+      type: 'sent',
+      sender: 'atendente',
+      sessionId,
+      atendenteSessionId,
+    });
   }
 
   getMessages$(): Observable<MessageDTO> {
     return this.webSocket.asObservable().pipe(
-      map(data => {
+      map((data) => {
         if (typeof data === 'object' && data.text) {
-          const atendenteSessionId = data.atendenteSessionId || localStorage.getItem('atendenteSessionId');
+          const atendenteSessionId =
+            data.atendenteSessionId ||
+            localStorage.getItem('atendenteSessionId');
           if (data.sender === 'user' && data.sessionId && atendenteSessionId) {
             this.sessionMapping[data.sessionId] = atendenteSessionId;
           }
@@ -45,22 +53,28 @@ export class AtendimentoWebSocketService {
             type: data.type || 'received',
             sender: data.sender || 'user',
             sessionId: data.sessionId,
-            atendenteSessionId
+            atendenteSessionId,
           };
         }
-        return { text: '', type: 'received', sender: 'user', sessionId: undefined, atendenteSessionId: undefined };
-      })
+        return {
+          text: '',
+          type: 'received',
+          sender: 'user',
+          sessionId: undefined,
+          atendenteSessionId: undefined,
+        };
+      }),
     );
   }
 
   getActiveSessions$(): Observable<string[]> {
     return this.webSocket.asObservable().pipe(
-      map(data => {
+      map((data) => {
         if (Array.isArray(data)) {
           return data;
         }
         return [];
-      })
+      }),
     );
   }
 
@@ -70,6 +84,20 @@ export class AtendimentoWebSocketService {
 
   assumeConversation(sessionId: string): void {
     const atendenteSessionId = localStorage.getItem('atendenteSessionId');
-    this.webSocket.next({ text: sessionId, type: 'assume', sessionId, atendenteSessionId });
+    this.webSocket.next({
+      text: sessionId,
+      type: 'assume',
+      sessionId,
+      atendenteSessionId,
+    });
+  }
+
+  getUserName(): string {
+    const dadosUsuario = localStorage.getItem('dadosUsuario');
+    if (dadosUsuario) {
+      const parsedDadosUsuario = JSON.parse(dadosUsuario);
+      return parsedDadosUsuario.nome;
+    }
+    return 'Unknown User'; // Fallback if no user data found
   }
 }
