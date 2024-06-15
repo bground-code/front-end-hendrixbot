@@ -1,3 +1,8 @@
+.content {
+  margin-top: 7rem;
+  height: calc(100vh - 7rem);
+}
+
 .dashboard {
   padding: 20px;
 }
@@ -70,5 +75,7 @@
 
 /* Ajuste de altura da tabela para corresponder à altura do gráfico */
 .card-body table {
-  height: calc(100% - 40px); /* 40px é uma estimativa da altura do cabeçalho do card */
+  height: calc(
+    100% - 40px
+  ); /* 40px é uma estimativa da altura do cabeçalho do card */
 }
