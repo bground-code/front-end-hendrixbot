@@ -1,0 +1,74 @@
+.dashboard {
+  padding: 20px;
+}
+
+.card {
+  border-radius: 0.35rem;
+}
+
+.card .card-body {
+  padding: 1.25rem;
+  height: 100%; /* Definindo a altura do card body como 100% */
+}
+
+.card .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.card .col-auto {
+  padding-right: 0;
+}
+
+.card .col {
+  padding-left: 0;
+}
+
+.card .text-xs {
+  font-size: 0.85rem;
+}
+
+.card .text-primary {
+  color: #4e73df !important;
+}
+
+.card .text-success {
+  color: #1cc88a !important;
+}
+
+.card .text-info {
+  color: #36b9cc !important;
+}
+
+.card .text-warning {
+  color: #f6c23e !important;
+}
+
+.card .text-gray-800 {
+  color: #5a5c69 !important;
+}
+
+.card .fa-2x {
+  font-size: 2em;
+}
+
+.progress-bar {
+  height: 1rem;
+}
+
+.progress-sm {
+  height: 1rem !important;
+}
+
+.bg-info {
+  background-color: #36b9cc !important;
+}
+
+.bg-primary {
+  background-color: #4e73df !important;
+}
+
+/* Ajuste de altura da tabela para corresponder à altura do gráfico */
+.card-body table {
+  height: calc(100% - 40px); /* 40px é uma estimativa da altura do cabeçalho do card */
+}

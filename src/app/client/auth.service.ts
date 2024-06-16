@@ -18,4 +18,8 @@ export class AuthService {
     }
     return false;
   }
+  logout() {
+    localStorage.removeItem('dadosUsuario');
+    localStorage.removeItem('accessToken');
+  }
 }

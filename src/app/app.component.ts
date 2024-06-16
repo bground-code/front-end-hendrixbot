@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Usuario } from './models/usuario';
 import { UsuarioService } from './client/usuario.service';
-import { StateService } from './shared/state.service';
+import { StateService } from './client/state.service';
 import { faGear, faHome, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -13,7 +13,7 @@ import { faGear, faHome, faUser } from '@fortawesome/free-solid-svg-icons';
 export class AppComponent {
   title = 'Hendrix-Bot';
   usuario = new Usuario();
-  showSidebar: boolean = true;
+  showSidebarHeader: boolean = true;
   isSideBarChecked = false;
 
   constructor(
@@ -23,7 +23,8 @@ export class AppComponent {
   ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.showSidebar = !event.url.includes('/login');
+        const isLoginPage = event.url.includes('/login');
+        this.showSidebarHeader = !isLoginPage;
       }
     });
   }

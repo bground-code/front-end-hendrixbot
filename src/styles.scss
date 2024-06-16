@@ -28,3 +28,51 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+.mat-mdc-dialog-container .mdc-dialog__surface{
+  z-index: 99999;
+}
+/* Estilo para as imagens do bot e do usuário */
+.bot-img, .user-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Estilo para a resposta do bot e do usuário */
+.response-text {
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 15px;
+  background-color: #f0f0f0;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.bot-response .response-text {
+  background-color: #e6f7ff;
+  transform: translateX(-100px);
+}
+
+.user-response .response-text {
+  background-color: #fef3c7;
+  transform: translateX(100px);
+}
+
+/* Animações */
+.dialogo-exemplo .bot-response .response-text,
+.dialogo-exemplo .user-response .response-text {
+  animation: slideIn 0.5s forwards;
+}
+
+@keyframes slideIn {
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Estilo adicional para hover */
+.bot-img:hover, .user-img:hover {
+  transform: scale(1.1);
+}
+
+

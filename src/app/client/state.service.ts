@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class StateService {
-  private isSideBarChecked = new BehaviorSubject<boolean>(false);
+  public isSideBarChecked = new BehaviorSubject<boolean>(false);
   isSideBarChecked$ = this.isSideBarChecked.asObservable();
 
   setSideBarChecked(value: boolean) {

@@ -10,6 +10,7 @@ import {ChatComponent} from "./components/chat/chat.component";
 import {HistoricoComponent} from "./components/historico/historico.component";
 import {VisualizarConversaComponent} from "./components/historico/visualizar.component";
 import {AtendimentoComponent} from "./components/atendimento/atendimento.component";
+import {DashboardComponent} from "./dashboard/dashboard.component";
 
 
 const routes: Routes = [
@@ -21,11 +22,24 @@ const routes: Routes = [
   {path: 'historico', component: HistoricoComponent},
   {path: 'visualizar-conversa/:sessionId', component: VisualizarConversaComponent},
   {path: 'atendimento', component: AtendimentoComponent},
+  {path: 'relatorios', component: DashboardComponent},
+
+  { path: 'cadastro-usuario', component: CadastroUsuarioComponent },
+  { path: 'intents', component: IntentsComponent },
+  { path: 'historia', component: StoryComponent },
+  { path: 'nlu', component: NluComponent },
+  { path: 'chat', component: ChatComponent },
+  { path: 'historico', component: HistoricoComponent },
+  {
+    path: 'visualizar-conversa/:sessionId',
+    component: VisualizarConversaComponent,
+  },
+  { path: 'atendimento', component: AtendimentoComponent },
 
 
   {
     path: '',
-    component: HomeComponent,
+    component: ChatComponent,
   },
   {
     path: 'login',
@@ -41,5 +55,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}
