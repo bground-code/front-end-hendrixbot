@@ -44,6 +44,8 @@ import { MatButton } from '@angular/material/button';
   styleUrls: ['./cadastro-usuario.component.scss'],
 })
 export class CadastroUsuarioComponent implements OnInit {
+  isPanelOpen: boolean = false;
+
   nome: string = '';
   email: string = '';
   cpf: string = '';
@@ -52,7 +54,7 @@ export class CadastroUsuarioComponent implements OnInit {
   confirmarSenha: string = '';
   contato: string = '';
   responsavel1: string = '';
-  papelUsuario: string = '';
+  papelUsuario: string = 'ALUNO';
   alunos: any[] = [];
   dropdownStates: { [key: number]: boolean } = {};
   totalElements: number = 100;
@@ -108,6 +110,13 @@ export class CadastroUsuarioComponent implements OnInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
+  openPanel() {
+    this.isPanelOpen = true;
+  }
+
+  closePanel() {
+    this.isPanelOpen = false;
+  }
 
   handleSalvar(): void {
     const alunoData = {
@@ -127,6 +136,7 @@ export class CadastroUsuarioComponent implements OnInit {
         console.log('Aluno cadastrado com sucesso:', response);
         this.buscarAlunos();
         this.toastrService.success('Aluno cadastrado com sucesso!');
+        this.closePanel();
       },
       (error) => {
         console.error('Erro ao cadastrar aluno:', error);
