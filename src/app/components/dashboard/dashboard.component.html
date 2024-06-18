@@ -1,130 +1,110 @@
-<div class="dashboard content">
-  <div class="row">
-    <div class="col-md-3 mb-4">
-      <div class="card border-left-primary shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div
-                class="text-xs font-weight-bold text-primary text-uppercase mb-1"
-              >
-                Total Conversas Leads
-              </div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">
-                {{ totalConversasLeads }}
-              </div>
+<div class="dashboard content p-4">
+  <div class="flex flex-col lg:flex-row justify-between gap-4">
+    <div class="mb-4 flex-1">
+      <div class="bg-white border-0 shadow-sm rounded-lg h-full p-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="text-lg lg:text-2xl text-purple-700 uppercase mb-1">
+              Total Conversas Leads
             </div>
-            <div class="col-auto">
-              <i class="fas fa-calendar fa-2x text-gray-300"></i>
+            <div class="text-lg lg:text-2xl text-zinc-800">
+              {{ totalConversasLeads }}
             </div>
+          </div>
+          <div class="text-zinc-300">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="size-6"
+            >
+              <path
+                d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z"
+              />
+            </svg>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-3 mb-4">
-      <div class="card border-left-success shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div
-                class="text-xs font-weight-bold text-success text-uppercase mb-1"
-              >
-                Total Conversas Alunos
-              </div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">
-                {{ totalConversasAlunos }}
-              </div>
+    <div class="mb-4 flex-1">
+      <div class="bg-white border-0 shadow-sm rounded-lg h-full p-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="text-lg lg:text-2xl text-pink-700 uppercase mb-1">
+              Total Conversas Alunos
             </div>
-            <div class="col-auto">
-              <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+            <div class="text-lg lg:text-2xl text-zinc-800">
+              {{ totalConversasAlunos }}
             </div>
+          </div>
+          <div class="text-zinc-300">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="size-6"
+            >
+              <path
+                d="M4.5 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM14.25 8.625a3.375 3.375 0 1 1 6.75 0 3.375 3.375 0 0 1-6.75 0ZM1.5 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM17.25 19.128l-.001.144a2.25 2.25 0 0 1-.233.96 10.088 10.088 0 0 0 5.06-1.01.75.75 0 0 0 .42-.643 4.875 4.875 0 0 0-6.957-4.611 8.586 8.586 0 0 1 1.71 5.157v.003Z"
+              />
+            </svg>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-3 mb-4">
-      <div class="card border-left-info shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div
-                class="text-xs font-weight-bold text-info text-uppercase mb-1"
-              >
-                Tasks
-              </div>
-              <div class="row no-gutters align-items-center">
-                <div class="col-auto">
-                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                    50%
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="progress progress-sm mr-2">
-                    <div
-                      class="progress-bar bg-info"
-                      role="progressbar"
-                      style="width: 50%"
-                      aria-valuenow="50"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                </div>
-              </div>
+
+    <div class="mb-4 flex-1">
+      <div class="bg-white border-0 shadow-sm rounded-lg h-full p-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="text-lg lg:text-2xl text-teal-700 uppercase mb-1">
+              Conversas Ativas
             </div>
-            <div class="col-auto">
-              <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-            </div>
+            <div class="text-lg lg:text-2xl text-zinc-800">18</div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3 mb-4">
-      <div class="card border-left-warning shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div
-                class="text-xs font-weight-bold text-warning text-uppercase mb-1"
-              >
-                Pending Requests
-              </div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-comments fa-2x text-gray-300"></i>
-            </div>
+          <div class="text-zinc-300">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="size-6"
+            >
+              <path
+                d="M4.913 2.658c2.075-.27 4.19-.408 6.337-.408 2.147 0 4.262.139 6.337.408 1.922.25 3.291 1.861 3.405 3.727a4.403 4.403 0 0 0-1.032-.211 50.89 50.89 0 0 0-8.42 0c-2.358.196-4.04 2.19-4.04 4.434v4.286a4.47 4.47 0 0 0 2.433 3.984L7.28 21.53A.75.75 0 0 1 6 21v-4.03a48.527 48.527 0 0 1-1.087-.128C2.905 16.58 1.5 14.833 1.5 12.862V6.638c0-1.97 1.405-3.718 3.413-3.979Z"
+              />
+              <path
+                d="M15.75 7.5c-1.376 0-2.739.057-4.086.169C10.124 7.797 9 9.103 9 10.609v4.285c0 1.507 1.128 2.814 2.67 2.94 1.243.102 2.5.157 3.768.165l2.782 2.781a.75.75 0 0 0 1.28-.53v-2.39l.33-.026c1.542-.125 2.67-1.433 2.67-2.94v-4.286c0-1.505-1.125-2.811-2.664-2.94A49.392 49.392 0 0 0 15.75 7.5Z"
+              />
+            </svg>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-lg-8 mb-4">
-      <div class="card shadow mb-4">
+  <div class="flex flex-col md:flex-row gap-4">
+    <div class="md:flex-1 mb-4 md:mb-0">
+      <div class="card border-0 shadow-sm rounded-lg mb-4">
         <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">
-            Perguntas Mais Frequentes
-          </h6>
+          <h6 class="m-0 text-2xl font-normal">Perguntas Mais Frequentes</h6>
         </div>
-        <div class="card-body">
-          <table class="table table-bordered">
+        <div class="card-body overflow-auto">
+          <table class="table table-bordered table-auto w-full">
             <thead>
               <tr>
-                <th scope="col">Pergunta</th>
-                <th scope="col">Quantidade</th>
+                <th scope="col" class="text-xl font-medium">Pergunta</th>
+                <th scope="col" class="text-xl font-medium">Quantidade</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let pergunta of perguntasFrequentesArray">
-                <td>{{ pergunta.pergunta }}</td>
-                <td>{{ pergunta.quantidade }}</td>
+                <td class="text-xl">{{ pergunta.pergunta }}</td>
+                <td class="text-xl">{{ pergunta.quantidade }}</td>
               </tr>
             </tbody>
           </table>
           <nav>
-            <ul class="pagination justify-content-end">
+            <ul class="pagination justify-content-end text-xl">
               <li class="page-item" [class.disabled]="!previousPage">
                 <a
                   class="page-link"
@@ -146,14 +126,12 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-4 mb-4">
-      <div class="card shadow mb-4">
+    <div class="w-full md:w-1/3 flex-shrink-0 h-fit">
+      <div class="card border-0 shadow-sm rounded-lg mb-4">
         <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">
-            Total de Conversas Mês
-          </h6>
+          <h6 class="m-0 text-2xl font-normal">Total de Conversas Mês</h6>
         </div>
-        <div class="card-body">
+        <div class="card-body relative flex items-center justify-center">
           <canvas id="myPieChart"></canvas>
         </div>
       </div>

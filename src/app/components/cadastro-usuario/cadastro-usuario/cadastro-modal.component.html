@@ -1,9 +1,18 @@
-<div class="">
-  <div class="p-2" style="z-index: 99999">
-    <h3 class="tituloModal">Cadastrar Usuário:</h3>
-    <div class="form-group">
-      <label for="nome">Nome completo</label>
-      <input id="nome" class="form-control" type="text" [(ngModel)]="nome" />
+<div class="p-3">
+  <div class="p-2" style="z-index: 9999">
+    <h3 class="tituloModal font-sans text-4xl">Cadastrar Usuário:</h3>
+    <div class="form-group mt-1">
+      <label
+        for="nome"
+        class="block text-xl font-sans font-medium pb-1 text-zinc-800"
+        >Nome completo</label
+      >
+      <input
+        id="nome"
+        class="form-control text-xl font-sans mt-1 text-zinc-700"
+        type="text"
+        [(ngModel)]="nome"
+      />
     </div>
     <div class="form-group">
       <label for="email">E-mail</label>
@@ -85,9 +94,9 @@
       </label>
       </div>
     </div> -->
-    <div class="form-group">
+    <div class="form-group" align="right">
       <button
-        class="bg-purple-500 rounded-lg text-zinc-50 text-semibold text-xl py-3 px-4"
+        class="bg-purple-600 rounded-lg text-zinc-50 text-semibold text-xl py-3 px-4"
         (click)="handleSalvar()"
       >
         Salvar

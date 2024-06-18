@@ -20,7 +20,7 @@
 
 // Examples
 // We use those styles to show code examples, you should remove them in your application.
-@import "scss/examples";
+
 @import "scss/base";
 @import "scss/variables";
 
@@ -28,11 +28,12 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-.mat-mdc-dialog-container .mdc-dialog__surface{
+.mat-mdc-dialog-container .mdc-dialog__surface {
   z-index: 99999;
 }
 /* Estilo para as imagens do bot e do usuário */
-.bot-img, .user-img {
+.bot-img,
+.user-img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -71,8 +72,45 @@
 }
 
 /* Estilo adicional para hover */
-.bot-img:hover, .user-img:hover {
+.bot-img:hover,
+.user-img:hover {
   transform: scale(1.1);
 }
+/* Optional: Custom backdrop class */
+.custom-backdrop-class {
+  background: rgba(0, 0, 0, 0.5); // Semi-transparent black background
+  position: fixed; // Ensure it covers the entire viewport
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
 
+/* Center the dialog container */
+::ng-deep .mat-dialog-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 8px;
+}
 
+/* Ensure Angular Material dialog is centered */
+::ng-deep .cdk-overlay-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Ensure the overlay container covers the full viewport */
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Optional: Center the dialog with additional padding */
+::ng-deep .mat-dialog-container {
+  max-width: 80vw; // Constrain the dialog width
+  max-height: 80vh; // Constrain the dialog height
+  overflow: auto; // Scroll if content exceeds dialog size
+}

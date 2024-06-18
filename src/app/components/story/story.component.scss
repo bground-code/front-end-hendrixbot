@@ -1,6 +1,15 @@
+.content-story {
+  margin-top: 7rem;
+  height: calc(100vh - 7rem);
+}
+
+.modal {
+  border: none;
+}
+
 .container {
   max-width: 100%;
-  padding: 20px;
+  // padding: 20px;
 }
 // .header{
 //   margin-top: -18px;
@@ -66,7 +75,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  font-family: Arial, sans-serif;
+  // font-family: Arial, sans-serif;
 
   // .button-group {
   //   display: flex;
@@ -168,4 +177,9 @@
       }
     }
   }
+}
+
+.bot-img {
+  width: 32px;
+  height: 32px;
 }

@@ -1,4 +1,11 @@
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  HostListener,
+  AfterViewInit,
+  ElementRef,
+} from '@angular/core';
 import { AlunoService } from '../../../client/cadastro.aluno.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CadastromodalComponent } from './cadastromodal.component';
@@ -146,12 +153,16 @@ export class CadastroUsuarioComponent implements OnInit {
 
   openModal(): void {
     const dialogRef = this.dialog.open(CadastromodalComponent, {
-      width: '1000px',
+      width: '600px',
       position: {
         top: '-45%',
-        left: '30%',
+        left: '25%',
         transform: 'translate(-50%, -50%)',
       } as any,
+      hasBackdrop: true,
+      disableClose: true, // Disable closing on backdrop click
+      autoFocus: true, // Auto-focus the first form field
+      backdropClass: 'custom-backdrop-class', // Custom class for backdrop if needed
     });
 
     dialogRef.afterClosed().subscribe(() => {
