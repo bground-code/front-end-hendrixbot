@@ -76,6 +76,6 @@
 /* Ajuste de altura da tabela para corresponder à altura do gráfico */
 .card-body table {
   height: calc(
-    100% - 40px
+    100% - 7rem
   ); /* 40px é uma estimativa da altura do cabeçalho do card */
 }

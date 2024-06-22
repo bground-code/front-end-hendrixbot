@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StateService } from 'src/app/client/state.service';
 import { RouterLink } from '@angular/router';
@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/client/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   isSideBarChecked: boolean = false;
   isLoggedIn: boolean = false;
 
@@ -21,6 +21,7 @@ export class HeaderComponent {
     public stateService: StateService,
     public authService: AuthService,
     private router: Router,
+    private elRef: ElementRef,
   ) {}
 
   ngOnInit() {
@@ -30,11 +31,12 @@ export class HeaderComponent {
     this.isLoggedIn = this.authService.isLogado();
   }
 
-  // This method is called when the checkbox changes state
   onCheckboxChange(event: Event) {
     const isChecked = (event.target as HTMLInputElement).checked;
+
     this.stateService.setSideBarChecked(isChecked);
   }
+
   onToggleLogin() {
     if (this.isLoggedIn) {
       this.logout();
@@ -47,5 +49,14 @@ export class HeaderComponent {
     this.authService.logout();
     this.isLoggedIn = false;
     this.router.navigate(['/']);
+  }
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: MouseEvent) {
+    if (
+      this.isSideBarChecked &&
+      !this.elRef.nativeElement.contains(event.target)
+    ) {
+      this.stateService.setSideBarChecked(false); // Close the sidebar
+    }
   }
 }
