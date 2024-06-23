@@ -156,7 +156,7 @@ export class CadastroUsuarioComponent implements OnInit {
       width: '600px',
       position: {
         top: '-45%',
-        left: '25%',
+        left: '2%',
         transform: 'translate(-50%, -50%)',
       } as any,
       hasBackdrop: true,

@@ -44,6 +44,15 @@
   transition: 0.4s;
 }
 
+.menu-close__icon {
+  height: 3.25rem;
+  fill: #333;
+  transition: 0.4s;
+  cursor: pointer;
+  margin-right: 2rem;
+  margin-left: -2rem;
+}
+
 .logout__icon {
   fill: #333;
   transition: 0.4s;
@@ -51,6 +60,7 @@
 }
 
 .menu__icon:hover,
+.menu-close__icon:hover,
 .logout__icon:hover {
   fill: #9a7bb3;
 }
