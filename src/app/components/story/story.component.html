@@ -26,24 +26,23 @@
         <span class="ml-2 text-xl">Treinar</span>
       </button> -->
     </div>
-    <div class="tabs flex justify-center my-2">
-      <a routerLink="/historia" routerLinkActive="active">
-        <span
-          class="inline-flex items-center rounded-md bg-purple-300 px-3 py-2 text-2xl text-purple-800 ring-1 ring-inset ring-purple-900/10 hover:bg-purple-800 hover:text-purple-50"
-          >Diálogos</span
-        ></a
-      >
-
+    <div class="tabs flex justify-center my-2 space-x-2">
       <a routerLink="/nlu" routerLinkActive="active"
         ><span
-          class="inline-flex items-center rounded-md bg-zinc-50 px-3 py-2 text-2xl text-purple-800 ring-1 ring-inset ring-purple-700/10 hover:bg-purple-800 hover:text-purple-50 ml-2"
+          class="inline-flex items-center rounded-md bg-zinc-50 px-3 py-2 text-2xl text-purple-800 ring-1 ring-inset ring-purple-700/10 hover:bg-purple-800 hover:text-purple-50"
           >Perguntas</span
         ></a
       >
       <a routerLink="/intents" routerLinkActive="active"
         ><span
-          class="inline-flex items-center rounded-md bg-zinc-50 px-3 py-2 text-2xl text-purple-800 ring-1 ring-inset ring-purple-700/10 hover:bg-purple-800 hover:text-purple-50 ml-2"
+          class="inline-flex items-center rounded-md bg-zinc-50 px-3 py-2 text-2xl text-purple-800 ring-1 ring-inset ring-purple-700/10 hover:bg-purple-800 hover:text-purple-50"
           >Respostas</span
+        ></a
+      >
+      <a routerLink="/historia" routerLinkActive="active">
+        <span
+          class="inline-flex items-center rounded-md bg-purple-300 px-3 py-2 text-2xl text-purple-800 ring-1 ring-inset ring-purple-900/10 cursor-default"
+          >Diálogos</span
         ></a
       >
       <button
@@ -73,15 +72,15 @@
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-xl rounded-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">
+              <h1 class="modal-title text-3xl font-sans" id="exampleModalLabel">
                 Tutorial de diálogos, perguntas e respostas
               </h1>
               <button
                 type="button"
-                class="btn-close"
+                class="text-2xl"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
@@ -100,7 +99,7 @@
                     aria-controls="dialogos"
                     aria-selected="true"
                   >
-                    <h2>Diálogos</h2>
+                    <h2 class="font-sans text-2xl text-zinc-700">Diálogos</h2>
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
@@ -114,7 +113,7 @@
                     aria-controls="perguntas"
                     aria-selected="false"
                   >
-                    <h2>Perguntas</h2>
+                    <h2 class="font-sans text-2xl text-zinc-700">Perguntas</h2>
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
@@ -128,7 +127,7 @@
                     aria-controls="respostas"
                     aria-selected="false"
                   >
-                    <h2>Respostas</h2>
+                    <h2 class="font-sans text-2xl text-zinc-700">Respostas</h2>
                   </button>
                 </li>
               </ul>
@@ -139,27 +138,35 @@
                   role="tabpanel"
                   aria-labelledby="dialogos-tab"
                 >
-                  <h2 class="pt-4">
+                  <h2 class="pt-4 font-sans text-2xl text-zinc-700">
                     Aqui você pode visualizar e configurar os diálogos entre o
                     bot e os usuários. Os diálogos são compostos por perguntas e
                     respostas, formando uma interação entre os dois.
                     <br /><br />
-                    <b class="mt-2"
+                    <b class="mt-3 font-sans text-2xl text-zinc-700"
                       >Abaixo um exemplo de diálogo entre o Hendrix e o
                       Usuário:</b
                     >
                   </h2>
                   <div class="dialogo-exemplo mt-4">
-                    <div class="bot-response mb-3">
+                    <div
+                      class="bot-response mb-4 flex align-middle justify-start space-x-2"
+                    >
                       <img
-                        src="assets/images/favicon-32x32.png"
-                        class="bot-img h-2 w-2"
+                        src="../../../assets/images/logo-bot.svg"
+                        class="bot-img"
                       />
-                      <div class="response-text">
-                        <h2>Olá! Como posso ajudar você hoje?</h2>
+                      <div class="response-text p-2 bg-purple-200 rounded-xl">
+                        <h2
+                          class="font-sans text-2xl text-zinc-900 flex align-middle"
+                        >
+                          Olá! Como posso ajudar você hoje?
+                        </h2>
                       </div>
                     </div>
-                    <div class="user-response mb-3">
+                    <div
+                      class="user-response mb-4 flex align-middle justify-start space-x-2"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
@@ -173,17 +180,25 @@
                         />
                       </svg>
 
-                      <div class="response-text">
-                        <h2>Quais são seus horários de funcionamento?</h2>
+                      <div class="response-text p-2 bg-rose-100 rounded-xl">
+                        <h2
+                          class="font-sans text-2xl text-zinc-900 flex align-middle"
+                        >
+                          Quais são seus horários de funcionamento?
+                        </h2>
                       </div>
                     </div>
-                    <div class="bot-response mb-3">
+                    <div
+                      class="bot-response mb-4 flex align-middle justify-start space-x-2"
+                    >
                       <img
-                        src="assets/images/favicon-32x32.png"
+                        src="../../../assets/images/logo-bot.svg"
                         class="bot-img"
                       />
-                      <div class="response-text">
-                        <h2>
+                      <div class="response-text p-2 bg-purple-200 rounded-xl">
+                        <h2
+                          class="font-sans text-2xl text-zinc-900 flex align-middle"
+                        >
                           Estamos abertos de segunda a sexta, das 9h às 18h.
                         </h2>
                       </div>
@@ -196,24 +211,25 @@
                   role="tabpanel"
                   aria-labelledby="perguntas-tab"
                 >
-                  <h2 class="response-text mt-4">
+                  <h2 class="pt-4 font-sans text-2xl text-zinc-900">
                     Nesta seção, você pode cadastrar as perguntas que o bot pode
                     entender. As perguntas devem ser claras e objetivas para que
-                    o bot consiga responder adequadamente. <br /><b
-                      >Abaixo exemplos de perguntas que podem vir do usuário e
-                      podem ser cadastradas:</b
-                    >
+                    o bot consiga responder adequadamente.
+                  </h2>
+                  <h2 class="pt-2 font-sans font-bold text-2xl text-zinc-900">
+                    Abaixo exemplos de perguntas que podem vir do usuário e
+                    podem ser cadastradas:
                   </h2>
 
-                  <h2 class="response-text pt-4">
+                  <h2 class="pt-4 font-sans text-2xl text-zinc-800">
                     Quais são seus horários de funcionamento?
                   </h2>
                   <br />
-                  <h2 class="response-text pt-4">
+                  <h2 class="pt-3 font-sans text-2xl text-zinc-800">
                     Como posso rastrear meu pedido?
                   </h2>
                   <br />
-                  <h2 class="response-text pt-4">
+                  <h2 class="pt-3 font-sans text-2xl text-zinc-800">
                     Quais são as formas de pagamento aceitas?
                   </h2>
                 </div>
@@ -224,26 +240,34 @@
                   role="tabpanel"
                   aria-labelledby="respostas-tab"
                 >
-                  <h2 class="mt-4 response-text">
+                  <h2
+                    class="mb-4 response-text pt-4 font-sans text-2xl text-zinc-900"
+                  >
                     Aqui você pode configurar as respostas que o bot pode dar.
                     As respostas são configuradas com base nas perguntas que os
                     usuários fazem. Você pode adicionar, editar e remover
                     respostas conforme necessário.
                   </h2>
 
-                  <h2 class="response-text">
+                  <h2
+                    class="response-text pt-4 font-sans text-2xl text-zinc-700"
+                  >
                     <strong>Pergunta:</strong> Quais são seus horários de
                     funcionamento? <br />
                     <strong>Resposta:</strong> Estamos abertos de segunda a
                     sexta, das 9h às 18h.
                   </h2>
-                  <h2 class="response-text">
+                  <h2
+                    class="response-text pt-4 font-sans text-2xl text-zinc-700"
+                  >
                     <strong>Pergunta:</strong> Como posso rastrear meu pedido?
                     <br />
                     <strong>Resposta:</strong> Você pode rastrear seu pedido
                     usando o código de rastreamento enviado por email.
                   </h2>
-                  <h2 class="response-text">
+                  <h2
+                    class="response-text pt-4 font-sans text-2xl text-zinc-700"
+                  >
                     <strong>Pergunta:</strong> Quais são as formas de pagamento
                     aceitas? <br />
                     <strong>Resposta:</strong> Aceitamos cartão de crédito,
@@ -255,7 +279,7 @@
             <div class="modal-footer">
               <button
                 type="button"
-                class="btn btn-secondary"
+                class="rounded-lg bg-purple-600 flex justify-center items-center px-3 py-2 text-zinc-50 font-sans font-normal text-2xl"
                 data-bs-dismiss="modal"
               >
                 Sair

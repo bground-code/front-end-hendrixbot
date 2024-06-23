@@ -132,54 +132,53 @@
   }
 }
 
-.content {
-  flex: 1; // Faz com que a content ocupe todo o espaço disponível
-  overflow-y: auto; // Adiciona uma barra de rolagem se o conteúdo exceder a altura da área visível
-  padding: 20px;
-  background-color: #f5f5f5;
+// .content {
+//   flex: 1; // Faz com que a content ocupe todo o espaço disponível
+//   overflow-y: auto; // Adiciona uma barra de rolagem se o conteúdo exceder a altura da área visível
+//   padding: 20px;
+//   background-color: #f5f5f5;
 
-  .dialog-list {
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      background-color: white;
-      box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+//   .dialog-list {
+//     ul {
+//       list-style: none;
+//       padding: 0;
+//       margin: 0;
+//       background-color: white;
+//       box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 
-      li {
-        padding: 10px;
-        border-bottom: 1px solid #eee;
+//       li {
+//         padding: 10px;
+//         border-bottom: 1px solid #eee;
 
-        .dialog-name {
-          font-weight: bold;
-          color: #666;
+//         .dialog-name {
+//           font-weight: bold;
+//           color: #666;
 
-          .icon {
-            margin-right: 5px;
-          }
-        }
+//           .icon {
+//             margin-right: 5px;
+//           }
+//         }
 
-        .dialog-items {
-          margin-top: 5px;
+//         .dialog-items {
+//           margin-top: 5px;
 
-          span {
-            display: inline-block;
-            background-color: #e0e0e0;
-            padding: 5px;
-            margin-right: 5px;
-            border-radius: 4px;
+//           span {
+//             display: inline-block;
+//             background-color: #e0e0e0;
+//             padding: 5px;
+//             margin-right: 5px;
+//             border-radius: 4px;
 
-            .icon {
-              margin-right: 5px;
-            }
-          }
-        }
-      }
-    }
-  }
-}
+//             .icon {
+//               margin-right: 5px;
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 
 .bot-img {
-  width: 32px;
-  height: 32px;
+  width: 3rem;
 }
