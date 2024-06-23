@@ -4,6 +4,7 @@ import Chart from 'chart.js/auto';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgForOf } from '@angular/common';
+import { AtendimentoWebSocketService } from 'src/app/client/atendimentowebsocketservice';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +14,7 @@ import { NgForOf } from '@angular/common';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
+  activeSessions: string[] = [];
   totalConversasLeads: number = 0;
   totalConversasAlunos: number = 0;
   totalConversasMes: number = 0;
@@ -25,9 +27,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   previousPage: number | null = null;
   nextPage: number | null = null;
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(private dashboardService: DashboardService,  private atendimentoService: AtendimentoWebSocketService) {}
+
 
   ngOnInit(): void {
+    this.subscribeToActiveSessions();
     this.loadDashboardData();
   }
 
@@ -223,6 +227,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           },
         },
       },
+    });
+  }
+
+  subscribeToActiveSessions(): void {
+    this.atendimentoService.getActiveSessions$().subscribe((sessions) => {
+      this.activeSessions = sessions;
     });
   }
 }

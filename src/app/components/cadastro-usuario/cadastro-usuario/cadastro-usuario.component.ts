@@ -205,12 +205,14 @@ export class CadastroUsuarioComponent implements OnInit {
   nextPage() {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
+      this.buscarAlunos();
     }
   }
 
   previousPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
+      this.buscarAlunos();
     }
   }
 
