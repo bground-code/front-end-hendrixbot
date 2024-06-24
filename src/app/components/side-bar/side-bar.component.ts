@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
-import { StateService } from 'src/app/client/state.service';
+import { StateService } from 'src/assets/shared/state.service';
 import { RouterLink } from '@angular/router';
 
 @Component({

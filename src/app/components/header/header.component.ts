@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { StateService } from 'src/app/client/state.service';
+import { StateService } from 'src/assets/shared/state.service';
 import { RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
