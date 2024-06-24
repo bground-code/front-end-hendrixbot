@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 interface Conversa {
   userName: string;
   creationTime: string;
+  sessionId: string;
 }
 
 @Component({
@@ -27,6 +28,7 @@ export class HistoricoComponent implements OnInit {
     this.historicoService.getHistoricoConversas().subscribe((res: any[]) => {
       this.conversas = res.reverse().map((conversa) => {
         return {
+          sessionId: conversa.sessionId,
           userName: conversa.userName ? conversa.userName : 'Lead',
           creationTime: conversa.creationTime
             ? new Date(conversa.creationTime).toLocaleString('pt-BR', {

@@ -33,12 +33,15 @@
             <p class="mt-1 truncate text-lg leading-5 text-zinc-500">
               Data e Hora da Conversa: {{ conversa.creationTime }}
             </p>
+            <p class="mt-1 truncate text-lg leading-5 text-zinc-500">
+            Sessão: {{ conversa.sessionId }}
+            </p>
           </div>
         </div>
         <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
           <button
             class="bg-purple-500 rounded-lg text-zinc-50 text-semibold text-xl py-3 px-4"
-            (click)="verConversa(conversa.userName)"
+            (click)="verConversa(conversa.sessionId)"
           >
             Ver Conversa
           </button>
