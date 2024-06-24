@@ -21,12 +21,8 @@
               'bg-purple-400 text-white': message.type === 'sent'
             }"
             class="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg"
-            [ngClass]="{
-              'rounded-l-lg rounded-br-lg': message.type === 'sent',
-              'rounded-r-lg rounded-bl-lg': message.type === 'received'
-            }"
           >
-            <p class="text-lg">{{ message.text }}</p>
+            <p class="text-lg" [innerHTML]="message.text | safeHtml"></p>
           </div>
         </div>
         <div
