@@ -76,9 +76,9 @@
             >
               <p class="text-lg">{{ message.text }}</p>
             </div>
-            <span class="text-md text-zinc-500 leading-none">{{
+            <!-- <span class="text-md text-zinc-500 leading-none">{{
               message.sender === "user" ? "Você" : "Atendente"
-            }}</span>
+            }}</span> -->
           </div>
           <div
             *ngIf="message.sender === 'user'"

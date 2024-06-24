@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SpeechRecognitionService } from '../../client/speech-recognition.service';
+import {SafeHtmlPipe} from "./safehtml.component";
 
 @Component({
   selector: 'app-chat',
@@ -13,6 +14,7 @@ import { SpeechRecognitionService } from '../../client/speech-recognition.servic
   imports: [
     CommonModule,
     FormsModule,
+    SafeHtmlPipe,
   ],
 })
 export class ChatComponent implements OnInit, OnDestroy {
@@ -47,6 +49,7 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.isListening = false;
     };
   }
+
 
   sendMessage() {
     if (this.newMessage.trim()) {
