@@ -1,8 +1,8 @@
-<div class="bot-flow mt-0">
-  <header class="header bg-zinc-50 p-1">
+<div class="content-story bot-flow p-0">
+  <header class="header bg-zinc-50">
     <div class="button-group">
       <button
-        class="flex justify-center rounded-md bg-purple-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600 uppercase"
+        class="flex justify-center rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600 uppercase"
         (click)="openCreateDialog()"
       >
         <svg
@@ -17,33 +17,26 @@
             clip-rule="evenodd"
           />
         </svg>
-        <span class="ml-2 text-xl">Criar novo diálogo</span>
+        <span class="ml-2 text-xl flex items-center">Criar novo diálogo</span>
       </button>
-      <!-- <button
-        class="flex justify-center rounded-md bg-purple-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600 uppercase"
-        (click)="trainModel()"
-      >
-        <span class="ml-2 text-xl">Treinar</span>
-      </button> -->
     </div>
-    <div class="tabs flex justify-center my-2">
-      <a routerLink="/historia" routerLinkActive="active">
-        <span
-          class="inline-flex items-center rounded-md bg-purple-300 px-3 py-2 text-2xl text-purple-800 ring-1 ring-inset ring-purple-900/10 hover:bg-purple-800 hover:text-purple-50"
-          >Diálogos</span
-        ></a
-      >
-
+    <div class="tabs flex justify-center my-2 space-x-2">
       <a routerLink="/nlu" routerLinkActive="active"
         ><span
-          class="inline-flex items-center rounded-md bg-zinc-50 px-3 py-2 text-2xl text-purple-800 ring-1 ring-inset ring-purple-700/10 hover:bg-purple-800 hover:text-purple-50 ml-2"
+          class="inline-flex items-center rounded-md bg-zinc-50 px-3 py-2 text-2xl text-purple-800 ring-1 ring-inset ring-purple-700/10 hover:bg-purple-800 hover:text-purple-50"
           >Perguntas</span
         ></a
       >
       <a routerLink="/intents" routerLinkActive="active"
         ><span
-          class="inline-flex items-center rounded-md bg-zinc-50 px-3 py-2 text-2xl text-purple-800 ring-1 ring-inset ring-purple-700/10 hover:bg-purple-800 hover:text-purple-50 ml-2"
+          class="inline-flex items-center rounded-md bg-zinc-50 px-3 py-2 text-2xl text-purple-800 ring-1 ring-inset ring-purple-700/10 hover:bg-purple-800 hover:text-purple-50"
           >Respostas</span
+        ></a
+      >
+      <a routerLink="/historia" routerLinkActive="active">
+        <span
+          class="inline-flex items-center rounded-md bg-purple-300 px-3 py-2 text-2xl text-purple-800 ring-1 ring-inset ring-purple-900/10 cursor-default"
+          >Diálogos</span
         ></a
       >
       <button
@@ -65,7 +58,7 @@
         </svg>
       </button>
       <div
-        class="modal fade text-xl"
+        class="modal fade text-xl border-0 rounded-lg"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
         id="exampleModal"
@@ -73,10 +66,10 @@
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-xl rounded-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">
+              <h1 class="modal-title text-3xl font-sans" id="exampleModalLabel">
                 Tutorial de diálogos, perguntas e respostas
               </h1>
               <button
@@ -100,7 +93,7 @@
                     aria-controls="dialogos"
                     aria-selected="true"
                   >
-                    <h2>Diálogos</h2>
+                    <h2 class="font-sans text-2xl text-zinc-700">Diálogos</h2>
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
@@ -114,7 +107,7 @@
                     aria-controls="perguntas"
                     aria-selected="false"
                   >
-                    <h2>Perguntas</h2>
+                    <h2 class="font-sans text-2xl text-zinc-700">Perguntas</h2>
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
@@ -128,7 +121,7 @@
                     aria-controls="respostas"
                     aria-selected="false"
                   >
-                    <h2>Respostas</h2>
+                    <h2 class="font-sans text-2xl text-zinc-700">Respostas</h2>
                   </button>
                 </li>
               </ul>
@@ -139,50 +132,67 @@
                   role="tabpanel"
                   aria-labelledby="dialogos-tab"
                 >
-                  <h2 class="pt-4">
+                  <h2 class="pt-4 font-sans text-2xl text-zinc-700">
                     Aqui você pode visualizar e configurar os diálogos entre o
                     bot e os usuários. Os diálogos são compostos por perguntas e
                     respostas, formando uma interação entre os dois.
                     <br /><br />
-                    <b class="mt-2"
+                    <b class="mt-3 font-sans text-2xl text-zinc-700"
                       >Abaixo um exemplo de diálogo entre o Hendrix e o
                       Usuário:</b
                     >
                   </h2>
                   <div class="dialogo-exemplo mt-4">
-                    <div class="bot-response mb-3">
+                    <div
+                      class="bot-response mb-4 flex align-middle justify-start space-x-2"
+                    >
                       <img
-                        src="assets/images/favicon-32x32.png"
+                        src="../../../assets/images/logo-bot.svg"
                         class="bot-img"
                       />
-                      <div class="response-text">
-                        <h2>Olá! Como posso ajudar você hoje?</h2>
+                      <div class="response-text p-2 bg-purple-200 rounded-xl">
+                        <h2
+                          class="font-sans text-2xl text-zinc-900 flex align-middle"
+                        >
+                          Olá! Como posso ajudar você hoje?
+                        </h2>
                       </div>
                     </div>
-                    <div class="user-response mb-3">
+                    <div
+                      class="user-response mb-4 flex align-middle justify-start space-x-2"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        width="30"
-                        height="30"
-                        fill="currentColor"
-                        class="bi bi-person user-img"
-                        viewBox="0 0 16 16"
+                        viewBox="0 0 24 24"
+                        fill=""
+                        class="bot-img fill-zinc-800"
                       >
                         <path
-                          d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"
+                          fill-rule="evenodd"
+                          d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+                          clip-rule="evenodd"
                         />
                       </svg>
-                      <div class="response-text">
-                        <h2>Quais são seus horários de funcionamento?</h2>
+
+                      <div class="response-text p-2 bg-rose-100 rounded-xl">
+                        <h2
+                          class="font-sans text-2xl text-zinc-900 flex align-middle"
+                        >
+                          Quais são seus horários de funcionamento?
+                        </h2>
                       </div>
                     </div>
-                    <div class="bot-response mb-3">
+                    <div
+                      class="bot-response mb-4 flex align-middle justify-start space-x-2"
+                    >
                       <img
-                        src="assets/images/favicon-32x32.png"
+                        src="../../../assets/images/logo-bot.svg"
                         class="bot-img"
                       />
-                      <div class="response-text">
-                        <h2>
+                      <div class="response-text p-2 bg-purple-200 rounded-xl">
+                        <h2
+                          class="font-sans text-2xl text-zinc-900 flex align-middle"
+                        >
                           Estamos abertos de segunda a sexta, das 9h às 18h.
                         </h2>
                       </div>
@@ -195,24 +205,25 @@
                   role="tabpanel"
                   aria-labelledby="perguntas-tab"
                 >
-                  <h2 class="response-text mt-4">
+                  <h2 class="pt-4 font-sans text-2xl text-zinc-900">
                     Nesta seção, você pode cadastrar as perguntas que o bot pode
                     entender. As perguntas devem ser claras e objetivas para que
-                    o bot consiga responder adequadamente. <br /><b
-                      >Abaixo exemplos de perguntas que podem vir do usuário e
-                      podem ser cadastradas:</b
-                    >
+                    o bot consiga responder adequadamente.
+                  </h2>
+                  <h2 class="pt-2 font-sans font-bold text-2xl text-zinc-900">
+                    Abaixo exemplos de perguntas que podem vir do usuário e
+                    podem ser cadastradas:
                   </h2>
 
-                  <h2 class="response-text pt-4">
+                  <h2 class="pt-4 font-sans text-2xl text-zinc-800">
                     Quais são seus horários de funcionamento?
                   </h2>
                   <br />
-                  <h2 class="response-text pt-4">
+                  <h2 class="pt-3 font-sans text-2xl text-zinc-800">
                     Como posso rastrear meu pedido?
                   </h2>
                   <br />
-                  <h2 class="response-text pt-4">
+                  <h2 class="pt-3 font-sans text-2xl text-zinc-800">
                     Quais são as formas de pagamento aceitas?
                   </h2>
                 </div>
@@ -223,26 +234,34 @@
                   role="tabpanel"
                   aria-labelledby="respostas-tab"
                 >
-                  <h2 class="mt-4 response-text">
+                  <h2
+                    class="mb-4 response-text pt-4 font-sans text-2xl text-zinc-900"
+                  >
                     Aqui você pode configurar as respostas que o bot pode dar.
                     As respostas são configuradas com base nas perguntas que os
                     usuários fazem. Você pode adicionar, editar e remover
                     respostas conforme necessário.
                   </h2>
 
-                  <h2 class="response-text">
+                  <h2
+                    class="response-text pt-4 font-sans text-2xl text-zinc-700"
+                  >
                     <strong>Pergunta:</strong> Quais são seus horários de
                     funcionamento? <br />
                     <strong>Resposta:</strong> Estamos abertos de segunda a
                     sexta, das 9h às 18h.
                   </h2>
-                  <h2 class="response-text">
+                  <h2
+                    class="response-text pt-4 font-sans text-2xl text-zinc-700"
+                  >
                     <strong>Pergunta:</strong> Como posso rastrear meu pedido?
                     <br />
                     <strong>Resposta:</strong> Você pode rastrear seu pedido
                     usando o código de rastreamento enviado por email.
                   </h2>
-                  <h2 class="response-text">
+                  <h2
+                    class="response-text pt-4 font-sans text-2xl text-zinc-700"
+                  >
                     <strong>Pergunta:</strong> Quais são as formas de pagamento
                     aceitas? <br />
                     <strong>Resposta:</strong> Aceitamos cartão de crédito,
@@ -254,7 +273,7 @@
             <div class="modal-footer">
               <button
                 type="button"
-                class="btn btn-secondary"
+                class="rounded-lg bg-purple-600 flex justify-center items-center px-3 py-2 text-zinc-50 font-sans font-normal text-2xl"
                 data-bs-dismiss="modal"
               >
                 Sair
@@ -280,10 +299,45 @@
           *ngFor="let story of stories; let i = index"
           class="dialog-card rounded"
         >
-          <div class="card-header">
-            <h3 class="text-xl font-semibold leading-7 text-zinc-800">
+          <div class="card-header flex items-center justify-center">
+            <h3 class="text-xl font-semibold text-zinc-800">
               Diálogo: {{ story.name }}
             </h3>
+
+            <div class="flex flex-row justify-center items-center space-x-4">
+              <button
+                class="rounded-3xl p-2 bg-teal-600 flex justify-center items-center text-zinc-800"
+                (click)="openEditDialog(story)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="size-6"
+                >
+                  <path
+                    d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32L19.513 8.2Z"
+                  />
+                </svg>
+              </button>
+              <button
+                class="rounded-3xl p-2 flex bg-rose-600 justify-center items-center text-zinc-800"
+                (click)="deleteStory(story.id)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="size-6"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
           <div class="card-body">
             <!-- Container Scrollable para perguntas e respostas -->
@@ -327,23 +381,6 @@
                   </select>
                 </div>
               </div>
-            </div>
-            <!-- Botões de ação -->
-            <div
-              class="flex flex-row justify-center items-center space-x-4 mt-4"
-            >
-              <button
-                class="rounded bg-teal-600 flex justify-center items-center px-3 py-2 text-lg text-white"
-                (click)="openEditDialog(story)"
-              >
-                Editar
-              </button>
-              <button
-                class="rounded bg-rose-500 flex justify-center items-center px-3 py-2 text-lg text-white"
-                (click)="deleteStory(story.id)"
-              >
-                Deletar
-              </button>
             </div>
           </div>
         </div>

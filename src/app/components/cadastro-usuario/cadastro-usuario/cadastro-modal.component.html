@@ -1,28 +1,54 @@
-<div class="">
-  <div class="p-2" style="z-index: 99999">
-    <h3 class="tituloModal">Cadastrar Usuário:</h3>
-    <div class="form-group">
-      <label for="nome">Nome completo</label>
-      <input id="nome" class="form-control" type="text" [(ngModel)]="nome" />
+<div class="p-3">
+  <div class="p-2" style="z-index: 9999">
+    <h3 class="tituloModal font-sans text-4xl">Cadastrar Usuário:</h3>
+    <div class="form-group mt-1">
+      <label
+        for="nome"
+        class="block text-2xl font-sans font-medium pb-1 text-zinc-800"
+        >Nome completo</label
+      >
+      <input
+        id="nome"
+        class="form-control text-2xl font-sans mt-1 text-zinc-700 py-2"
+        type="text"
+        [(ngModel)]="nome"
+      />
     </div>
     <div class="form-group">
-      <label for="email">E-mail</label>
-      <input id="email" class="form-control" type="email" [(ngModel)]="email" />
+      <label
+        for="email"
+        class="block text-2xl font-sans font-medium pb-1 text-zinc-800"
+        >E-mail</label
+      >
+      <input
+        id="email"
+        class="form-control text-2xl font-sans mt-1 text-zinc-700 py-2"
+        type="email"
+        [(ngModel)]="email"
+      />
     </div>
     <div class="form-group">
-      <label for="senha">Senha</label>
+      <label
+        for="senha"
+        class="block text-2xl font-sans font-medium pb-1 text-zinc-800"
+        >Senha</label
+      >
       <input
         id="senha"
-        class="form-control"
+        class="form-control text-2xl font-sans mt-1 text-zinc-700 py-2"
         type="password"
         [(ngModel)]="senha"
       />
     </div>
     <div class="form-group">
-      <label for="confirmarSenha">Confirme a senha</label>
+      <label
+        for="confirmarSenha"
+        class="block text-2xl font-sans font-medium pb-1 text-zinc-800"
+        >Confirme a senha</label
+      >
       <input
         id="confirmarSenha"
-        class="form-control"
+        class="form-control text-2xl font-sans mt-1 text-zinc-700 py-2"
         type="password"
         [(ngModel)]="confirmarSenha"
       />
@@ -30,16 +56,29 @@
     <div class="row">
       <div class="col-6">
         <div class="form-group">
-          <label for="cpf">CPF</label>
-          <input id="cpf" class="form-control" type="text" [(ngModel)]="cpf" />
+          <label
+            for="cpf"
+            class="block text-2xl font-sans font-medium pb-1 text-zinc-800"
+            >CPF</label
+          >
+          <input
+            id="cpf"
+            class="form-control text-2xl font-sans mt-1 text-zinc-700 py-2"
+            type="text"
+            [(ngModel)]="cpf"
+          />
         </div>
       </div>
       <div class="col-6">
         <div class="form-group">
-          <label for="dataNascimento">Data de nascimento</label>
+          <label
+            for="dataNascimento"
+            class="block text-2xl font-sans font-medium pb-1 text-zinc-800"
+            >Data de nascimento</label
+          >
           <input
             id="dataNascimento"
-            class="form-control"
+            class="form-control text-2xl font-sans mt-1 text-zinc-700 py-2"
             type="date"
             [(ngModel)]="dataNascimento"
           />
@@ -47,47 +86,35 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="contato">Contato</label>
+      <label
+        for="contato"
+        class="block text-2xl font-sans font-medium pb-1 text-zinc-800"
+        >Contato</label
+      >
       <input
         id="contato"
-        class="form-control"
+        class="form-control text-2xl font-sans mt-1 text-zinc-700 py-2"
         type="text"
         [(ngModel)]="contato"
       />
     </div>
     <div class="form-group">
-      <label for="responsavel1">Responsável</label>
+      <label
+        for="responsavel1"
+        class="block text-2xl font-sans font-medium pb-1 text-zinc-800"
+        >Responsável</label
+      >
       <input
         id="responsavel1"
-        class="form-control"
+        class="form-control text-2xl font-sans mt-1 text-zinc-700 py-2"
         type="text"
         [(ngModel)]="responsavel1"
       />
     </div>
-    <!-- <div class="form-group" id="papelUsuario">
-      <label for="papelUsuario">Papel do Usuário:</label>
-      <div>
-        <label>
-          <input
-            type="radio"
-            name="papelUsuario"
-            [(ngModel)]="papelUsuario"
-            value="ALUNO"
-            
-          />
-          Aluno
-        </label>
-        <label>
-        <input type="radio" name="papelUsuario" [(ngModel)]="papelUsuario" value="GERENTE"> Gerente
-      </label>
-      <label>
-        <input type="radio" name="papelUsuario" [(ngModel)]="papelUsuario" value="ADMIN"> Admin
-      </label>
-      </div>
-    </div> -->
-    <div class="form-group" align="right">
+
+    <div class="form-group mt-2" align="right">
       <button
-        class="bg-purple-500 rounded-lg text-zinc-50 text-semibold text-xl py-3 px-4"
+        class="bg-purple-600 rounded-lg text-zinc-50 text-semibold text-xl py-3 px-4"
         (click)="handleSalvar()"
       >
         Salvar
