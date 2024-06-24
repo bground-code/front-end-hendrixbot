@@ -45,5 +45,30 @@
         </div>
       </li>
     </ul>
+    <div class="flex items-center justify-between mb-2 py-4">
+      <p
+        class="block font-sans text-2xl antialiased font-normal leading-normal text-blue-gray-900"
+      >
+        <!-- Página {{ currentPage }} de {{ totalPages }} -->
+      </p>
+      <div class="flex gap-2">
+        <button
+          class="select-none rounded-lg border border-zinc-900 py-2 px-4 text-center align-middle font-sans text-2xl capitalize text-zinc-900 transition-all hover:opacity-75 focus:ring focus:ring-zinc-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          type="button"
+        >
+          <!-- (click)="previousPage()"
+          [disabled]="currentPage === 1" -->
+          Anterior
+        </button>
+        <button
+          class="select-none rounded-lg border py-2 px-4 text-center align-middle font-sans text-2xl capitalize text-zinc-900 transition-all hover:opacity-75 focus:ring focus:ring-zinc-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          type="button"
+        >
+          <!-- (click)="nextPage()"
+          [disabled]="currentPage === totalPages" -->
+          Próxima
+        </button>
+      </div>
+    </div>
   </div>
 </div>

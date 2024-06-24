@@ -11,23 +11,34 @@ interface Conversa {
 @Component({
   selector: 'app-historico',
   templateUrl: './historico.component.html',
-  styleUrls: ['./historico.component.scss']
+  styleUrls: ['./historico.component.scss'],
 })
 export class HistoricoComponent implements OnInit {
   conversas: Conversa[] = [];
   filteredConversas: Conversa[] = [];
   searchTerm: string = '';
 
-  constructor(private historicoService: HistoricoService, private router: Router) { }
+  constructor(
+    private historicoService: HistoricoService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.historicoService.getHistoricoConversas().subscribe((res: any[]) => {
-      this.conversas = res.reverse().map(conversa => {
+      this.conversas = res.reverse().map((conversa) => {
         return {
           userName: conversa.userName ? conversa.userName : 'Lead',
-          creationTime: conversa.creationTime ? new Date(conversa.creationTime).toLocaleString('pt-BR', {
-            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit'
-          }) : 'Data não disponível',
+          creationTime: conversa.creationTime
+            ? new Date(conversa.creationTime).toLocaleString('pt-BR', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+              })
+            : 'Data não disponível',
         };
       });
       this.filteredConversas = this.conversas;
@@ -38,8 +49,8 @@ export class HistoricoComponent implements OnInit {
     if (this.searchTerm.trim() === '') {
       this.filteredConversas = this.conversas;
     } else {
-      this.filteredConversas = this.conversas.filter(conversa =>
-        conversa.userName.toLowerCase().includes(this.searchTerm.toLowerCase())
+      this.filteredConversas = this.conversas.filter((conversa) =>
+        conversa.userName.toLowerCase().includes(this.searchTerm.toLowerCase()),
       );
     }
   }
