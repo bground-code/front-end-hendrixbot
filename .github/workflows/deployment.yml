@@ -1,0 +1,68 @@
+name: Build and Push Angular Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout do código-fonte
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Instalação do Node.js e Angular CLI
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies and Angular CLI
+        run: |
+          npm install
+          npm install -g @angular/cli
+
+      # 3. Build do projeto Angular
+      - name: Build Angular project
+        run: ng build --configuration production
+
+      # 4. Configuração do Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # 5. Login no Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # 6. Build e Push da Imagem Docker com Tag Única
+      - name: Build and push Docker image
+        run: |
+          NEW_TAG=$(date +%Y%m%d%H%M%S) # Gera uma tag com timestamp
+          docker build -t caiquelacerda15/front-end-hendrixbot:${NEW_TAG} .
+          docker push caiquelacerda15/front-end-hendrixbot:${NEW_TAG}
+          echo "NEW_TAG=${NEW_TAG}" >> $GITHUB_ENV
+
+      # 7. Atualiza o deployment.yaml no Repositório ArgoCD Privado
+      - name: Update deployment.yaml in ArgoCD Repo
+        env:
+          ARGOCD_REPO_TOKEN: ${{ secrets.ARGOCD_REPO_TOKEN }}
+        run: |
+          # Clona o repositório ArgoCD privado usando o token
+          git clone https://${ARGOCD_REPO_TOKEN}@github.com/bground-code/argo-cd.git
+          cd argo-cd/base/deployment/angular-app
+          
+          # Atualiza a tag da imagem no deployment.yaml
+          sed -i "s|image: caiquelacerda15/front-end-hendrixbot:.*|image: caiquelacerda15/front-end-hendrixbot:${NEW_TAG}|" deployment.yaml
+          
+          # Configura o Git e faz o commit
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add deployment.yaml
+          git commit -m "Update Angular image to ${NEW_TAG}"
+          git push https://${ARGOCD_REPO_TOKEN}@github.com/bground-code/argo-cd.git
