@@ -29,4 +29,4 @@ jobs:
 
       - name: Sync Angular Application
         run: |
-          argocd app sync my-angular-app
+          argocd app sync angular-app
