@@ -32,10 +32,11 @@ import {
 } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import { faGear, faHome, faUser } from '@fortawesome/free-solid-svg-icons';
-
+import { MatDialogModule } from '@angular/material/dialog';
 import { VisualizarConversaComponent } from './components/historico/visualizar.component';
 import { HistoricoComponent } from './components/historico/historico.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
+import { CadastromodalComponent } from './components/cadastro-usuario/cadastro-usuario/cadastromodal.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,8 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
     CardHeaderComponent,
     HeaderComponent,
     SideBarComponent,
+    MatDialogModule,
+    CadastromodalComponent,
   ],
   providers: [
     provideAnimations(),

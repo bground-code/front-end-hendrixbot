@@ -99,11 +99,19 @@ export class AtendimentoComponent implements OnInit {
         mappedAtendenteSessionId === this.atendenteSessionId &&
         message.text
       ) {
-        this.messages.push(message);
-        localStorage.setItem(
-          'atendimentoMessages',
-          JSON.stringify(this.messages),
-        );
+        // Adicionar logs de depuração
+        console.log("Mensagem recebida:", message);
+
+        // Verificar se a mensagem já existe antes de adicionar
+        if (!this.messages.some(m => m.text === message.text && m.sender === message.sender && m.sessionId === message.sessionId)) {
+          this.messages.push(message);
+          localStorage.setItem(
+            'atendimentoMessages',
+            JSON.stringify(this.messages),
+          );
+        } else {
+          console.log("Mensagem duplicada detectada e ignorada:", message);
+        }
       }
     });
   }

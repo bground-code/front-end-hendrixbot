@@ -1,39 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 import { IntentsService } from '../../client/intents.service';
-import { ToastrService } from "ngx-toastr";
-import { CommonModule } from "@angular/common";
+import { ToastrService } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { MatCard, MatCardTitle } from "@angular/material/card";
-import { MatList, MatListItem } from "@angular/material/list";
-import { MatLine } from "@angular/material/core";
-import { MatButton } from "@angular/material/button";
+import { MatCard, MatCardTitle } from '@angular/material/card';
+import { MatList, MatListItem } from '@angular/material/list';
+import { MatLine } from '@angular/material/core';
+import { MatButton } from '@angular/material/button';
 import { NluData } from '../../models/nlu';
-import { RouterLink, RouterLinkActive } from "@angular/router";
-import { FormsModule } from "@angular/forms";
-import { FaIconComponent } from "@fortawesome/angular-fontawesome";
-import { faTrash, faPlusCircle, faMessage } from "@fortawesome/free-solid-svg-icons";
-import {MatIcon} from "@angular/material/icon";
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-intents',
   templateUrl: './intents.component.html',
-  imports: [CommonModule, MatCardTitle, MatCard, MatList, MatListItem, MatLine, MatButton, MatIcon, RouterLink, RouterLinkActive, FormsModule, FaIconComponent],
+  imports: [
+    CommonModule,
+    MatCardTitle,
+    MatCard,
+    MatList,
+    MatListItem,
+    MatLine,
+    MatButton,
+    RouterLink,
+    RouterLinkActive,
+    FormsModule,
+  ],
   standalone: true,
-  styleUrls: ['./intents.component.scss']
+  styleUrls: ['./intents.component.scss'],
 })
 export class IntentsComponent implements OnInit {
   responses: any[] = [];
   intents: any[] = [];
-  icons = {
-    faTrash,
-    faPlusCircle,
-    faMessage
-  };
+  selectedResponse: any = null;
+  selectedResponseIndex: number = -1;
+  creatingNewResponse = false;
+  newResponse = { name: '', texts: [''] };
 
   constructor(
     private intentsService: IntentsService,
     private toastr: ToastrService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -42,27 +49,37 @@ export class IntentsComponent implements OnInit {
   }
 
   fetchIntents() {
-    this.intentsService.fetchIntents().subscribe(
-      data => this.intents = data,
-      error => {
+    this.intentsService.fetchIntents().subscribe({
+      next: (data) => {
+        this.intents = data;
+        // Sort intents alphabetically by name
+        this.intents.sort((a, b) => a.name.localeCompare(b.name));
+      },
+      error: (error) => {
         console.error('Error fetching intents:', error);
-        this.toastr.error('Erro ao buscar intents. Por favor, tente novamente.', 'Erro');
-      }
-    );
+        this.toastr.error(
+          'Erro ao buscar intents. Por favor, tente novamente.',
+          'Erro',
+        );
+      },
+    });
   }
 
   fetchResponses() {
-    this.intentsService.fetchResponses().subscribe(
-      data => this.responses = data,
-      error => {
+    this.intentsService.fetchResponses().subscribe({
+      next: (data) => {
+        this.responses = data;
+      },
+      error: (error) => {
         console.error('Error fetching responses:', error);
-        this.toastr.error('Erro ao buscar respostas. Por favor, tente novamente.', 'Erro');
-      }
-    );
+        this.toastr.error(
+          'Erro ao buscar respostas. Por favor, tente novamente.',
+          'Erro',
+        );
+      },
+    });
   }
 
-  selectedResponse: any = null;
-  selectedResponseIndex: number = -1;
   selectResponse(index: number) {
     this.creatingNewResponse = true;
     this.selectedResponse = this.responses[index];
@@ -70,12 +87,12 @@ export class IntentsComponent implements OnInit {
 
     this.newResponse = {
       name: this.selectedResponse.name,
-      texts: this.selectedResponse.texts
+      texts: [...this.selectedResponse.texts], // Create a new reference
     };
-  }
 
-  creatingNewResponse = false;
-  newResponse = { name: '', texts: [''] };
+    // Sort texts after selecting a response
+    this.sortTextsAlphabetically();
+  }
 
   toggleCreateNewResponse() {
     this.creatingNewResponse = !this.creatingNewResponse;
@@ -88,30 +105,38 @@ export class IntentsComponent implements OnInit {
   }
 
   handleSubmitNewResponse() {
-    if (!this.newResponse.name || this.newResponse.texts.some(text => !text.trim())) {
+    if (
+      !this.newResponse.name ||
+      this.newResponse.texts.some((text) => !text.trim())
+    ) {
       this.toastr.error('Por favor, preencha todos os campos.', 'Erro');
       return;
     }
 
     const formattedData = {
-      id: this.selectedResponse ? this.selectedResponse.id : undefined, // Adicionamos o ID apenas se estiver editando
+      id: this.selectedResponse ? this.selectedResponse.id : undefined, // Add ID only if editing
       name: this.newResponse.name,
-      texts: this.newResponse.texts
+      texts: this.newResponse.texts,
     };
 
     if (this.selectedResponse) {
-      this.intentsService.editarResponse(this.selectedResponse.id, formattedData).subscribe(
-        () => {
-          this.toastr.success('Resposta atualizada com sucesso!');
-          this.fetchResponses();
-          this.creatingNewResponse = false;
-          this.resetForm();
-        },
-        error => {
-          console.error('Error updating response:', error);
-          this.toastr.error('Erro ao atualizar a resposta. Por favor, tente novamente.', 'Erro');
-        }
-      );
+      this.intentsService
+        .editarResponse(this.selectedResponse.id, formattedData)
+        .subscribe(
+          () => {
+            this.toastr.success('Resposta atualizada com sucesso!');
+            this.fetchResponses();
+            this.creatingNewResponse = false;
+            this.resetForm();
+          },
+          (error) => {
+            console.error('Error updating response:', error);
+            this.toastr.error(
+              'Erro ao atualizar a resposta. Por favor, tente novamente.',
+              'Erro',
+            );
+          },
+        );
     } else {
       this.intentsService.createResponse(formattedData).subscribe(
         () => {
@@ -120,10 +145,13 @@ export class IntentsComponent implements OnInit {
           this.creatingNewResponse = false;
           this.resetForm();
         },
-        error => {
+        (error) => {
           console.error('Error creating new response:', error);
-          this.toastr.error('Erro ao criar nova resposta. Por favor, tente novamente.', 'Erro');
-        }
+          this.toastr.error(
+            'Erro ao criar nova resposta. Por favor, tente novamente.',
+            'Erro',
+          );
+        },
       );
     }
   }
@@ -134,27 +162,37 @@ export class IntentsComponent implements OnInit {
     this.selectedResponseIndex = -1;
   }
 
+  addResponseBubble() {
+    this.newResponse.texts = ['', ...this.newResponse.texts];
+    // Sort texts after adding a new bubble
+    this.sortTextsAlphabetically();
+  }
+
   removeResponseBubble(index: number) {
-    if (this.newResponse.texts && this.newResponse.texts.length > 1) {
+    if (this.newResponse.texts.length > 1) {
       this.newResponse.texts.splice(index, 1);
+      // Sort texts after removing a bubble
+      this.sortTextsAlphabetically();
     } else {
       this.toastr.error('Deve haver pelo menos uma resposta.');
     }
   }
 
   deleteResponse(index: number, event: MouseEvent): void {
-    event.stopPropagation(); // Evita que o evento de clique no item seja disparado
+    event.stopPropagation(); // Prevent the click event from propagating to parent elements
     const responseId = this.responses[index].id;
     this.intentsService.deleteResponse(responseId).subscribe(
       () => {
         this.toastr.success('Resposta excluída com sucesso!');
         this.fetchResponses();
       },
-      error => {
-        const errorMessage = error.error?.message || 'Erro ao excluir resposta. Por favor, tente novamente.';
+      (error) => {
+        const errorMessage =
+          error.error?.message ||
+          'Erro ao excluir resposta. Por favor, tente novamente.';
         this.toastr.info(errorMessage, 'Atenção');
         console.error('Erro ao excluir resposta:', error);
-      }
+      },
     );
   }
 
@@ -165,19 +203,18 @@ export class IntentsComponent implements OnInit {
         this.toastr.success('Intent excluído com sucesso!');
         this.fetchIntents();
       },
-      error => {
-        this.toastr.error('Erro ao excluir intent. Por favor, tente novamente.', 'Erro');
-      }
+      (error) => {
+        this.toastr.error(
+          'Erro ao excluir intent. Por favor, tente novamente.',
+          'Erro',
+        );
+      },
     );
   }
 
-
-  addResponseBubble() {
-    if (!this.newResponse.texts) {
-      this.newResponse.texts = [''];
-    } else {
-      this.newResponse.texts.push('');
-    }
+  // Function to sort texts alphabetically
+  sortTextsAlphabetically() {
+    this.newResponse.texts.sort((a, b) => a.localeCompare(b));
   }
 
   trackByText(index: number, text: string): any {

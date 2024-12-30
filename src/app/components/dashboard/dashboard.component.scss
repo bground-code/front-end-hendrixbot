@@ -1,3 +1,8 @@
+.content {
+  margin-top: 7rem;
+  height: calc(100vh - 7rem);
+}
+
 .dashboard {
   padding: 20px;
 }
@@ -49,7 +54,7 @@
 }
 
 .card .fa-2x {
-  font-size: 2em;
+  // font-size: 2em;
 }
 
 .progress-bar {
@@ -61,14 +66,16 @@
 }
 
 .bg-info {
-  background-color: #36b9cc !important;
+  background-color: #0d9488 !important;
 }
 
 .bg-primary {
-  background-color: #4e73df !important;
+  background-color: #9333ea !important;
 }
 
 /* Ajuste de altura da tabela para corresponder à altura do gráfico */
 .card-body table {
-  height: calc(100% - 40px); /* 40px é uma estimativa da altura do cabeçalho do card */
+  height: calc(
+    100% - 7rem
+  ); /* 40px é uma estimativa da altura do cabeçalho do card */
 }

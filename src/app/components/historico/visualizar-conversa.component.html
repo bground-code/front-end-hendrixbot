@@ -1,3 +1,4 @@
+<div class="contentConversa">
 <div *ngIf="loading">Carregando mensagens...</div>
 <div *ngIf="!loading" class="chat-container">
   <div *ngIf="messages.length > 0; else noMessagesTemplate">
@@ -12,4 +13,4 @@
     <p>Nenhuma mensagem encontrada.</p>
   </ng-template>
 </div>
-<button class="btn btn-secondary" (click)="voltarParaHistorico()">Voltar para o histórico</button>
+</div>

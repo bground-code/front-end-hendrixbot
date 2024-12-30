@@ -56,3 +56,66 @@
 //   margin-bottom: 6px;
 //   margin-top: 6px;
 //   }
+
+// cadastro-modal.component.scss
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.modal-body {
+  padding: 2rem;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+  border-top: 1px solid #dee2e6;
+}
+
+.btn {
+  margin-left: 0.5rem;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+}
+
+.mat-paginator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #fff;
+  border-top: 1px solid #e5e7eb;
+}
+
+.mat-paginator-range-label {
+  font-size: 1rem;
+  color: #374151;
+}
+
+.mat-paginator-navigation-previous,
+.mat-paginator-navigation-next {
+  background-color: #2563eb;
+  color: #fff;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+}
+
+.mat-paginator-navigation-previous:hover,
+.mat-paginator-navigation-next:hover {
+  background-color: #1e40af;
+}
+
+.mat-paginator-navigation-previous[disabled],
+.mat-paginator-navigation-next[disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
