@@ -55,12 +55,10 @@ jobs:
         run: |
           # Clona o repositório ArgoCD privado usando o token
           git clone https://${ARGOCD_REPO_TOKEN}@github.com/bground-code/argo-cd.git
-          cd argo-cd
-
-          # Verifica se o diretório e o arquivo existem
-          if [ -d "base/deployment/angular-app" ] && [ -f "base/deployment/angular-app/deployment.yaml" ]; then
-            cd base/deployment/angular-app
-
+          cd argo-cd/base/deployment/angular-app
+          
+          # Verifica se o arquivo deployment.yaml existe
+          if [ -f "deployment.yaml" ]; then
             # Atualiza a tag da imagem no deployment.yaml
             sed -i "s|image: caiquelacerda15/front-end-hendrixbot:.*|image: caiquelacerda15/front-end-hendrixbot:${NEW_TAG}|" deployment.yaml
 
@@ -71,6 +69,6 @@ jobs:
             git commit -m "Update Angular image to ${NEW_TAG}"
             git push https://${ARGOCD_REPO_TOKEN}@github.com/bground-code/argo-cd.git
           else
-            echo "Diretório ou arquivo deployment.yaml não encontrado!"
+            echo "Arquivo deployment.yaml não encontrado!"
             exit 1
           fi
