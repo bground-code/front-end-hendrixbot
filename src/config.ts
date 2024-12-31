@@ -1,4 +1,4 @@
-export const backendUrl = 'http://localhost:8081';
-export const  backendUrlws ='ws://localhost:8081/chat';
-export const wsUrl = 'ws://localhost:8081/atendimento';
+export const backendUrl = 'http://hendrixbot.com.br:30081';
+export const  backendUrlws ='ws://hendrixbot.com.br:30081/chat';
+export const wsUrl = 'ws://hendrixbot.com.br:30081/atendimento';
 
